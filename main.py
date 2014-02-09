@@ -41,8 +41,7 @@ class MyForm(QtGui.QWidget):
             ydl.add_default_info_extractors()
             ydl.add_progress_hook(self.hook)
             ydl.download([url])        
-
-
+        self.ui.progressBar.setValue(0)
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
