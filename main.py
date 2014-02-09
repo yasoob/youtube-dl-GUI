@@ -5,6 +5,24 @@ import sys
 import youtube_dl
 import os
 
+class MainWindow(QtGui.QMainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+
+        # create stuff
+        self.rw = MyForm()
+        self.setCentralWidget(self.rw)
+        self.createStatusBar()
+
+        # show windows
+        self.show()
+        self.rw.show()
+
+    def createStatusBar(self):
+        sb = QtGui.QStatusBar()
+        sb.setFixedHeight(18)
+        self.setStatusBar(sb)
+
 class MyForm(QtGui.QWidget):
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
@@ -45,7 +63,7 @@ class MyForm(QtGui.QWidget):
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
-    myapp = MyForm()
+    myapp = MainWindow()
     myapp.show()
     sys.exit(app.exec_())
 
