@@ -16,6 +16,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.lineEdit_2.setText(os.getcwd())
         self.ui.lineEdit_2.textEdited.connect(self.set_dest)
 
+        self.connect_menu_action()
         self.setWindowTitle('youtube-dl v0.1')
         self.show()
 
@@ -38,6 +39,9 @@ class MainWindow(QtGui.QMainWindow):
     def change_progress(self,e):
         self.ui.progressBar.setValue(int(e))
 
+    def connect_menu_action(self):
+        self.ui.actionExit.triggered.connect(QtGui.qApp.quit)
+
 class Download(QtCore.QThread):
     statusSignal = QtCore.pyqtSignal(QtCore.QString)
     p_barSignal = QtCore.pyqtSignal(QtCore.QString)
@@ -57,7 +61,8 @@ class Download(QtCore.QThread):
             time.sleep(10)
             return
         if li.get('eta') is not None:
-            self.statusSignal.emit(self.format_seconds(li.get('eta')))
+            filename = li.get('filename').split('/')[-1][:13]+'..'
+            self.statusSignal.emit('Downloading '+filename+' : '+self.format_seconds(li.get('eta')))
 
     def download(self):
         ydl_options = {
