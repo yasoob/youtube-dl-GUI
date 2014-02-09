@@ -13,8 +13,10 @@ class MainWindow(QtGui.QMainWindow):
         self.rw = MyForm()
         self.setCentralWidget(self.rw)
         self.createStatusBar()
+        self.add_menu()
 
         # show windows
+        self.setWindowTitle('youtube-dl v0.1')
         self.show()
         self.rw.show()
 
@@ -22,6 +24,17 @@ class MainWindow(QtGui.QMainWindow):
         sb = QtGui.QStatusBar()
         sb.setFixedHeight(18)
         self.setStatusBar(sb)
+
+    def add_menu(self):
+        exitAction = QtGui.QAction(QtGui.QIcon('exit.png'), '&Exit', self)        
+        exitAction.setShortcut('Ctrl+Q')
+        exitAction.setStatusTip('Exit application')
+        exitAction.triggered.connect(QtGui.qApp.quit)
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('&File')
+        fileMenu.addAction(exitAction)
+
 
 class MyForm(QtGui.QWidget):
     def __init__(self, parent=None):
@@ -34,22 +47,22 @@ class MyForm(QtGui.QWidget):
         self.ui.lineEdit_2.textEdited.connect(self.set_dest)
 
     def set_dest(self):
-		file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
-		self.ui.lineEdit_2.setText(file)
+        file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
+        self.ui.lineEdit_2.setText(file)
     
     def handleButton(self):
         url = str(self.ui.lineEdit.text())
         if url is not '':
             self.download(url)
         else:
-        	self.ui.lineEdit.setPlaceholderText("No url given!")
+            self.ui.lineEdit.setPlaceholderText("No url given!")
         #self.ui.progressBar.setValue(19)
 
     def hook(self, li):
         self.ui.progressBar.setValue(int((float(li.get('downloaded_bytes')) / float(li.get('total_bytes')))*100.0))
 
     def download(self, url):
-    	directory = str(self.ui.lineEdit_2.text())
+        directory = str(self.ui.lineEdit_2.text())
         ydl_options = {
             'outtmpl': '{0}/%(title)s-%(id)s.%(ext)s'.format(directory),
             'continuedl': True,
