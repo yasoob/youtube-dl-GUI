@@ -24,6 +24,7 @@ class MainWindow(QtGui.QMainWindow):
         sb = QtGui.QStatusBar()
         sb.setFixedHeight(18)
         self.setStatusBar(sb)
+        self.statusBar().showMessage("Ready")
 
     def add_menu(self):
         exitAction = QtGui.QAction(QtGui.QIcon('exit.png'), '&Exit', self)        
@@ -55,7 +56,7 @@ class MyForm(QtGui.QWidget):
         if url is not '':
             self.download(url)
         else:
-            self.ui.lineEdit.setPlaceholderText("No url given!")
+            QtGui.QMessageBox.information(self,"Error!","No url given!")
         #self.ui.progressBar.setValue(19)
 
     def hook(self, li):
