@@ -1,4 +1,4 @@
-from gui_code import Ui_Form
+from gui import Ui_MainWindow
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 import sys
@@ -6,46 +6,17 @@ import youtube_dl
 import os
 
 class MainWindow(QtGui.QMainWindow):
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-
-        # create stuff
-        self.rw = MyForm()
-        self.setCentralWidget(self.rw)
-        self.createStatusBar()
-        self.add_menu()
-
-        # show windows
-        self.setWindowTitle('youtube-dl v0.1')
-        self.show()
-        self.rw.show()
-
-    def createStatusBar(self):
-        sb = QtGui.QStatusBar()
-        sb.setFixedHeight(18)
-        self.setStatusBar(sb)
-        self.statusBar().showMessage("Ready")
-
-    def add_menu(self):
-        exitAction = QtGui.QAction(QtGui.QIcon('exit.png'), '&Exit', self)        
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(QtGui.qApp.quit)
-
-        menubar = self.menuBar()
-        fileMenu = menubar.addMenu('&File')
-        fileMenu.addAction(exitAction)
-
-
-class MyForm(QtGui.QWidget):
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self.ui = Ui_Form()
+        QtGui.QMainWindow.__init__(self, parent)
+        self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.img_label.setPixmap(QtGui.QPixmap(os.getcwd() + "/logo.png"))
+        self.ui.label.setPixmap(QtGui.QPixmap(os.getcwd() + "/logo.png"))
         self.ui.pushButton.clicked.connect(self.handleButton)
         self.ui.lineEdit_2.setText(os.getcwd())
         self.ui.lineEdit_2.textEdited.connect(self.set_dest)
+        self.setWindowTitle('youtube-dl v0.1')
+        self.show()
+
 
     def set_dest(self):
         file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
