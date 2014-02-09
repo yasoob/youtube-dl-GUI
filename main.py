@@ -1,4 +1,4 @@
-from gui2 import Ui_Form
+from gui_code import Ui_Form
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 import sys
@@ -10,7 +10,7 @@ class MyForm(QtGui.QWidget):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        self.ui.img_label.setPixmap(QtGui.QPixmap(os.getcwd() + "/logo1.png"))
+        self.ui.img_label.setPixmap(QtGui.QPixmap(os.getcwd() + "/logo.png"))
         self.ui.pushButton.clicked.connect(self.handleButton)
         self.ui.lineEdit_2.setText(os.getcwd())
         self.ui.lineEdit_2.textEdited.connect(self.set_dest)
