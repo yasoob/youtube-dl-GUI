@@ -17,6 +17,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.statusbar.showMessage('Ready.')
         self.set_connections()
         
+        self.url_list = []
         self.ui.tableWidget.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.Stretch)
         self.ui.tableWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.rowcount = 0
@@ -38,14 +39,31 @@ class MainWindow(QtGui.QMainWindow):
         if url is '':
             QtGui.QMessageBox.information(self,"Error!","No url given!")
             return
-        directory = str(self.ui.lineEdit_2.text())
-        self.down_thread = Download(url,directory,self.rowcount)
-        self.down_thread.statusSignal.connect(self.ui.statusbar.showMessage)
-        self.down_thread.p_barSignal.connect(self.ui.progressBar.setValue)
-        self.down_thread.list_Signal.connect(self.add_to_table)
-        self.down_thread.row_Signal.connect(self.increase_rowcount)
-        self.down_thread.start()
-        self.rowcount += 1
+        if url not in self.url_list:
+            directory = str(self.ui.lineEdit_2.text())
+            self.down_thread = Download(url,directory,self.rowcount)
+            self.down_thread.statusSignal.connect(self.ui.statusbar.showMessage)
+            self.down_thread.remove_url_Signal.connect(self.remove_url)
+            self.down_thread.list_Signal.connect(self.add_to_table)
+            self.down_thread.row_Signal.connect(self.increase_rowcount)
+            self.down_thread.start()
+            self.ui.statusbar.showMessage('Extracting information..')
+            self.rowcount += 1
+            self.url_list.append(url)
+            if len(self.url_list) is not 0:
+                self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
+            else:
+                self.ui.statusbar.showMessage("done")
+        else:
+            self.ui.statusbar.showMessage('This url is already being downloaded')
+            time.sleep(5)
+            if len(self.url_list) is not 0:
+                self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
+            else:
+                self.ui.statusbar.showMessage("done")
+    
+    def remove_url(self,url):
+        self.url_list.remove(url)
 
     def add_to_table(self, values):
         row = values[0]
@@ -64,7 +82,7 @@ class MainWindow(QtGui.QMainWindow):
         
 class Download(QtCore.QThread):
     statusSignal = QtCore.pyqtSignal(QtCore.QString)
-    p_barSignal = QtCore.pyqtSignal(int)
+    remove_url_Signal = QtCore.pyqtSignal(str)
     list_Signal = QtCore.pyqtSignal([list])
     row_Signal = QtCore.pyqtSignal()
 
@@ -78,20 +96,22 @@ class Download(QtCore.QThread):
 
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
-            self.p_barSignal.emit(int((float(li.get('downloaded_bytes')) / float(li.get('total_bytes')))*100.0))
+            #self.p_barSignal.emit(int((float(li.get('downloaded_bytes')) / float(li.get('total_bytes')))*100.0))
             if li.get('speed') is not None:
                 self.speed = self.format_speed(li.get('speed'))
                 self.eta = self.format_seconds(li.get('eta'))
                 self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.eta,self.speed,li.get('status')])
             elif li.get('status') == "finished":
+                self.remove_url_Signal.emit(self.url)
                 self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.eta,self.speed,li.get('status')])
         else:
             self.statusSignal.emit('Already Downloaded')
+            self.row_Signal.emit()
+            self.remove_url_Signal.emit(self.url)
             time.sleep(10)
             return
         if li.get('eta') is not None:
             filename = li.get('filename').split('/')[-1][:25]+'..'
-            self.statusSignal.emit('Downloading '+filename+' - '+self.format_seconds(li.get('eta')))
 
     def download(self):
         ydl_options = {
@@ -107,13 +127,11 @@ class Download(QtCore.QThread):
             except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
                 self.row_Signal.emit()
                 self.statusSignal.emit(str(e))
-        self.p_barSignal.emit(0)
+        #self.p_barSignal.emit(0)
 
     def run(self):
-        self.filenameSent = False
-        self.statusSignal.emit('Extracting information..')
         self.download()
-        #self.statusSignal.emit('Done!')
+        self.statusSignal.emit('Done!')
 
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)
