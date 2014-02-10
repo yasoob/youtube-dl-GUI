@@ -19,7 +19,7 @@ class MainWindow(QtGui.QMainWindow):
         
         self.ui.tableWidget.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.Stretch)
         self.ui.tableWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.rowcount = -1
+        self.rowcount = 0
 
         self.connect_menu_action()
         self.setWindowTitle('youtube-dl v0.1')
@@ -49,16 +49,15 @@ class MainWindow(QtGui.QMainWindow):
 
     def add_to_table(self, values):
         row = values[0]
-        #if row > self.rowcount:
-        self.ui.tableWidget.setRowCount(self.rowcount+1)
         m=0
         for key in values[1:]:
             newitem = QtGui.QTableWidgetItem(key)
-            self.ui.tableWidget.setItem(self.rowcount, m, newitem)
+            self.ui.tableWidget.setItem(row, m, newitem)
             m += 1
+        self.ui.tableWidget.setRowCount(self.rowcount)
 
     def increase_rowcount(self):
-        self.rowcount += self.rowcount 
+        self.rowcount -= 1 
 
     def connect_menu_action(self):
         self.ui.actionExit.triggered.connect(QtGui.qApp.quit)
@@ -67,7 +66,7 @@ class Download(QtCore.QThread):
     statusSignal = QtCore.pyqtSignal(QtCore.QString)
     p_barSignal = QtCore.pyqtSignal(int)
     list_Signal = QtCore.pyqtSignal([list])
-    row_Signal = QtCore.pyqtSignal(int)
+    row_Signal = QtCore.pyqtSignal()
 
     def __init__(self,url,directory,rowcount):
         super(Download,self).__init__()
@@ -79,10 +78,13 @@ class Download(QtCore.QThread):
 
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
-            self.p_barSignal.emit(str(int((float(li.get('downloaded_bytes')) / float(li.get('total_bytes')))*100.0)))
+            self.p_barSignal.emit(int((float(li.get('downloaded_bytes')) / float(li.get('total_bytes')))*100.0))
             if li.get('speed') is not None:
-                speed = self.format_speed(li.get('speed'))
-                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.format_seconds(li.get('eta')),speed,li.get('status')] )
+                self.speed = self.format_speed(li.get('speed'))
+                self.eta = self.format_seconds(li.get('eta'))
+                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.eta,self.speed,li.get('status')])
+            elif li.get('status') == "finished":
+                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.eta,self.speed,li.get('status')])
         else:
             self.statusSignal.emit('Already Downloaded')
             time.sleep(10)
@@ -102,17 +104,16 @@ class Download(QtCore.QThread):
             ydl.add_progress_hook(self.hook)
             try:
                 ydl.download([self.url])        
-            except:
-                err = sys.exc_info()[0]
-                self.statusSignal.emit(err)
-        self.p_barSignal.emit(str(0))
+            except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
+                self.row_Signal.emit()
+                self.statusSignal.emit(str(e))
+        self.p_barSignal.emit(0)
 
     def run(self):
         self.filenameSent = False
         self.statusSignal.emit('Extracting information..')
         self.download()
-        self.row_Signal.emit()
-        self.statusSignal.emit('Done!')
+        #self.statusSignal.emit('Done!')
 
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)
