@@ -11,7 +11,7 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.label.setPixmap(QtGui.QPixmap(os.getcwd() + "/logo.png"))
+        self.ui.label.setPixmap(QtGui.QPixmap(os.getcwd() + "/resources/logo.png"))
         self.ui.lineEdit_2.setText(os.getcwd())
         self.ui.statusbar.showMessage('Ready.')
         self.set_connections()

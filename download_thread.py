@@ -51,6 +51,7 @@ class Download(QtCore.QThread):
                 ydl.download([self.url])        
             except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
                 self.row_Signal.emit()
+                self.remove_url_Signal.emit(self.url)
                 self.error_occured = True
                 self.statusSignal.emit(str(e))
         #self.p_barSignal.emit(0)

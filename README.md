@@ -39,4 +39,4 @@ TODO:
 
 License:
 ----------
-As youtube-dl this project is also released to the Public Domain
+This project is released under the MIT license. See the included license file.
