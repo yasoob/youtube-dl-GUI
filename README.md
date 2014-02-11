@@ -5,7 +5,7 @@ This repository contains code for a youtube-dl GUI written in PyQt. It is based 
 
 ScreenShot:
 -------------
-![youtube-dl-gui Screenshot in Ubuntu](http://i.imgur.com/yiHeIHb.png)
+![youtube-dl-gui Screenshot in Ubuntu](http://i.imgur.com/gb3SIKY.png)
 
 Requirements:
 ------------
