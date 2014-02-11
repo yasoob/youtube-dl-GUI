@@ -126,12 +126,14 @@ class Download(QtCore.QThread):
                 ydl.download([self.url])        
             except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
                 self.row_Signal.emit()
+                self.error_occured = True
                 self.statusSignal.emit(str(e))
         #self.p_barSignal.emit(0)
 
     def run(self):
         self.download()
-        self.statusSignal.emit('Done!')
+        if self.error_occured is not True:
+            self.statusSignal.emit('Done!')
 
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)
