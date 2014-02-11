@@ -51,14 +51,20 @@ class MainWindow(QtGui.QMainWindow):
             self.rowcount += 1
             self.url_list.append(url)
             if len(self.url_list) is not 0:
-                self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
+                if len(self.url_list) < 2:
+                    self.ui.statusbar.showMessage('Downloading {0} song'.format(len(self.url_list)))
+                else:
+                    self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
             else:
                 self.ui.statusbar.showMessage("done")
         else:
             self.ui.statusbar.showMessage('This url is already being downloaded')
             time.sleep(5)
             if len(self.url_list) is not 0:
-                self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
+                if len(self.url_list) < 2:
+                    self.ui.statusbar.showMessage('Downloading {0} song'.format(len(self.url_list)))
+                else:
+                    self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
             else:
                 self.ui.statusbar.showMessage("done")
     
@@ -85,6 +91,7 @@ class Download(QtCore.QThread):
     remove_url_Signal = QtCore.pyqtSignal(str)
     list_Signal = QtCore.pyqtSignal([list])
     row_Signal = QtCore.pyqtSignal()
+    error_occured = False
 
     def __init__(self,url,directory,rowcount):
         super(Download,self).__init__()

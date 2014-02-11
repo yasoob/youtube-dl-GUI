@@ -17,6 +17,7 @@ This application has the following features:
 - supports downloading videos from 200+ websites
 - allows to download multiple videos in parallel
 - shows download statistics separately for each video
+- Resumes interrupted downloads
 
 Contributor:
 ---------
