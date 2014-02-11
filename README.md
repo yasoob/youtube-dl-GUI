@@ -22,7 +22,8 @@ This application has the following features:
 
 Contributor:
 ---------
-- Muhammad Yasoob Ullah
+- Muhammad Yasoob Ullah Khalid
+
 If you want to become a contributor then just contribute some code and I will add you to this list
 
 Bugs:
