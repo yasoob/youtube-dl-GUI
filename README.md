@@ -11,10 +11,26 @@ Requirements:
 ------------
 - PyQt
 
+Features:
+----------
+This application has the following features:
+- supports downloading videos from 200+ websites
+- allows to download multiple videos in parallel
+- shows download statistics separately for each video
+
 Contributor:
 ---------
 - Muhammad Yasoob Ullah
 If you want to become a contributor then just contribute some code and I will add you to this list
+
+Bugs:
+----------
+This program is still in beta so if you encounter any bugs feel free to report them on https://github.com/yasoob/youtube-dl-GUI/issues. 
+
+TODO:
+-------
+- Allow pause/resume functionality
+- integrate post processing options
 
 License:
 ----------
