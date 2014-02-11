@@ -26,8 +26,8 @@ class MainWindow(QtGui.QMainWindow):
         self.show()
 
     def set_connections(self):
-        self.ui.pushButton.clicked.connect(self.handleButton)
-        self.ui.lineEdit_2.textEdited.connect(self.set_dest)
+        self.ui.download_btn.clicked.connect(self.handleButton)
+        self.ui.browse_btn.clicked.connect(self.set_dest)
 
     def set_dest(self):
         file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))

@@ -112,6 +112,13 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_2"/>
         </item>
+        <item>
+         <widget class="QPushButton" name="browse_btn">
+          <property name="text">
+           <string>Browse</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item alignment="Qt::AlignVCenter">
@@ -161,7 +168,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="download_btn">
         <property name="text">
          <string>Download</string>
         </property>
@@ -200,7 +207,7 @@
   <connection>
    <sender>lineEdit</sender>
    <signal>returnPressed()</signal>
-   <receiver>pushButton</receiver>
+   <receiver>download_btn</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

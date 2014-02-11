@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
+# Form implementation generated from reading ui file 'gui_qt-designer.ui'
 #
-# Created: Mon Feb 10 22:58:16 2014
+# Created: Wed Feb 12 01:04:15 2014
 #      by: PyQt4 UI code generator 4.10
 #
 # WARNING! All changes made in this file will be lost!
@@ -64,6 +64,9 @@ class Ui_MainWindow(object):
         self.lineEdit_2 = QtGui.QLineEdit(self.centralwidget)
         self.lineEdit_2.setObjectName(_fromUtf8("lineEdit_2"))
         self.horizontalLayout_2.addWidget(self.lineEdit_2)
+        self.browse_btn = QtGui.QPushButton(self.centralwidget)
+        self.browse_btn.setObjectName(_fromUtf8("browse_btn"))
+        self.horizontalLayout_2.addWidget(self.browse_btn)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
@@ -82,9 +85,9 @@ class Ui_MainWindow(object):
         self.tableWidget.verticalHeader().setMinimumSectionSize(20)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
         self.verticalLayout.addWidget(self.tableWidget)
-        self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.verticalLayout.addWidget(self.pushButton)
+        self.download_btn = QtGui.QPushButton(self.centralwidget)
+        self.download_btn.setObjectName(_fromUtf8("download_btn"))
+        self.verticalLayout.addWidget(self.download_btn)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -102,7 +105,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
-        QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton.click)
+        QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.download_btn.click)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -110,6 +113,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "img label", None))
         self.label_2.setText(_translate("MainWindow", "Video URL:", None))
         self.label_3.setText(_translate("MainWindow", "Save To:", None))
+        self.browse_btn.setText(_translate("MainWindow", "Browse", None))
         self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Video/Song", None))
@@ -119,7 +123,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Speed", None))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Status", None))
-        self.pushButton.setText(_translate("MainWindow", "Download", None))
+        self.download_btn.setText(_translate("MainWindow", "Download", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
 
