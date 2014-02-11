@@ -18,6 +18,7 @@ This application has the following features:
 - allows to download multiple videos in parallel
 - shows download statistics separately for each video
 - Resumes interrupted downloads
+- Downloads the video in best quality
 
 Contributor:
 ---------
@@ -32,6 +33,8 @@ TODO:
 -------
 - Allow pause/resume functionality
 - integrate post processing options
+- integrate batch add feature
+- integrate save state
 
 License:
 ----------
