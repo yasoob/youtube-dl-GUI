@@ -9,7 +9,8 @@ ScreenShot:
 
 Requirements:
 ------------
-- PyQt
+- PyQt4
+- Python >= v2.6
 
 Features:
 ----------
@@ -36,6 +37,7 @@ TODO:
 - integrate post processing options
 - integrate batch add feature
 - integrate save state
+- integrate Queue to make it stable
 
 License:
 ----------
