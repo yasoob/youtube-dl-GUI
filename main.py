@@ -28,6 +28,11 @@ class MainWindow(QtGui.QMainWindow):
     def set_connections(self):
         self.ui.download_btn.clicked.connect(self.handleButton)
         self.ui.browse_btn.clicked.connect(self.set_dest)
+        self.ui.batch_btn.clicked.connect(self.batch_file)
+
+    def batch_file(self):
+        file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
+        self.ui.lineEdit.setText(file)
 
     def set_dest(self):
         file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
