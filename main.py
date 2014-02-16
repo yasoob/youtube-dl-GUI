@@ -11,7 +11,6 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.label.setPixmap(QtGui.QPixmap(os.getcwd() + "/resources/logo.png"))
         self.ui.lineEdit_2.setText(os.getcwd())
         self.ui.statusbar.showMessage('Ready.')
         self.set_connections()
@@ -28,7 +27,7 @@ class MainWindow(QtGui.QMainWindow):
     def set_connections(self):
         self.ui.download_btn.clicked.connect(self.handleButton)
         self.ui.browse_btn.clicked.connect(self.set_dest)
-        self.ui.batch_btn.clicked.connect(self.batch_file)
+        #self.ui.batch_btn.clicked.connect(self.batch_file)
 
     def batch_file(self):
         file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
@@ -95,4 +94,3 @@ if __name__ == "__main__":
     myapp = MainWindow()
     myapp.show()
     sys.exit(app.exec_())
-

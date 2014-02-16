@@ -35,7 +35,10 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>img label</string>
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="resource.qrc">:/logo.png</pixmap>
           </property>
          </widget>
         </item>
@@ -202,7 +205,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>lineEdit</sender>

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
+# Form implementation generated from reading ui file 'gui_qt-designer.ui'
 #
-# Created: Thu Feb 13 00:38:24 2014
+# Created: Sun Feb 16 21:54:15 2014
 #      by: PyQt4 UI code generator 4.10
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addItem(spacerItem)
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setText(_fromUtf8(""))
-        self.label.setPixmap(QtGui.QPixmap(_fromUtf8(":/newPrefix/logo.png")))
+        self.label.setPixmap(QtGui.QPixmap(_fromUtf8(":/logo.png")))
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout.addWidget(self.label)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -55,24 +55,17 @@ class Ui_MainWindow(object):
         self.lineEdit = QtGui.QLineEdit(self.centralwidget)
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.horizontalLayout_3.addWidget(self.lineEdit)
-        spacerItem3 = QtGui.QSpacerItem(3, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem3)
-        self.batch_btn = QtGui.QPushButton(self.centralwidget)
-        self.batch_btn.setObjectName(_fromUtf8("batch_btn"))
-        self.horizontalLayout_3.addWidget(self.batch_btn)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.label_3 = QtGui.QLabel(self.centralwidget)
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.horizontalLayout_2.addWidget(self.label_3)
-        spacerItem4 = QtGui.QSpacerItem(33, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem4)
+        spacerItem3 = QtGui.QSpacerItem(33, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
         self.lineEdit_2 = QtGui.QLineEdit(self.centralwidget)
         self.lineEdit_2.setObjectName(_fromUtf8("lineEdit_2"))
         self.horizontalLayout_2.addWidget(self.lineEdit_2)
-        spacerItem5 = QtGui.QSpacerItem(5, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem5)
         self.browse_btn = QtGui.QPushButton(self.centralwidget)
         self.browse_btn.setObjectName(_fromUtf8("browse_btn"))
         self.horizontalLayout_2.addWidget(self.browse_btn)
@@ -120,9 +113,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.label_2.setText(_translate("MainWindow", "Video URL:", None))
-        self.batch_btn.setText(_translate("MainWindow", "Batch Add", None))
         self.label_3.setText(_translate("MainWindow", "Save To:", None))
-        self.browse_btn.setText(_translate("MainWindow", "  Browse   ", None))
+        self.browse_btn.setText(_translate("MainWindow", "Browse", None))
         self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Video/Song", None))
@@ -136,3 +128,4 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
 
+import resource_rc

@@ -11,6 +11,7 @@ Requirements:
 ------------
 - PyQt4
 - Python >= v2.6
+- py2exe - _see Windows_
 
 Features:
 ----------
@@ -20,6 +21,13 @@ This application has the following features:
 - shows download statistics separately for each video
 - Resumes interrupted downloads
 - Downloads the video in best quality
+
+Windows:
+-----------
+The exe is currently hosted on [Dropbox](https://www.dropbox.com/s/oj8dh4q82tofk34/youtube-dl.exe). I have included a setup.py file. Just run it like this:
+```
+```
+This will result in a dist and build directory. Simply go to the dist directory and you will get a ```main.exe``` file and some other files. That ```main.exe``` file is a standalone executable which can be run simply by double clicking it. You can distribute that file to your friend.
 
 Contributor:
 ---------
