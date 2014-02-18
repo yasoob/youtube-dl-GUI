@@ -25,10 +25,13 @@ class Download(QtCore.QThread):
             if li.get('speed') is not None:
                 self.speed = self.format_speed(li.get('speed'))
                 self.eta = self.format_seconds(li.get('eta'))
-                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.eta,self.speed,li.get('status')])
+                self.bytes = 'unknown'
+                if li.get('total_bytes') is not None:
+                    self.bytes = self.format_bytes(li.get('total_bytes'))
+                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
             elif li.get('status') == "finished":
                 self.remove_url_Signal.emit(self.url)
-                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.eta,self.speed,li.get('status')])
+                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
         else:
             self.statusSignal.emit('Already Downloaded')
             self.row_Signal.emit()

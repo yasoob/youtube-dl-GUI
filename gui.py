@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer.ui'
 #
-# Created: Sun Feb 16 21:54:15 2014
+# Created: Mon Feb 17 19:00:14 2014
 #      by: PyQt4 UI code generator 4.10
 #
 # WARNING! All changes made in this file will be lost!
@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.tableWidget.setRowCount(0)
-        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setColumnCount(5)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -83,6 +83,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(4, item)
         self.tableWidget.verticalHeader().setDefaultSectionSize(30)
         self.tableWidget.verticalHeader().setMinimumSectionSize(20)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
@@ -119,10 +121,12 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Video/Song", None))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "ETA", None))
+        item.setText(_translate("MainWindow", "Size", None))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Speed", None))
+        item.setText(_translate("MainWindow", "ETA", None))
         item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Speed", None))
+        item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Status", None))
         self.download_btn.setText(_translate("MainWindow", "Download", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))

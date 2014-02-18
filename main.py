@@ -21,7 +21,7 @@ class MainWindow(QtGui.QMainWindow):
         self.rowcount = 0
 
         self.connect_menu_action()
-        self.setWindowTitle('youtube-dl v0.2')
+        self.setWindowTitle('youtube-dl v0.3.0')
         self.show()
 
     def set_connections(self):
