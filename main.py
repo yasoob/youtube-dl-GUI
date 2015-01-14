@@ -10,13 +10,19 @@ from download_thread import Download
 
 class BatchAddDialogue(QtGui.QDialog):
     def __init__(self, parent=None):
-        super(BatchAddDialogue, self).__init__()
+        super(BatchAddDialogue, self).__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
         self.ui = Ui_BatchAdd()
         self.ui.setupUi(self)
-        self.ui.Browse.clicked(self.browse_clicked)
+        self.ui.Browse.clicked.connect(self.browse_clicked)
+        self.ui.Close.clicked.connect(self.ui.close)
 
     def browse_clicked(self):
-        pass
+        file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
+        with open(file, 'rb') as file_data:
+            for line in file_data.readlines():
+                self.ui.UrlList.append(line)
+
+
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
@@ -39,11 +45,13 @@ class MainWindow(QtGui.QMainWindow):
     def set_connections(self):
         self.ui.download_btn.clicked.connect(self.handleButton)
         self.ui.browse_btn.clicked.connect(self.set_dest)
-        #self.ui.batch_btn.clicked.connect(self.batch_file)
+        self.ui.BatchAdd.clicked.connect(self.batch_file)
 
     def batch_file(self):
-        file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
-        self.ui.lineEdit.setText(file)
+        self.batch_dialogue = BatchAddDialogue(self)
+        self.batch_dialogue.exec_()
+        print self.batch_dialogue.ui.UrlList.toPlainText()
+        #print self.batch_dialogue.ui.UrlList
 
     def set_dest(self):
         file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'batch_add.ui'
 #
-# Created: Wed Jan 14 16:50:56 2015
+# Created: Wed Jan 14 17:49:14 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,8 +26,10 @@ except AttributeError:
 class Ui_BatchAdd(object):
     def setupUi(self, BatchAdd):
         BatchAdd.setObjectName(_fromUtf8("BatchAdd"))
-        BatchAdd.resize(383, 264)
-        BatchAdd.setWindowOpacity(1.0)
+        BatchAdd.setWindowModality(QtCore.Qt.NonModal)
+        BatchAdd.resize(400, 300)
+        BatchAdd.setMaximumSize(QtCore.QSize(400, 16777215))
+        BatchAdd.setModal(False)
         self.verticalLayout_2 = QtGui.QVBoxLayout(BatchAdd)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.verticalWidget = QtGui.QWidget(BatchAdd)
@@ -35,13 +37,7 @@ class Ui_BatchAdd(object):
         self.verticalLayout = QtGui.QVBoxLayout(self.verticalWidget)
         self.verticalLayout.setMargin(0)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.UrlList = QtGui.QPlainTextEdit(self.verticalWidget)
-        self.UrlList.setStatusTip(_fromUtf8(""))
-        self.UrlList.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.UrlList.setTabChangesFocus(True)
-        self.UrlList.setDocumentTitle(_fromUtf8(""))
-        self.UrlList.setPlainText(_fromUtf8(""))
-        self.UrlList.setOverwriteMode(False)
+        self.UrlList = QtGui.QTextEdit(self.verticalWidget)
         self.UrlList.setObjectName(_fromUtf8("UrlList"))
         self.verticalLayout.addWidget(self.UrlList)
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -63,7 +59,6 @@ class Ui_BatchAdd(object):
 
     def retranslateUi(self, BatchAdd):
         BatchAdd.setWindowTitle(_translate("BatchAdd", "Batch Add", None))
-        BatchAdd.setToolTip(_translate("BatchAdd", "Batch Add Urls", None))
         self.Browse.setText(_translate("BatchAdd", "Browse", None))
         self.Add.setText(_translate("BatchAdd", "Add", None))
         self.Close.setText(_translate("BatchAdd", "Close", None))
