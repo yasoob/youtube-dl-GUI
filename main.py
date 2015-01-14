@@ -1,10 +1,22 @@
-from gui import Ui_MainWindow
+from UI.gui import Ui_MainWindow
+from UI.batch_add_ui import Ui_BatchAdd
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 import sys
 import os
 import time 
 from download_thread import Download
+
+
+class BatchAddDialogue(QtGui.QDialog):
+    def __init__(self, parent=None):
+        super(BatchAddDialogue, self).__init__()
+        self.ui = Ui_BatchAdd()
+        self.ui.setupUi(self)
+        self.ui.Browse.clicked(self.browse_clicked)
+
+    def browse_clicked(self):
+        pass
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):

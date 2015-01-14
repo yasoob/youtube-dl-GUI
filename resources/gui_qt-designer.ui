@@ -76,7 +76,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>14</width>
+            <width>24</width>
             <height>20</height>
            </size>
           </property>
@@ -84,6 +84,13 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="BatchAdd">
+          <property name="text">
+           <string>Batch Add</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -191,7 +198,7 @@
      <x>0</x>
      <y>0</y>
      <width>622</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -200,12 +207,30 @@
     </property>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionLicense"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionLicense">
+   <property name="text">
+    <string>License</string>
    </property>
   </action>
  </widget>

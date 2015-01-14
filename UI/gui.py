@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer.ui'
 #
-# Created: Mon Feb 17 19:00:14 2014
-#      by: PyQt4 UI code generator 4.10
+# Created: Wed Jan 14 16:59:46 2015
+#      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -50,11 +50,14 @@ class Ui_MainWindow(object):
         self.label_2 = QtGui.QLabel(self.centralwidget)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.horizontalLayout_3.addWidget(self.label_2)
-        spacerItem2 = QtGui.QSpacerItem(14, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
+        spacerItem2 = QtGui.QSpacerItem(24, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
         self.lineEdit = QtGui.QLineEdit(self.centralwidget)
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.horizontalLayout_3.addWidget(self.lineEdit)
+        self.BatchAdd = QtGui.QPushButton(self.centralwidget)
+        self.BatchAdd.setObjectName(_fromUtf8("BatchAdd"))
+        self.horizontalLayout_3.addWidget(self.BatchAdd)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -88,25 +91,34 @@ class Ui_MainWindow(object):
         self.tableWidget.verticalHeader().setDefaultSectionSize(30)
         self.tableWidget.verticalHeader().setMinimumSectionSize(20)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
-        self.verticalLayout.addWidget(self.tableWidget)
+        self.verticalLayout.addWidget(self.tableWidget, QtCore.Qt.AlignVCenter)
         self.download_btn = QtGui.QPushButton(self.centralwidget)
         self.download_btn.setObjectName(_fromUtf8("download_btn"))
         self.verticalLayout.addWidget(self.download_btn)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 622, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 622, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menuAbout = QtGui.QMenu(self.menubar)
+        self.menuAbout.setObjectName(_fromUtf8("menuAbout"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
         self.actionExit = QtGui.QAction(MainWindow)
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
+        self.actionHelp = QtGui.QAction(MainWindow)
+        self.actionHelp.setObjectName(_fromUtf8("actionHelp"))
+        self.actionLicense = QtGui.QAction(MainWindow)
+        self.actionLicense.setObjectName(_fromUtf8("actionLicense"))
         self.menuFile.addAction(self.actionExit)
+        self.menuAbout.addAction(self.actionHelp)
+        self.menuAbout.addAction(self.actionLicense)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.download_btn.click)
@@ -115,6 +127,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.label_2.setText(_translate("MainWindow", "Video URL:", None))
+        self.BatchAdd.setText(_translate("MainWindow", "Batch Add", None))
         self.label_3.setText(_translate("MainWindow", "Save To:", None))
         self.browse_btn.setText(_translate("MainWindow", "Browse", None))
         self.tableWidget.setSortingEnabled(True)
@@ -130,6 +143,9 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Status", None))
         self.download_btn.setText(_translate("MainWindow", "Download", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
+        self.menuAbout.setTitle(_translate("MainWindow", "About", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
+        self.actionHelp.setText(_translate("MainWindow", "Help", None))
+        self.actionLicense.setText(_translate("MainWindow", "License", None))
 
 import resource_rc
