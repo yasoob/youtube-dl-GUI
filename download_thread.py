@@ -11,21 +11,21 @@ class Download(QtCore.QThread):
     row_Signal = QtCore.pyqtSignal()
     error_occured = False
 
-    def __init__(self,url,directory,rowcount,proxy=None, parent=None):
-        super(Download,self).__init__(parent)
-        self.url = url
-        self.directory = directory
-        self.local_rowcount = rowcount
-        self.proxy = proxy or ''
+    def __init__(self,opts):
+        super(Download,self).__init__(opts.get('parent'))
+        self.url = opts.get('url')
+        self.directory = opts.get('directory')
+        self.local_rowcount = opts.get('rowcount')
+        self.convert_format = opts.get('convert_format')
+        self.proxy = opts.get('proxy')
         if self.directory is not '':
-            self.directory = directory + '/'
+            self.directory = opts.get('directory') + '/'
 
     def __del__(self):
         self.wait()
 
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
-            #self.p_barSignal.emit(int((float(li.get('downloaded_bytes')) / float(li.get('total_bytes')))*100.0))
             if li.get('speed') is not None:
                 self.speed = self.format_speed(li.get('speed'))
                 self.eta = self.format_seconds(li.get('eta'))
@@ -51,6 +51,7 @@ class Download(QtCore.QThread):
             'continuedl': True,
             'quiet': True,
             'proxy': self.proxy,
+            'format': self.convert_format,
         }
         with youtube_dl.YoutubeDL(ydl_options) as ydl:
             ydl.add_default_info_extractors()

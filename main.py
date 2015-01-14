@@ -1,4 +1,4 @@
-from UI.gui import Ui_MainWindow
+from UI.gui2 import Ui_MainWindow
 from UI.batch_add_ui import Ui_BatchAdd
 from PyQt4 import QtGui
 from PyQt4 import QtCore
@@ -46,10 +46,8 @@ class MainWindow(QtGui.QMainWindow):
         self.set_connections()
         
         self.url_list = []
-        self.thread_pool = []
+        self.thread_pool = {}
         self.ui.tableWidget.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.Stretch)
-        self.ui.tableWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.ui.tableWidget.setSortingEnabled(False)
         self.rowcount = 0
 
         self.connect_menu_action()
@@ -76,16 +74,37 @@ class MainWindow(QtGui.QMainWindow):
 
     def download_url(self, url):
         directory = str(self.ui.lineEdit_2.text())
+        quality = 'best'
+        delete_file = False
+        if self.ui.ConvertCheckBox.isChecked():
+            quality = str(self.ui.ConvertComboBox.currentText())
+        if self.ui.DeleteFileCheckBox.isChecked():
+            delete_file = True
 
-        self.down_thread = Download(url, directory, self.rowcount, None, self)
-        self.down_thread.statusSignal.connect(self.ui.statusbar.showMessage)
-        self.down_thread.remove_url_Signal.connect(self.remove_url)
-        self.down_thread.list_Signal.connect(self.add_to_table)
-        self.down_thread.row_Signal.connect(self.decrease_rowcount)
-        self.down_thread.start()
+        self.thread_pool['thread{}'.format(self.rowcount)] = Download({
+            'url': url,
+            'directory': directory,
+            'rowcount': self.rowcount,
+            'proxy': '',
+            'convert_format': quality,
+            'delete_file': delete_file,
+            'parent':self,
+        })
+
+        self.thread_pool['thread{}'.format(self.rowcount)].statusSignal.connect(self.ui.statusbar.showMessage)
+        self.thread_pool['thread{}'.format(self.rowcount)].remove_url_Signal.connect(self.remove_url)
+        self.thread_pool['thread{}'.format(self.rowcount)].list_Signal.connect(self.add_to_table)
+        self.thread_pool['thread{}'.format(self.rowcount)].row_Signal.connect(self.decrease_rowcount)
+        self.thread_pool['thread{}'.format(self.rowcount)].start()
+
         self.ui.statusbar.showMessage('Extracting information..')
-
         self.rowcount += 1
+
+        self.ui.tableWidget.setRowCount(self.rowcount)
+        for m, key in enumerate([url,'','','','starting']):
+            newitem = QtGui.QTableWidgetItem(key)
+            self.ui.tableWidget.setItem(0, m, newitem)
+
         self.url_list.append(url)
         if len(self.url_list) is not 0:
             if len(self.url_list) < 2:

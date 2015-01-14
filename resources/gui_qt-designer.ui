@@ -131,7 +131,7 @@
         </item>
        </layout>
       </item>
-      <item alignment="Qt::AlignVCenter">
+      <item>
        <widget class="QTableWidget" name="tableWidget">
         <property name="contextMenuPolicy">
          <enum>Qt::DefaultContextMenu</enum>
