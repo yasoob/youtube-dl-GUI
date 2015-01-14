@@ -14,7 +14,8 @@ class BatchAddDialogue(QtGui.QDialog):
         self.ui = Ui_BatchAdd()
         self.ui.setupUi(self)
         self.ui.Browse.clicked.connect(self.browse_clicked)
-        self.ui.Close.clicked.connect(self.ui.close)
+        self.ui.Close.clicked.connect(self.close)
+        self.ui.Add.clicked.connect(self.browse_clicked)
 
     def browse_clicked(self):
         file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
@@ -29,6 +30,7 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.batch_dialogue = BatchAddDialogue(self)
         self.ui.lineEdit_2.setText(os.getcwd())
         self.ui.statusbar.showMessage('Ready.')
         self.set_connections()
@@ -39,7 +41,7 @@ class MainWindow(QtGui.QMainWindow):
         self.rowcount = 0
 
         self.connect_menu_action()
-        self.setWindowTitle('youtube-dl v0.3.0')
+        self.setWindowTitle('youtube-dl v0.3.2')
         self.show()
 
     def set_connections(self):
@@ -48,7 +50,6 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.BatchAdd.clicked.connect(self.batch_file)
 
     def batch_file(self):
-        self.batch_dialogue = BatchAddDialogue(self)
         self.batch_dialogue.exec_()
         print self.batch_dialogue.ui.UrlList.toPlainText()
         #print self.batch_dialogue.ui.UrlList
@@ -75,9 +76,9 @@ class MainWindow(QtGui.QMainWindow):
             self.url_list.append(url)
             if len(self.url_list) is not 0:
                 if len(self.url_list) < 2:
-                    self.ui.statusbar.showMessage('Downloading {0} song'.format(len(self.url_list)))
+                    self.ui.statusbar.showMessage('Downloading')
                 else:
-                    self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
+                    self.ui.statusbar.showMessage('Downloading')
             else:
                 self.ui.statusbar.showMessage("done")
         else:
@@ -107,7 +108,35 @@ class MainWindow(QtGui.QMainWindow):
         self.rowcount -= 1 
 
     def connect_menu_action(self):
-        self.ui.actionExit.triggered.connect(QtGui.qApp.quit)
+        self.ui.actionExit.triggered.connect(self.close)
+
+    def closeEvent(self, event):
+        if len(self.url_list) is not 0:
+            msgBox = QtGui.QMessageBox(self)
+            msgBox.setWindowTitle("Exit")
+            msgBox.setText("Some files are currently being downloaded.")
+            msgBox.setInformativeText("Do you really want to close?")
+            msgBox.setStandardButtons(QtGui.QMessageBox.Close | QtGui.QMessageBox.Cancel)
+            msgBox.setDefaultButton(QtGui.QMessageBox.Cancel)
+            ret = msgBox.exec_()
+            if ret == QtGui.QMessageBox.Cancel:
+                event.ignore()
+            else:
+                self.close()
+        else:
+            self.close()
+        """
+            exit_diag = QtGui.QMessageBox(self)
+            exit_diag.setText("The document has been modified.")
+            exit_diag.setInformativeText("Do you want to save your changes?")
+            exit_diag.setStandardButtons(QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Close)
+            exit_diag.setDefaultButton(QtGui.QMessageBox)
+            if exit_diag.exec_() == QtGui.QMessageBox.Close:
+                self.close()
+            else:
+                event.ignore()
+        """
+
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

@@ -6,32 +6,44 @@ from .common import InfoExtractor
 from ..utils import (
     int_or_none,
     parse_duration,
+    url_basename,
 )
 
 
 class CNNIE(InfoExtractor):
-    _VALID_URL = r'''(?x)https?://((edition|www)\.)?cnn\.com/video/(data/.+?|\?)/
-        (?P<path>.+?/(?P<title>[^/]+?)(?:\.cnn|(?=&)))'''
+    _VALID_URL = r'''(?x)https?://(?:(?:edition|www)\.)?cnn\.com/video/(?:data/.+?|\?)/
+        (?P<path>.+?/(?P<title>[^/]+?)(?:\.(?:cnn|hln)(?:-ap)?|(?=&)))'''
 
     _TESTS = [{
         'url': 'http://edition.cnn.com/video/?/video/sports/2013/06/09/nadal-1-on-1.cnn',
-        'file': 'sports_2013_06_09_nadal-1-on-1.cnn.mp4',
         'md5': '3e6121ea48df7e2259fe73a0628605c4',
         'info_dict': {
+            'id': 'sports/2013/06/09/nadal-1-on-1.cnn',
+            'ext': 'mp4',
             'title': 'Nadal wins 8th French Open title',
             'description': 'World Sport\'s Amanda Davies chats with 2013 French Open champion Rafael Nadal.',
             'duration': 135,
             'upload_date': '20130609',
         },
-    },
-    {
+    }, {
         "url": "http://edition.cnn.com/video/?/video/us/2013/08/21/sot-student-gives-epic-speech.georgia-institute-of-technology&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+rss%2Fcnn_topstories+%28RSS%3A+Top+Stories%29",
-        "file": "us_2013_08_21_sot-student-gives-epic-speech.georgia-institute-of-technology.mp4",
         "md5": "b5cc60c60a3477d185af8f19a2a26f4e",
         "info_dict": {
+            'id': 'us/2013/08/21/sot-student-gives-epic-speech.georgia-institute-of-technology',
+            'ext': 'mp4',
             "title": "Student's epic speech stuns new freshmen",
             "description": "A Georgia Tech student welcomes the incoming freshmen with an epic speech backed by music from \"2001: A Space Odyssey.\"",
             "upload_date": "20130821",
+        }
+    }, {
+        'url': 'http://www.cnn.com/video/data/2.0/video/living/2014/12/22/growing-america-nashville-salemtown-board-episode-1.hln.html',
+        'md5': 'f14d02ebd264df951feb2400e2c25a1b',
+        'info_dict': {
+            'id': 'living/2014/12/22/growing-america-nashville-salemtown-board-episode-1.hln',
+            'ext': 'mp4',
+            'title': 'Nashville Ep. 1: Hand crafted skateboards',
+            'description': 'md5:e7223a503315c9f150acac52e76de086',
+            'upload_date': '20141222',
         }
     }]
 
@@ -78,8 +90,11 @@ class CNNIE(InfoExtractor):
 
         self._sort_formats(formats)
 
-        thumbnails = sorted([((int(t.attrib['height']),int(t.attrib['width'])), t.text) for t in info.findall('images/image')])
-        thumbs_dict = [{'resolution': res, 'url': t_url} for (res, t_url) in thumbnails]
+        thumbnails = [{
+            'height': int(t.attrib['height']),
+            'width': int(t.attrib['width']),
+            'url': t.text,
+        } for t in info.findall('images/image')]
 
         metas_el = info.find('metas')
         upload_date = (
@@ -92,9 +107,58 @@ class CNNIE(InfoExtractor):
             'id': info.attrib['id'],
             'title': info.find('headline').text,
             'formats': formats,
-            'thumbnail': thumbnails[-1][1],
-            'thumbnails': thumbs_dict,
+            'thumbnails': thumbnails,
             'description': info.find('description').text,
             'duration': duration,
             'upload_date': upload_date,
+        }
+
+
+class CNNBlogsIE(InfoExtractor):
+    _VALID_URL = r'https?://[^\.]+\.blogs\.cnn\.com/.+'
+    _TEST = {
+        'url': 'http://reliablesources.blogs.cnn.com/2014/02/09/criminalizing-journalism/',
+        'md5': '3e56f97b0b6ffb4b79f4ea0749551084',
+        'info_dict': {
+            'id': 'bestoftv/2014/02/09/criminalizing-journalism.cnn',
+            'ext': 'mp4',
+            'title': 'Criminalizing journalism?',
+            'description': 'Glenn Greenwald responds to comments made this week on Capitol Hill that journalists could be criminal accessories.',
+            'upload_date': '20140209',
+        },
+        'add_ie': ['CNN'],
+    }
+
+    def _real_extract(self, url):
+        webpage = self._download_webpage(url, url_basename(url))
+        cnn_url = self._html_search_regex(r'data-url="(.+?)"', webpage, 'cnn url')
+        return {
+            '_type': 'url',
+            'url': cnn_url,
+            'ie_key': CNNIE.ie_key(),
+        }
+
+
+class CNNArticleIE(InfoExtractor):
+    _VALID_URL = r'https?://(?:(?:edition|www)\.)?cnn\.com/(?!video/)'
+    _TEST = {
+        'url': 'http://www.cnn.com/2014/12/21/politics/obama-north-koreas-hack-not-war-but-cyber-vandalism/',
+        'md5': '275b326f85d80dff7592a9820f5dc887',
+        'info_dict': {
+            'id': 'bestoftv/2014/12/21/sotu-crowley-president-obama-north-korea-not-going-to-be-intimidated.cnn',
+            'ext': 'mp4',
+            'title': 'Obama: We\'re not going to be intimidated',
+            'description': 'md5:e735586f3dc936075fa654a4d91b21f9',
+            'upload_date': '20141220',
+        },
+        'add_ie': ['CNN'],
+    }
+
+    def _real_extract(self, url):
+        webpage = self._download_webpage(url, url_basename(url))
+        cnn_url = self._html_search_regex(r"video:\s*'([^']+)'", webpage, 'cnn url')
+        return {
+            '_type': 'url',
+            'url': 'http://cnn.com/video/?/video/' + cnn_url,
+            'ie_key': CNNIE.ie_key(),
         }
