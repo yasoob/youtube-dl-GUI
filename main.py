@@ -13,16 +13,26 @@ class BatchAddDialogue(QtGui.QDialog):
         super(BatchAddDialogue, self).__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
         self.ui = Ui_BatchAdd()
         self.ui.setupUi(self)
+        self.download = False
         self.ui.Browse.clicked.connect(self.browse_clicked)
         self.ui.Close.clicked.connect(self.close)
-        self.ui.Add.clicked.connect(self.browse_clicked)
+        self.ui.Add.clicked.connect(self.addClicked)
 
     def browse_clicked(self):
         file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
+        if file is '':
+            return
         with open(file, 'rb') as file_data:
             for line in file_data.readlines():
-                self.ui.UrlList.append(line)
+                self.ui.UrlList.append(line.strip())
 
+    def addClicked(self):
+        if str(self.ui.UrlList.toPlainText()).strip() is '':
+            QtGui.QMessageBox.information(self, "Error!","No urls given!")
+            return
+        else:
+            self.download = True
+            self.close()
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -36,8 +46,10 @@ class MainWindow(QtGui.QMainWindow):
         self.set_connections()
         
         self.url_list = []
+        self.thread_pool = []
         self.ui.tableWidget.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.Stretch)
         self.ui.tableWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.ui.tableWidget.setSortingEnabled(False)
         self.rowcount = 0
 
         self.connect_menu_action()
@@ -51,44 +63,53 @@ class MainWindow(QtGui.QMainWindow):
 
     def batch_file(self):
         self.batch_dialogue.exec_()
-        print self.batch_dialogue.ui.UrlList.toPlainText()
-        #print self.batch_dialogue.ui.UrlList
+        if self.batch_dialogue.download is True:
+            urls = list(self.batch_dialogue.ui.UrlList.toPlainText().split('\n'))
+            for url in urls:
+                self.download_url(str(url))
+        else:
+            return
 
     def set_dest(self):
         file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
         self.ui.lineEdit_2.setText(file)
-    
+
+    def download_url(self, url):
+        directory = str(self.ui.lineEdit_2.text())
+
+        self.down_thread = Download(url, directory, self.rowcount, None, self)
+        self.down_thread.statusSignal.connect(self.ui.statusbar.showMessage)
+        self.down_thread.remove_url_Signal.connect(self.remove_url)
+        self.down_thread.list_Signal.connect(self.add_to_table)
+        self.down_thread.row_Signal.connect(self.decrease_rowcount)
+        self.down_thread.start()
+        self.ui.statusbar.showMessage('Extracting information..')
+
+        self.rowcount += 1
+        self.url_list.append(url)
+        if len(self.url_list) is not 0:
+            if len(self.url_list) < 2:
+                self.ui.statusbar.showMessage('Downloading {0} file'.format(len(self.url_list)))
+            else:
+                self.ui.statusbar.showMessage('Downloading {0} files'.format(len(self.url_list)))
+        else:
+            self.ui.statusbar.showMessage("done")
+
     def handleButton(self):
         url = str(self.ui.lineEdit.text())
         if url is '':
-            QtGui.QMessageBox.information(self,"Error!","No url given!")
+            QtGui.QMessageBox.information(self, "Error!","No url given!")
             return
         if url not in self.url_list:
-            directory = str(self.ui.lineEdit_2.text())
-            self.down_thread = Download(url,directory,self.rowcount)
-            self.down_thread.statusSignal.connect(self.ui.statusbar.showMessage)
-            self.down_thread.remove_url_Signal.connect(self.remove_url)
-            self.down_thread.list_Signal.connect(self.add_to_table)
-            self.down_thread.row_Signal.connect(self.increase_rowcount)
-            self.down_thread.start()
-            self.ui.statusbar.showMessage('Extracting information..')
-            self.rowcount += 1
-            self.url_list.append(url)
-            if len(self.url_list) is not 0:
-                if len(self.url_list) < 2:
-                    self.ui.statusbar.showMessage('Downloading')
-                else:
-                    self.ui.statusbar.showMessage('Downloading')
-            else:
-                self.ui.statusbar.showMessage("done")
+            self.download_url(url)
         else:
             self.ui.statusbar.showMessage('This url is already being downloaded')
             time.sleep(5)
             if len(self.url_list) is not 0:
                 if len(self.url_list) < 2:
-                    self.ui.statusbar.showMessage('Downloading {0} song'.format(len(self.url_list)))
+                    self.ui.statusbar.showMessage('Downloading {0} file'.format(len(self.url_list)))
                 else:
-                    self.ui.statusbar.showMessage('Downloading {0} songs'.format(len(self.url_list)))
+                    self.ui.statusbar.showMessage('Downloading {0} files'.format(len(self.url_list)))
             else:
                 self.ui.statusbar.showMessage("done")
     
@@ -104,7 +125,7 @@ class MainWindow(QtGui.QMainWindow):
             m += 1
         self.ui.tableWidget.setRowCount(self.rowcount)
 
-    def increase_rowcount(self):
+    def decrease_rowcount(self):
         self.rowcount -= 1 
 
     def connect_menu_action(self):

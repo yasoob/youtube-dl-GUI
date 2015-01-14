@@ -2,230 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f59715e1-e9c8-4227-a5ca-6b847c467480" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\FileDownloader.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\InfoExtractors.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\cinemassacre.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\d8.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\depositfiles.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\justintv.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\slashdot.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\southparkstudios.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\youtube_dl\extractor\statigram.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/YoutubeDL.py" afterPath="$PROJECT_DIR$/youtube_dl/YoutubeDL.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/__init__.py" afterPath="$PROJECT_DIR$/youtube_dl/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/downloader/__init__.py" afterPath="$PROJECT_DIR$/youtube_dl/downloader/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/__init__.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/postprocessor/__init__.py" afterPath="$PROJECT_DIR$/youtube_dl/postprocessor/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/__main__.py" afterPath="$PROJECT_DIR$/youtube_dl/__main__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/academicearth.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/academicearth.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/addanime.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/addanime.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/aes.py" afterPath="$PROJECT_DIR$/youtube_dl/aes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/anitube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/anitube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/aparat.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/aparat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/appletrailers.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/appletrailers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/archiveorg.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/archiveorg.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ard.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ard.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/arte.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/arte.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/auengine.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/auengine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/bambuser.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/bambuser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/bandcamp.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/bandcamp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/blinkx.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/blinkx.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/bliptv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/bliptv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/bloomberg.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/bloomberg.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/breakcom.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/breakcom.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/brightcove.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/brightcove.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/c56.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/c56.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/canalc2.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/canalc2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/canalplus.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/canalplus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/cbs.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/cbs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/channel9.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/channel9.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/chilloutzone.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/chilloutzone.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/clipfish.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/clipfish.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/cliphunter.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/cliphunter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/clipsyndicate.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/clipsyndicate.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/cmt.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/cmt.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/cnn.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/cnn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/collegehumor.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/collegehumor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/comedycentral.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/comedycentral.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/downloader/common.py" afterPath="$PROJECT_DIR$/youtube_dl/downloader/common.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/common.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/common.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/postprocessor/common.py" afterPath="$PROJECT_DIR$/youtube_dl/postprocessor/common.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/condenast.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/condenast.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/criterion.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/criterion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/crunchyroll.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/crunchyroll.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/cspan.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/cspan.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/dailymotion.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/dailymotion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/daum.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/daum.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/defense.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/defense.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/discovery.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/discovery.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/dotsub.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/dotsub.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/dreisat.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/dreisat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/dropbox.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/dropbox.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ebaumsworld.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ebaumsworld.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ehow.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ehow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/eighttracks.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/eighttracks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/eitb.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/eitb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/elpais.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/elpais.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/escapist.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/escapist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/everyonesmixtape.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/everyonesmixtape.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/exfm.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/exfm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/extremetube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/extremetube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/facebook.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/facebook.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/faz.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/faz.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/postprocessor/ffmpeg.py" afterPath="$PROJECT_DIR$/youtube_dl/postprocessor/ffmpeg.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/firstpost.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/firstpost.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/fktv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/fktv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/flickr.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/flickr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/franceinter.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/franceinter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/francetv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/francetv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/freesound.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/freesound.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/funnyordie.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/funnyordie.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/gamekings.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/gamekings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/gamespot.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/gamespot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/gametrailers.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/gametrailers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/generic.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/generic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/googleplus.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/googleplus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/googlesearch.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/googlesearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/hark.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/hark.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/downloader/hls.py" afterPath="$PROJECT_DIR$/youtube_dl/downloader/hls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/hotnewhiphop.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/hotnewhiphop.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/howcast.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/howcast.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/downloader/http.py" afterPath="$PROJECT_DIR$/youtube_dl/downloader/http.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/huffpost.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/huffpost.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/hypem.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/hypem.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ign.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ign.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/imdb.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/imdb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/infoq.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/infoq.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/instagram.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/instagram.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/internetvideoarchive.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/internetvideoarchive.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/iprima.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/iprima.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ivi.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ivi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/jeuxvideo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/jeuxvideo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/jpopsukitv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/jpopsukitv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/jukebox.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/jukebox.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/kankan.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/kankan.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/keek.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/keek.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/keezmovies.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/keezmovies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/khanacademy.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/khanacademy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/kickstarter.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/kickstarter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/lifenews.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/lifenews.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/liveleak.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/liveleak.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/livestream.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/livestream.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/lynda.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/lynda.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/m6.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/m6.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/download_thread.py" afterPath="$PROJECT_DIR$/download_thread.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/malemotion.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/malemotion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mdr.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mdr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/metacafe.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/metacafe.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/metacritic.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/metacritic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mit.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mit.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mixcloud.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mixcloud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mofosex.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mofosex.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mooshare.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mooshare.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/downloader/mplayer.py" afterPath="$PROJECT_DIR$/youtube_dl/downloader/mplayer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mpora.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mpora.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/mtv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/mtv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/muzu.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/muzu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/myspace.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/myspace.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/myspass.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/myspass.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/myvideo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/myvideo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/naver.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/naver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/nba.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/nba.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/nbc.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/nbc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ndr.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ndr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ndtv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ndtv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/newgrounds.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/newgrounds.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/nfb.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/nfb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/nhl.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/nhl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/niconico.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/niconico.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ninegag.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ninegag.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/normalboots.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/normalboots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/novamov.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/novamov.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/nowness.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/nowness.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/nowvideo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/nowvideo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ooyala.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ooyala.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/orf.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/orf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/pbs.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/pbs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/photobucket.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/photobucket.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/podomatic.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/podomatic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/pornhd.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/pornhd.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/pornhub.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/pornhub.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/pornotube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/pornotube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/pyvideo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/pyvideo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/radiofrance.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/radiofrance.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/rbmaradio.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/rbmaradio.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/redtube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/redtube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ringtv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ringtv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ro220.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ro220.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/roxwel.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/roxwel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/rtlnow.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/rtlnow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/downloader/rtmp.py" afterPath="$PROJECT_DIR$/youtube_dl/downloader/rtmp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/rutube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/rutube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/servingsys.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/servingsys.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/sina.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/sina.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/slideshare.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/slideshare.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/smotri.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/smotri.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/sohu.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/sohu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/soundcloud.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/soundcloud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/space.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/space.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/spankwire.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/spankwire.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/spiegel.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/spiegel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/spike.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/spike.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/stanfordoc.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/stanfordoc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/steam.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/steam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/streamcloud.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/streamcloud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/subtitles.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/subtitles.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/sztvhu.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/sztvhu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/teamcoco.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/teamcoco.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/techtalks.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/techtalks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ted.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ted.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tf1.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tf1.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/theplatform.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/theplatform.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/thisav.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/thisav.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tinypic.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tinypic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/traileraddict.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/traileraddict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/trilulilu.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/trilulilu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tube8.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tube8.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tudou.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tudou.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tumblr.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tumblr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tutv.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tutv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/tvp.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/tvp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/unistra.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/unistra.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/update.py" afterPath="$PROJECT_DIR$/youtube_dl/update.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/ustream.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/ustream.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/utils.py" afterPath="$PROJECT_DIR$/youtube_dl/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vbox7.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vbox7.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/veehd.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/veehd.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/veoh.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/veoh.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/version.py" afterPath="$PROJECT_DIR$/youtube_dl/version.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vevo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vevo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vice.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vice.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/viddler.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/viddler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/videodetective.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/videodetective.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/videofyme.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/videofyme.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/videopremium.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/videopremium.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/viki.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/viki.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vimeo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vimeo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vine.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vk.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vk.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/vube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/vube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/wat.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/wat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/weibo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/weibo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/wimp.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/wimp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/wistia.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/wistia.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/worldstarhiphop.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/worldstarhiphop.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/postprocessor/xattrpp.py" afterPath="$PROJECT_DIR$/youtube_dl/postprocessor/xattrpp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/xhamster.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/xhamster.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/xnxx.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/xnxx.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/xtube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/xtube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/xvideos.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/xvideos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/yahoo.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/yahoo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/youjizz.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/youjizz.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/youku.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/youku.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/youporn.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/youporn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/youtube.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/youtube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youtube_dl/extractor/zdf.py" afterPath="$PROJECT_DIR$/youtube_dl/extractor/zdf.py" />
     </list>
     <ignored path="youtube-dl-GUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -252,8 +30,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52" vertical-offset="1649" max-vertical-offset="2567">
-              <caret line="110" column="56" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.8" vertical-offset="1785" max-vertical-offset="2924">
+              <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="54" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -264,11 +42,31 @@
       <file leaf-file-name="download_thread.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/download_thread.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1666">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1768">
+              <caret line="52" column="19" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/youtube_dl/downloader/common.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4233" max-vertical-offset="5355">
+              <caret line="157" column="29" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="YoutubeDL.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/youtube_dl/YoutubeDL.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="25874">
+              <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -286,6 +84,8 @@
         <option value="$PROJECT_DIR$/UI/__init__.py" />
         <option value="$PROJECT_DIR$/UI/gui.py" />
         <option value="$PROJECT_DIR$/demo.py" />
+        <option value="$PROJECT_DIR$/download_thread.py" />
+        <option value="$PROJECT_DIR$/urls.txt" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -334,6 +134,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="youtube-dl-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="youtube-dl-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="youtube-dl-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="youtube_dl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="youtube-dl-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="youtube-dl-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="youtube_dl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="downloader" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -555,7 +387,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="784" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -640,10 +472,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/youtube_dl/downloader/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4233" max-vertical-offset="5355">
+          <caret line="157" column="29" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/youtube_dl/YoutubeDL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="25874">
+          <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urls.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08" vertical-offset="0" max-vertical-offset="425">
+          <caret line="2" column="125" selection-start-line="2" selection-start-column="125" selection-end-line="2" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/download_thread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1666">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1768">
+          <caret line="52" column="19" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -652,8 +508,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52" vertical-offset="1649" max-vertical-offset="2567">
-          <caret line="110" column="56" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.8" vertical-offset="1785" max-vertical-offset="2924">
+          <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="54" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>

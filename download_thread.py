@@ -11,13 +11,17 @@ class Download(QtCore.QThread):
     row_Signal = QtCore.pyqtSignal()
     error_occured = False
 
-    def __init__(self,url,directory,rowcount):
-        super(Download,self).__init__()
+    def __init__(self,url,directory,rowcount,proxy=None, parent=None):
+        super(Download,self).__init__(parent)
         self.url = url
         self.directory = directory
         self.local_rowcount = rowcount
+        self.proxy = proxy or ''
         if self.directory is not '':
             self.directory = directory + '/'
+
+    def __del__(self):
+        self.wait()
 
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
@@ -28,10 +32,10 @@ class Download(QtCore.QThread):
                 self.bytes = 'unknown'
                 if li.get('total_bytes') is not None:
                     self.bytes = self.format_bytes(li.get('total_bytes'))
-                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
+                self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
             elif li.get('status') == "finished":
                 self.remove_url_Signal.emit(self.url)
-                self.list_Signal.emit( [self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
+                self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
         else:
             self.statusSignal.emit('Already Downloaded')
             self.row_Signal.emit()
@@ -45,7 +49,8 @@ class Download(QtCore.QThread):
         ydl_options = {
             'outtmpl': '{0}%(title)s-%(id)s.%(ext)s'.format(self.directory),
             'continuedl': True,
-            'quiet' : True,
+            'quiet': True,
+            'proxy': self.proxy,
         }
         with youtube_dl.YoutubeDL(ydl_options) as ydl:
             ydl.add_default_info_extractors()
@@ -63,6 +68,7 @@ class Download(QtCore.QThread):
         self.download()
         if self.error_occured is not True:
             self.statusSignal.emit('Done!')
+        self.terminate()
 
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)
