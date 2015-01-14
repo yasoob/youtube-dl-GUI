@@ -75,21 +75,20 @@ class MainWindow(QtGui.QMainWindow):
     def download_url(self, url):
         directory = str(self.ui.lineEdit_2.text())
         quality = 'best'
-        delete_file = False
         if self.ui.ConvertCheckBox.isChecked():
             quality = str(self.ui.ConvertComboBox.currentText())
-        if self.ui.DeleteFileCheckBox.isChecked():
-            delete_file = True
-
-        self.thread_pool['thread{}'.format(self.rowcount)] = Download({
+        options = {
             'url': url,
             'directory': directory,
             'rowcount': self.rowcount,
             'proxy': '',
             'convert_format': quality,
-            'delete_file': delete_file,
             'parent':self,
-        })
+        }
+        if not self.ui.DeleteFileCheckBox.isChecked():
+            options['keep_file'] = True
+
+        self.thread_pool['thread{}'.format(self.rowcount)] = Download(options)
 
         self.thread_pool['thread{}'.format(self.rowcount)].statusSignal.connect(self.ui.statusbar.showMessage)
         self.thread_pool['thread{}'.format(self.rowcount)].remove_url_Signal.connect(self.remove_url)
@@ -162,20 +161,17 @@ class MainWindow(QtGui.QMainWindow):
             if ret == QtGui.QMessageBox.Cancel:
                 event.ignore()
             else:
-                self.close()
+                self.kill_all_threads()
         else:
-            self.close()
-        """
-            exit_diag = QtGui.QMessageBox(self)
-            exit_diag.setText("The document has been modified.")
-            exit_diag.setInformativeText("Do you want to save your changes?")
-            exit_diag.setStandardButtons(QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Close)
-            exit_diag.setDefaultButton(QtGui.QMessageBox)
-            if exit_diag.exec_() == QtGui.QMessageBox.Close:
-                self.close()
+            self.kill_all_threads()
+
+    def kill_all_threads(self):
+        for key, value in self.thread_pool.iteritems():
+            if value.done is False:
+                value.exit()
             else:
-                event.ignore()
-        """
+                continue
+        self.close()
 
 
 if __name__ == "__main__":

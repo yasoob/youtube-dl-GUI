@@ -9,8 +9,8 @@ class Download(QtCore.QThread):
     remove_url_Signal = QtCore.pyqtSignal(str)
     list_Signal = QtCore.pyqtSignal([list])
     row_Signal = QtCore.pyqtSignal()
-    error_occured = False
-
+    error_occurred = False
+    done = False
     def __init__(self,opts):
         super(Download,self).__init__(opts.get('parent'))
         self.url = opts.get('url')
@@ -18,6 +18,7 @@ class Download(QtCore.QThread):
         self.local_rowcount = opts.get('rowcount')
         self.convert_format = opts.get('convert_format')
         self.proxy = opts.get('proxy')
+        self.keep_file = opts.get('keep_file')
         if self.directory is not '':
             self.directory = opts.get('directory') + '/'
 
@@ -35,7 +36,8 @@ class Download(QtCore.QThread):
                 self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
             elif li.get('status') == "finished":
                 self.remove_url_Signal.emit(self.url)
-                self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
+                self.file_name = li.get('filename').split('/')[-1]
+                self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,'Converting'])
         else:
             self.statusSignal.emit('Already Downloaded')
             self.row_Signal.emit()
@@ -51,25 +53,32 @@ class Download(QtCore.QThread):
             'continuedl': True,
             'quiet': True,
             'proxy': self.proxy,
-            'format': self.convert_format,
+            'postprocessors': [{
+                'key': 'FFmpegVideoConvertor',
+                'preferedformat': self.convert_format,
+            }],
         }
+        if self.keep_file:
+            ydl_options['keepvideo'] = True
+
         with youtube_dl.YoutubeDL(ydl_options) as ydl:
             ydl.add_default_info_extractors()
             ydl.add_progress_hook(self.hook)
             try:
                 ydl.download([self.url])        
-            except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
+            except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError,youtube_dl.utils.UnavailableVideoError) as e:
                 self.row_Signal.emit()
                 self.remove_url_Signal.emit(self.url)
-                self.error_occured = True
+                self.error_occurred = True
                 self.statusSignal.emit(str(e))
         #self.p_barSignal.emit(0)
 
     def run(self):
         self.download()
-        if self.error_occured is not True:
+        if self.error_occurred is not True:
+            self.list_Signal.emit([self.local_rowcount, self.file_name, self.bytes, self.eta, self.speed, 'finished'])
             self.statusSignal.emit('Done!')
-        self.terminate()
+        self.done = True
 
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)

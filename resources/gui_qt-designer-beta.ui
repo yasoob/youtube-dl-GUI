@@ -204,22 +204,12 @@
                    </property>
                    <item>
                     <property name="text">
-                     <string>mp3</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
                      <string>mp4</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>aac</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>m4a</string>
+                     <string>flv</string>
                     </property>
                    </item>
                    <item>
@@ -229,12 +219,12 @@
                    </item>
                    <item>
                     <property name="text">
-                     <string>wav</string>
+                     <string>webm</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>webm</string>
+                     <string>mkv</string>
                     </property>
                    </item>
                   </widget>
@@ -245,6 +235,9 @@
                 <widget class="QCheckBox" name="DeleteFileCheckBox">
                  <property name="text">
                   <string>Delete Original File</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -281,10 +274,19 @@
             <item>
              <widget class="QTableWidget" name="tableWidget">
               <property name="contextMenuPolicy">
-               <enum>Qt::DefaultContextMenu</enum>
+               <enum>Qt::ActionsContextMenu</enum>
               </property>
               <property name="autoFillBackground">
                <bool>true</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QTableWidget
+{
+    outline: 0;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::VLine</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
@@ -295,15 +297,21 @@
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectRows</enum>
               </property>
+              <property name="gridStyle">
+               <enum>Qt::NoPen</enum>
+              </property>
               <property name="sortingEnabled">
                <bool>false</bool>
               </property>
               <property name="rowCount">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="columnCount">
                <number>5</number>
               </property>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
               <attribute name="verticalHeaderDefaultSectionSize">
                <number>30</number>
               </attribute>
@@ -313,6 +321,7 @@
               <attribute name="verticalHeaderShowSortIndicator" stdset="0">
                <bool>false</bool>
               </attribute>
+              <row/>
               <column>
                <property name="text">
                 <string>Video/Song</string>

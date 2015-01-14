@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
 #
-# Created: Thu Jan 15 02:57:21 2015
+# Created: Thu Jan 15 03:38:31 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -112,11 +112,10 @@ class Ui_MainWindow(object):
         self.ConvertComboBox.addItem(_fromUtf8(""))
         self.ConvertComboBox.addItem(_fromUtf8(""))
         self.ConvertComboBox.addItem(_fromUtf8(""))
-        self.ConvertComboBox.addItem(_fromUtf8(""))
-        self.ConvertComboBox.addItem(_fromUtf8(""))
         self.horizontalLayout_4.addWidget(self.ConvertComboBox)
         self.verticalLayout_9.addLayout(self.horizontalLayout_4)
         self.DeleteFileCheckBox = QtGui.QCheckBox(self.groupBox_2)
+        self.DeleteFileCheckBox.setChecked(True)
         self.DeleteFileCheckBox.setObjectName(_fromUtf8("DeleteFileCheckBox"))
         self.verticalLayout_9.addWidget(self.DeleteFileCheckBox)
         self.verticalLayout_10.addLayout(self.verticalLayout_9)
@@ -135,12 +134,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QtGui.QVBoxLayout()
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
         self.tableWidget = QtGui.QTableWidget(self.ActivityTab)
-        self.tableWidget.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.tableWidget.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
         self.tableWidget.setAutoFillBackground(True)
+        self.tableWidget.setStyleSheet(_fromUtf8("QTableWidget\n"
+"{\n"
+"    outline: 0;\n"
+"}"))
+        self.tableWidget.setFrameShape(QtGui.QFrame.VLine)
         self.tableWidget.setFrameShadow(QtGui.QFrame.Plain)
         self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tableWidget.setRowCount(0)
+        self.tableWidget.setGridStyle(QtCore.Qt.NoPen)
+        self.tableWidget.setRowCount(1)
         self.tableWidget.setColumnCount(5)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         item = QtGui.QTableWidgetItem()
@@ -153,6 +158,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setDefaultSectionSize(30)
         self.tableWidget.verticalHeader().setMinimumSectionSize(20)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
@@ -199,13 +205,11 @@ class Ui_MainWindow(object):
         self.browse_btn.setText(_translate("MainWindow", "Browse", None))
         self.groupBox_2.setTitle(_translate("MainWindow", "Convert", None))
         self.ConvertCheckBox.setText(_translate("MainWindow", "Convert After Download", None))
-        self.ConvertComboBox.setItemText(0, _translate("MainWindow", "mp3", None))
-        self.ConvertComboBox.setItemText(1, _translate("MainWindow", "mp4", None))
-        self.ConvertComboBox.setItemText(2, _translate("MainWindow", "aac", None))
-        self.ConvertComboBox.setItemText(3, _translate("MainWindow", "m4a", None))
-        self.ConvertComboBox.setItemText(4, _translate("MainWindow", "ogg", None))
-        self.ConvertComboBox.setItemText(5, _translate("MainWindow", "wav", None))
-        self.ConvertComboBox.setItemText(6, _translate("MainWindow", "webm", None))
+        self.ConvertComboBox.setItemText(0, _translate("MainWindow", "mp4", None))
+        self.ConvertComboBox.setItemText(1, _translate("MainWindow", "flv", None))
+        self.ConvertComboBox.setItemText(2, _translate("MainWindow", "ogg", None))
+        self.ConvertComboBox.setItemText(3, _translate("MainWindow", "webm", None))
+        self.ConvertComboBox.setItemText(4, _translate("MainWindow", "mkv", None))
         self.DeleteFileCheckBox.setText(_translate("MainWindow", "Delete Original File", None))
         self.download_btn.setText(_translate("MainWindow", "Download", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DownloadTab), _translate("MainWindow", "Download", None))
