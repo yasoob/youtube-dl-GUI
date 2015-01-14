@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
 #
-# Created: Thu Jan 15 02:55:26 2015
+# Created: Thu Jan 15 02:57:21 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -186,7 +186,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.download_btn.click)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

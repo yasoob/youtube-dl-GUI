@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f59715e1-e9c8-4227-a5ca-6b847c467480" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/gui_qt-designer.ui" afterPath="$PROJECT_DIR$/resources/gui_qt-designer.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/download_thread.py" afterPath="$PROJECT_DIR$/download_thread.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/gui_qt-designer-beta.ui" afterPath="$PROJECT_DIR$/resources/gui_qt-designer-beta.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gui2.py" afterPath="$PROJECT_DIR$/UI/gui2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <ignored path="youtube-dl-GUI.iws" />
@@ -31,8 +31,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56" vertical-offset="612" max-vertical-offset="3247">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.68" vertical-offset="612" max-vertical-offset="3247">
+              <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -515,8 +515,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56" vertical-offset="612" max-vertical-offset="3247">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.68" vertical-offset="612" max-vertical-offset="3247">
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
