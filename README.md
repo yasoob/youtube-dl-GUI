@@ -51,3 +51,9 @@ TODO:
 License:
 ----------
 This project is released under the MIT license. See the included license file.
+
+Note:
+-----
+
+I am doing a huge change in the code base and UI so it is very unstable right now. You may use it at your own risk.
+Some UI components are not wired up so they are useless right now.
