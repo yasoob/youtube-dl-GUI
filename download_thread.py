@@ -1,5 +1,4 @@
 import math
-from PyQt4 import QtGui
 from PyQt4 import QtCore
 import youtube_dl
 import time

@@ -1,4 +1,4 @@
-from UI.gui2 import Ui_MainWindow
+from UI.gui import Ui_MainWindow
 from UI.batch_add_ui import Ui_BatchAdd
 from PyQt4 import QtGui
 from PyQt4 import QtCore
