@@ -6,6 +6,7 @@ import sys
 import os
 import time 
 from download_thread import Download
+from post_processor_thread import PostProcessor
 
 
 class BatchAddDialogue(QtGui.QDialog):
@@ -16,17 +17,17 @@ class BatchAddDialogue(QtGui.QDialog):
         self.download = False
         self.ui.Browse.clicked.connect(self.browse_clicked)
         self.ui.Close.clicked.connect(self.close)
-        self.ui.Add.clicked.connect(self.addClicked)
+        self.ui.Add.clicked.connect(self.add_clicked)
 
     def browse_clicked(self):
-        file = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter = QtCore.QString('*.txt')))
-        if file is '':
+        file_name = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter=QtCore.QString('*.txt')))
+        if file_name is '':
             return
-        with open(file, 'rb') as file_data:
+        with open(file_name, 'rb') as file_data:
             for line in file_data.readlines():
                 self.ui.UrlList.append(line.strip())
 
-    def addClicked(self):
+    def add_clicked(self):
         if str(self.ui.UrlList.toPlainText()).strip() is '':
             QtGui.QMessageBox.information(self, "Error!","No urls given!")
             return
@@ -56,7 +57,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def set_connections(self):
         self.ui.download_btn.clicked.connect(self.handleButton)
-        self.ui.browse_btn.clicked.connect(self.set_dest)
+        self.ui.browse_btn.clicked.connect(self.set_destination)
         self.ui.BatchAdd.clicked.connect(self.batch_file)
 
     def batch_file(self):
@@ -68,9 +69,12 @@ class MainWindow(QtGui.QMainWindow):
         else:
             return
 
-    def set_dest(self):
-        file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
-        self.ui.lineEdit_2.setText(file)
+    def set_destination(self):
+        file_name = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
+        self.ui.lineEdit_2.setText(file_name)
+
+    def convert_file(self,file_path, preferred_format, delete_tmp=False):
+        pass
 
     def download_url(self, url):
         directory = str(self.ui.lineEdit_2.text())
@@ -100,9 +104,9 @@ class MainWindow(QtGui.QMainWindow):
         self.rowcount += 1
 
         self.ui.tableWidget.setRowCount(self.rowcount)
-        for m, key in enumerate([url,'','','','starting']):
-            newitem = QtGui.QTableWidgetItem(key)
-            self.ui.tableWidget.setItem(0, m, newitem)
+        for m, key in enumerate([url, '', '', '', 'starting']):
+            new_item = QtGui.QTableWidgetItem(key)
+            self.ui.tableWidget.setItem(0, m, new_item)
 
         self.url_list.append(url)
         if len(self.url_list) is not 0:
@@ -136,10 +140,10 @@ class MainWindow(QtGui.QMainWindow):
 
     def add_to_table(self, values):
         row = values[0]
-        m=0
+        m = 0
         for key in values[1:]:
-            newitem = QtGui.QTableWidgetItem(key)
-            self.ui.tableWidget.setItem(row, m, newitem)
+            new_item = QtGui.QTableWidgetItem(key)
+            self.ui.tableWidget.setItem(row, m, new_item)
             m += 1
         self.ui.tableWidget.setRowCount(self.rowcount)
 

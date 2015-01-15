@@ -10,6 +10,7 @@ class Download(QtCore.QThread):
     row_Signal = QtCore.pyqtSignal()
     error_occurred = False
     done = False
+
     def __init__(self,opts):
         super(Download,self).__init__(opts.get('parent'))
         self.url = opts.get('url')
@@ -32,7 +33,16 @@ class Download(QtCore.QThread):
                 self.bytes = 'unknown'
                 if li.get('total_bytes') is not None:
                     self.bytes = self.format_bytes(li.get('total_bytes'))
-                self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,li.get('status')])
+
+                self.list_Signal.emit([
+                    self.local_rowcount,
+                    li.get('filename').split('/')[-1],
+                    self.bytes,
+                    self.eta,
+                    self.speed,
+                    li.get('status')
+                ])
+
             elif li.get('status') == "finished":
                 self.remove_url_Signal.emit(self.url)
                 self.file_name = li.get('filename').split('/')[-1]
@@ -79,6 +89,7 @@ class Download(QtCore.QThread):
             self.statusSignal.emit('Done!')
         self.done = True
 
+    @staticmethod
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)
         (hours, mins) = divmod(mins, 60)
@@ -89,6 +100,7 @@ class Download(QtCore.QThread):
         else:
             return '%02d:%02d:%02d' % (hours, mins, secs)
 
+    @staticmethod
     def format_bytes(self,bytes):
         if bytes is None:
             return u'N/A'

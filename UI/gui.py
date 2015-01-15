@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
 #
-# Created: Thu Jan 15 20:34:33 2015
+# Created: Thu Jan 15 21:02:59 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
         self.BrowseConvertToLineEdit = QtGui.QLineEdit(self.ConvertTab)
         self.BrowseConvertToLineEdit.setObjectName(_fromUtf8("BrowseConvertToLineEdit"))
         self.horizontalLayout_6.addWidget(self.BrowseConvertToLineEdit)
-        self.gridLayout.addLayout(self.horizontalLayout_6, 5, 3, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_6, 5, 2, 1, 1)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setSpacing(6)
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
@@ -155,7 +155,7 @@ class Ui_MainWindow(object):
         self.BrowseConvertLineEdit = QtGui.QLineEdit(self.ConvertTab)
         self.BrowseConvertLineEdit.setObjectName(_fromUtf8("BrowseConvertLineEdit"))
         self.horizontalLayout_5.addWidget(self.BrowseConvertLineEdit)
-        self.gridLayout.addLayout(self.horizontalLayout_5, 0, 3, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_5, 0, 2, 1, 1)
         self.ConvertMultipleToLabel = QtGui.QLabel(self.ConvertTab)
         self.ConvertMultipleToLabel.setObjectName(_fromUtf8("ConvertMultipleToLabel"))
         self.gridLayout.addWidget(self.ConvertMultipleToLabel, 4, 0, 1, 1)
@@ -168,7 +168,7 @@ class Ui_MainWindow(object):
         self.DeleteConvertMultipleCheckBox.setChecked(True)
         self.DeleteConvertMultipleCheckBox.setTristate(False)
         self.DeleteConvertMultipleCheckBox.setObjectName(_fromUtf8("DeleteConvertMultipleCheckBox"))
-        self.gridLayout.addWidget(self.DeleteConvertMultipleCheckBox, 1, 3, 1, 1)
+        self.gridLayout.addWidget(self.DeleteConvertMultipleCheckBox, 1, 2, 1, 1)
         self.ConvertMultipleComboBox = QtGui.QComboBox(self.ConvertTab)
         self.ConvertMultipleComboBox.setMinimumSize(QtCore.QSize(120, 0))
         self.ConvertMultipleComboBox.setObjectName(_fromUtf8("ConvertMultipleComboBox"))
@@ -177,17 +177,15 @@ class Ui_MainWindow(object):
         self.ConvertMultipleComboBox.addItem(_fromUtf8(""))
         self.ConvertMultipleComboBox.addItem(_fromUtf8(""))
         self.ConvertMultipleComboBox.addItem(_fromUtf8(""))
-        self.gridLayout.addWidget(self.ConvertMultipleComboBox, 4, 3, 1, 1)
+        self.gridLayout.addWidget(self.ConvertMultipleComboBox, 4, 2, 1, 1)
         self.ConvertMultipleDestinationLabel = QtGui.QLabel(self.ConvertTab)
         self.ConvertMultipleDestinationLabel.setObjectName(_fromUtf8("ConvertMultipleDestinationLabel"))
         self.gridLayout.addWidget(self.ConvertMultipleDestinationLabel, 5, 0, 1, 1)
         spacerItem6 = QtGui.QSpacerItem(20, 10, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
-        self.gridLayout.addItem(spacerItem6, 2, 3, 1, 1)
-        spacerItem7 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem7, 5, 2, 1, 1)
+        self.gridLayout.addItem(spacerItem6, 2, 2, 1, 1)
         self.verticalLayout_11.addLayout(self.gridLayout)
-        spacerItem8 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout_11.addItem(spacerItem8)
+        spacerItem7 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_11.addItem(spacerItem7)
         self.ConvertMultipleButton = QtGui.QPushButton(self.ConvertTab)
         self.ConvertMultipleButton.setMinimumSize(QtCore.QSize(0, 28))
         self.ConvertMultipleButton.setAutoDefault(False)
