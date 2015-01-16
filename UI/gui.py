@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
 #
-# Created: Thu Jan 15 21:02:59 2015
+# Created: Fri Jan 16 04:28:11 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -67,7 +67,10 @@ class Ui_MainWindow(object):
         spacerItem2 = QtGui.QSpacerItem(24, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
         self.lineEdit = QtGui.QLineEdit(self.groupBox)
+        self.lineEdit.setFrame(True)
+        self.lineEdit.setEchoMode(QtGui.QLineEdit.Normal)
         self.lineEdit.setCursorPosition(0)
+        self.lineEdit.setCursorMoveStyle(QtCore.Qt.VisualMoveStyle)
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.BatchAdd = QtGui.QPushButton(self.groupBox)
@@ -138,23 +141,23 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QtGui.QHBoxLayout()
         self.horizontalLayout_6.setSpacing(6)
         self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
+        self.BrowseConvertToLineEdit = QtGui.QLineEdit(self.ConvertTab)
+        self.BrowseConvertToLineEdit.setObjectName(_fromUtf8("BrowseConvertToLineEdit"))
+        self.horizontalLayout_6.addWidget(self.BrowseConvertToLineEdit)
         self.BrowseConvertToButton = QtGui.QPushButton(self.ConvertTab)
         self.BrowseConvertToButton.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.BrowseConvertToButton.setObjectName(_fromUtf8("BrowseConvertToButton"))
         self.horizontalLayout_6.addWidget(self.BrowseConvertToButton)
-        self.BrowseConvertToLineEdit = QtGui.QLineEdit(self.ConvertTab)
-        self.BrowseConvertToLineEdit.setObjectName(_fromUtf8("BrowseConvertToLineEdit"))
-        self.horizontalLayout_6.addWidget(self.BrowseConvertToLineEdit)
         self.gridLayout.addLayout(self.horizontalLayout_6, 5, 2, 1, 1)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setSpacing(6)
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
-        self.BrowseConvertButton = QtGui.QPushButton(self.ConvertTab)
-        self.BrowseConvertButton.setObjectName(_fromUtf8("BrowseConvertButton"))
-        self.horizontalLayout_5.addWidget(self.BrowseConvertButton)
         self.BrowseConvertLineEdit = QtGui.QLineEdit(self.ConvertTab)
         self.BrowseConvertLineEdit.setObjectName(_fromUtf8("BrowseConvertLineEdit"))
         self.horizontalLayout_5.addWidget(self.BrowseConvertLineEdit)
+        self.BrowseConvertButton = QtGui.QPushButton(self.ConvertTab)
+        self.BrowseConvertButton.setObjectName(_fromUtf8("BrowseConvertButton"))
+        self.horizontalLayout_5.addWidget(self.BrowseConvertButton)
         self.gridLayout.addLayout(self.horizontalLayout_5, 0, 2, 1, 1)
         self.ConvertMultipleToLabel = QtGui.QLabel(self.ConvertTab)
         self.ConvertMultipleToLabel.setObjectName(_fromUtf8("ConvertMultipleToLabel"))
@@ -181,7 +184,7 @@ class Ui_MainWindow(object):
         self.ConvertMultipleDestinationLabel = QtGui.QLabel(self.ConvertTab)
         self.ConvertMultipleDestinationLabel.setObjectName(_fromUtf8("ConvertMultipleDestinationLabel"))
         self.gridLayout.addWidget(self.ConvertMultipleDestinationLabel, 5, 0, 1, 1)
-        spacerItem6 = QtGui.QSpacerItem(20, 10, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        spacerItem6 = QtGui.QSpacerItem(20, 15, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem6, 2, 2, 1, 1)
         self.verticalLayout_11.addLayout(self.gridLayout)
         spacerItem7 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -210,7 +213,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.tableWidget.setGridStyle(QtCore.Qt.NoPen)
-        self.tableWidget.setRowCount(1)
+        self.tableWidget.setRowCount(0)
         self.tableWidget.setColumnCount(5)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         item = QtGui.QTableWidgetItem()
@@ -250,8 +253,9 @@ class Ui_MainWindow(object):
         self.actionHelp.setObjectName(_fromUtf8("actionHelp"))
         self.actionLicense = QtGui.QAction(MainWindow)
         self.actionLicense.setObjectName(_fromUtf8("actionLicense"))
+        self.actionOptions = QtGui.QAction(MainWindow)
+        self.actionOptions.setObjectName(_fromUtf8("actionOptions"))
         self.menuFile.addAction(self.actionExit)
-        self.menuAbout.addAction(self.actionHelp)
         self.menuAbout.addAction(self.actionLicense)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuAbout.menuAction())
@@ -262,9 +266,10 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "youtube-dl v0.3.5", None))
         self.groupBox.setTitle(_translate("MainWindow", "Enter url and download location", None))
         self.label_2.setText(_translate("MainWindow", "Video URL:", None))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "http://www.dailymotion.com/video/x2asrvp_salman-khan-teasing-katrina-kaif-at-his-sister-arpita-s-wedding_shortfilms", None))
         self.BatchAdd.setText(_translate("MainWindow", "Batch Add", None))
         self.label_3.setText(_translate("MainWindow", "Save To:", None))
         self.browse_btn.setText(_translate("MainWindow", "Browse", None))
@@ -304,9 +309,10 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Status", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ActivityTab), _translate("MainWindow", "Activity", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
-        self.menuAbout.setTitle(_translate("MainWindow", "About", None))
+        self.menuAbout.setTitle(_translate("MainWindow", "Help", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
-        self.actionHelp.setText(_translate("MainWindow", "Help", None))
+        self.actionHelp.setText(_translate("MainWindow", "About", None))
         self.actionLicense.setText(_translate("MainWindow", "License", None))
+        self.actionOptions.setText(_translate("MainWindow", "Options", None))
 
 import resource_rc

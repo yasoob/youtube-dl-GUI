@@ -1,13 +1,29 @@
 from UI.gui import Ui_MainWindow
 from UI.batch_add_ui import Ui_BatchAdd
+from UI.licenseDialog import Ui_Dialog
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 import sys
 import os
-import time 
 from download_thread import Download
 from post_processor_thread import PostProcessor
 
+import ctypes
+myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+try:
+    approot = os.path.dirname(os.path.abspath(__file__))
+except NameError:  # We are the main py2exe script, not a module
+    import sys
+    approot = os.path.dirname(os.path.abspath(sys.argv[0]))
+
+class LicenseDialogue(QtGui.QDialog):
+    def __init__(self, parent=None):
+        super(LicenseDialogue, self).__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self)
+        self.ui.ExitButton.clicked.connect(self.close)
 
 class BatchAddDialogue(QtGui.QDialog):
     def __init__(self, parent=None):
@@ -41,24 +57,32 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        path = os.path.join(approot, 'UI', 'icon.png')
+        self.setWindowIcon(QtGui.QIcon(path))
         self.batch_dialogue = BatchAddDialogue(self)
         self.ui.lineEdit_2.setText(os.getcwd())
+        self.ui.BrowseConvertToLineEdit.setText(os.getcwd())
+        self.ui.BrowseConvertLineEdit.files = []
         self.ui.statusbar.showMessage('Ready.')
         self.set_connections()
         
         self.url_list = []
+        self.complete_url_list = {}
+        self.convert_list = []
         self.thread_pool = {}
         self.ui.tableWidget.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.Stretch)
         self.rowcount = 0
 
         self.connect_menu_action()
-        self.setWindowTitle('youtube-dl v0.3.3')
         self.show()
 
     def set_connections(self):
         self.ui.download_btn.clicked.connect(self.handleButton)
         self.ui.browse_btn.clicked.connect(self.set_destination)
         self.ui.BatchAdd.clicked.connect(self.batch_file)
+        self.ui.BrowseConvertButton.clicked.connect(self.convert_file_browse)
+        self.ui.ConvertMultipleButton.clicked.connect(self.convert_button)
+        self.ui.BrowseConvertToButton.clicked.connect(self.browse_convert_destination)
 
     def batch_file(self):
         self.batch_dialogue.exec_()
@@ -71,44 +95,110 @@ class MainWindow(QtGui.QMainWindow):
 
     def set_destination(self):
         file_name = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
-        self.ui.lineEdit_2.setText(file_name)
+        if file_name is not '':
+            self.ui.lineEdit_2.setText(file_name)
 
-    def convert_file(self,file_path, preferred_format, delete_tmp=False):
-        pass
+    def browse_convert_destination(self):
+        file_name = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
+        if file_name is not '':
+            self.ui.BrowseConvertToLineEdit.setText(file_name)
 
-    def download_url(self, url):
+    def convert_button(self):
+        preferred_format = str(self.ui.ConvertMultipleComboBox.currentText())
+        out_path = str(self.ui.BrowseConvertToLineEdit.text())
+        delete_temp = self.ui.DeleteFileCheckBox.isChecked()
+        if len(self.ui.BrowseConvertLineEdit.files) < 1:
+            QtGui.QMessageBox.information(self, "Error!","No files given!")
+            return
+
+        for file_path in self.ui.BrowseConvertLineEdit.files:
+            self.convert_file(file_path, out_path, preferred_format,delete_temp)
+
+    def convert_file_browse(self):
+        file_names = [str(file_n) for file_n in list(QtGui.QFileDialog.getOpenFileNames(self, "Select files",
+            filter=QtCore.QString('Videos (*.mp4 *.ogg *.webm *.flv *.mkv)')
+        ))]
+        if len(file_names) > 1:
+            self.ui.BrowseConvertLineEdit.setText('{} Files selected'.format(len(file_names)))
+            self.ui.BrowseConvertLineEdit.files = file_names
+        elif len(file_names) == 1:
+            self.ui.BrowseConvertLineEdit.setText(file_names[0])
+            self.ui.BrowseConvertLineEdit.files = file_names
+        else:
+            self.ui.BrowseConvertLineEdit.files = file_names
+
+    def convert_file(self,file_path, out_path, preferred_format, delete_tmp=False):
+        if file_path.split('.')[-1] == preferred_format:
+            self.ui.statusbar.showMessage('The source and destination formats are same')
+            return
+
+        if file_path not in self.convert_list:
+            options= {
+                'file_path': file_path,
+                'preferred_format': preferred_format,
+                'row_count': self.rowcount,
+                'delete_tmp': delete_tmp,
+                'parent': self,
+                'out_path': out_path,
+            }
+            self.thread_pool['thread{}'.format(self.rowcount)] = PostProcessor(options)
+            self.thread_pool['thread{}'.format(self.rowcount)].statusSignal.connect(self.ui.statusbar.showMessage)
+            self.thread_pool['thread{}'.format(self.rowcount)].list_Signal.connect(self.add_to_table)
+            self.thread_pool['thread{}'.format(self.rowcount)].row_Signal.connect(self.decrease_rowcount)
+            self.thread_pool['thread{}'.format(self.rowcount)].start()
+            self.convert_list.append(file_path)
+            self.ui.tabWidget.setCurrentIndex(2)
+            self.add_to_table([
+                self.rowcount,
+                os.path.split(file_path)[-1].split('.')[0],
+                '',
+                '00:00',
+                '-- KiB/s',
+                'Converting'
+            ])
+            self.rowcount += 1
+
+        else:
+            self.ui.statusbar.showMessage('Already Converted')
+
+    def download_url(self, url, row = None):
+        if row >= 0:
+            row = row
+        elif row is None:
+            row = self.rowcount
+
         directory = str(self.ui.lineEdit_2.text())
-        quality = 'best'
+        quality = False
         if self.ui.ConvertCheckBox.isChecked():
             quality = str(self.ui.ConvertComboBox.currentText())
+        print row, self.rowcount
         options = {
             'url': url,
             'directory': directory,
-            'rowcount': self.rowcount,
+            'rowcount': row,
             'proxy': '',
             'convert_format': quality,
             'parent':self,
         }
+
         if not self.ui.DeleteFileCheckBox.isChecked():
             options['keep_file'] = True
 
-        self.thread_pool['thread{}'.format(self.rowcount)] = Download(options)
+        self.thread_pool['thread{}'.format(row)] = Download(options)
+        self.thread_pool['thread{}'.format(row)].statusSignal.connect(self.ui.statusbar.showMessage)
+        self.thread_pool['thread{}'.format(row)].remove_url_Signal.connect(self.remove_url)
+        self.thread_pool['thread{}'.format(row)].list_Signal.connect(self.add_to_table)
+        self.thread_pool['thread{}'.format(row)].row_Signal.connect(self.decrease_rowcount)
+        self.thread_pool['thread{}'.format(row)].start()
 
-        self.thread_pool['thread{}'.format(self.rowcount)].statusSignal.connect(self.ui.statusbar.showMessage)
-        self.thread_pool['thread{}'.format(self.rowcount)].remove_url_Signal.connect(self.remove_url)
-        self.thread_pool['thread{}'.format(self.rowcount)].list_Signal.connect(self.add_to_table)
-        self.thread_pool['thread{}'.format(self.rowcount)].row_Signal.connect(self.decrease_rowcount)
-        self.thread_pool['thread{}'.format(self.rowcount)].start()
-
+        self.ui.tabWidget.setCurrentIndex(2)
         self.ui.statusbar.showMessage('Extracting information..')
-        self.rowcount += 1
-
-        self.ui.tableWidget.setRowCount(self.rowcount)
-        for m, key in enumerate([url, '', '', '', 'starting']):
-            new_item = QtGui.QTableWidgetItem(key)
-            self.ui.tableWidget.setItem(0, m, new_item)
 
         self.url_list.append(url)
+        self.complete_url_list[row] = url
+
+        self.rowcount += 1
+
         if len(self.url_list) is not 0:
             if len(self.url_list) < 2:
                 self.ui.statusbar.showMessage('Downloading {0} file'.format(len(self.url_list)))
@@ -122,11 +212,11 @@ class MainWindow(QtGui.QMainWindow):
         if url is '':
             QtGui.QMessageBox.information(self, "Error!","No url given!")
             return
-        if url not in self.url_list:
-            self.download_url(url)
+        can_download, rowcount = self.can_download(url)
+        if can_download:
+            self.download_url(url, rowcount)
         else:
-            self.ui.statusbar.showMessage('This url is already being downloaded')
-            time.sleep(5)
+            QtGui.QMessageBox.information(self, "Error!","This url is already being downloaded")
             if len(self.url_list) is not 0:
                 if len(self.url_list) < 2:
                     self.ui.statusbar.showMessage('Downloading {0} file'.format(len(self.url_list)))
@@ -134,9 +224,27 @@ class MainWindow(QtGui.QMainWindow):
                     self.ui.statusbar.showMessage('Downloading {0} files'.format(len(self.url_list)))
             else:
                 self.ui.statusbar.showMessage("done")
-    
+
+    def can_download(self,url):
+        if url not in self.url_list:
+            for row, _url in self.complete_url_list.iteritems():
+                if url == _url:
+                    print "url already there:"
+                    print row, self.rowcount
+                    return True, row
+            print "url not already there:"
+            print self.rowcount, self.rowcount
+            return True, self.rowcount
+        else:
+            return False, self.rowcount
+
     def remove_url(self,url):
-        self.url_list.remove(url)
+        try:
+            self.url_list.remove(url)
+        except:
+            print url
+            print self.url_list
+            return
 
     def add_to_table(self, values):
         row = values[0]
@@ -152,6 +260,11 @@ class MainWindow(QtGui.QMainWindow):
 
     def connect_menu_action(self):
         self.ui.actionExit.triggered.connect(self.close)
+        self.ui.actionLicense.triggered.connect(self.showLicense)
+
+    def showLicense(self):
+        license = LicenseDialogue(self)
+        license.show()
 
     def closeEvent(self, event):
         if len(self.url_list) is not 0:
@@ -172,7 +285,7 @@ class MainWindow(QtGui.QMainWindow):
     def kill_all_threads(self):
         for key, value in self.thread_pool.iteritems():
             if value.done is False:
-                value.exit()
+                del value
             else:
                 continue
         self.close()

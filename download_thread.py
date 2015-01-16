@@ -22,9 +22,6 @@ class Download(QtCore.QThread):
         if self.directory is not '':
             self.directory = opts.get('directory') + '/'
 
-    def __del__(self):
-        self.wait()
-
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
             if li.get('speed') is not None:
@@ -44,15 +41,17 @@ class Download(QtCore.QThread):
                 ])
 
             elif li.get('status') == "finished":
-                self.remove_url_Signal.emit(self.url)
                 self.file_name = li.get('filename').split('/')[-1]
                 self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,'Converting'])
         else:
+            self.bytes = self.format_bytes(li.get('total_bytes'))
+            self.file_name = li.get('filename').split('/')[-1]
+            self.speed = '-- KiB/s'
+
+            self.list_Signal.emit([self.local_rowcount, self.file_name, self.bytes, '00:00', self.speed,'Finished'])
             self.statusSignal.emit('Already Downloaded')
             self.row_Signal.emit()
-            self.remove_url_Signal.emit(self.url)
-            time.sleep(10)
-            return
+
         if li.get('eta') is not None:
             filename = li.get('filename').split('/')[-1][:25]+'..'
 
@@ -62,11 +61,13 @@ class Download(QtCore.QThread):
             'continuedl': True,
             'quiet': True,
             'proxy': self.proxy,
-            'postprocessors': [{
+        }
+        if self.convert_format is not False:
+            ydl_options['postprocessors'] = [{
                 'key': 'FFmpegVideoConvertor',
                 'preferedformat': self.convert_format,
-            }],
-        }
+            }]
+
         if self.keep_file:
             ydl_options['keepvideo'] = True
 
@@ -83,13 +84,22 @@ class Download(QtCore.QThread):
         #self.p_barSignal.emit(0)
 
     def run(self):
+        self.list_Signal.emit([
+            self.local_rowcount,
+            self.url,
+            '',
+            '',
+            '',
+            'Starting'
+        ])
+
         self.download()
         if self.error_occurred is not True:
-            self.list_Signal.emit([self.local_rowcount, self.file_name, self.bytes, self.eta, self.speed, 'finished'])
+            self.list_Signal.emit([self.local_rowcount, self.file_name, self.bytes, '00:00', self.speed, 'Finished'])
             self.statusSignal.emit('Done!')
+        self.remove_url_Signal.emit(self.url)
         self.done = True
 
-    @staticmethod
     def format_seconds(self,seconds):
         (mins, secs) = divmod(seconds, 60)
         (hours, mins) = divmod(mins, 60)
@@ -100,7 +110,6 @@ class Download(QtCore.QThread):
         else:
             return '%02d:%02d:%02d' % (hours, mins, secs)
 
-    @staticmethod
     def format_bytes(self,bytes):
         if bytes is None:
             return u'N/A'

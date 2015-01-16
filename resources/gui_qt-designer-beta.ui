@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>youtube-dl v0.3.3</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -104,8 +104,20 @@
                    </item>
                    <item>
                     <widget class="QLineEdit" name="lineEdit">
+                     <property name="frame">
+                      <bool>true</bool>
+                     </property>
+                     <property name="echoMode">
+                      <enum>QLineEdit::Normal</enum>
+                     </property>
                      <property name="cursorPosition">
                       <number>0</number>
+                     </property>
+                     <property name="placeholderText">
+                      <string>http://www.dailymotion.com/video/x2asrvp_salman-khan-teasing-katrina-kaif-at-his-sister-arpita-s-wedding_shortfilms</string>
+                     </property>
+                     <property name="cursorMoveStyle">
+                      <enum>Qt::VisualMoveStyle</enum>
                      </property>
                     </widget>
                    </item>
@@ -285,6 +297,9 @@
                <number>6</number>
               </property>
               <item>
+               <widget class="QLineEdit" name="BrowseConvertToLineEdit"/>
+              </item>
+              <item>
                <widget class="QPushButton" name="BrowseConvertToButton">
                 <property name="focusPolicy">
                  <enum>Qt::StrongFocus</enum>
@@ -294,9 +309,6 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QLineEdit" name="BrowseConvertToLineEdit"/>
-              </item>
              </layout>
             </item>
             <item row="0" column="2">
@@ -305,14 +317,14 @@
                <number>6</number>
               </property>
               <item>
+               <widget class="QLineEdit" name="BrowseConvertLineEdit"/>
+              </item>
+              <item>
                <widget class="QPushButton" name="BrowseConvertButton">
                 <property name="text">
                  <string>Browse</string>
                 </property>
                </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="BrowseConvertLineEdit"/>
               </item>
              </layout>
             </item>
@@ -412,7 +424,7 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>10</height>
+                <height>15</height>
                </size>
               </property>
              </spacer>
@@ -490,7 +502,7 @@
                <bool>false</bool>
               </property>
               <property name="rowCount">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="columnCount">
                <number>5</number>
@@ -507,7 +519,6 @@
               <attribute name="verticalHeaderShowSortIndicator" stdset="0">
                <bool>false</bool>
               </attribute>
-              <row/>
               <column>
                <property name="text">
                 <string>Video/Song</string>
@@ -562,9 +573,8 @@
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>Help</string>
     </property>
-    <addaction name="actionHelp"/>
     <addaction name="actionLicense"/>
    </widget>
    <addaction name="menuFile"/>
@@ -578,12 +588,17 @@
   </action>
   <action name="actionHelp">
    <property name="text">
-    <string>Help</string>
+    <string>About</string>
    </property>
   </action>
   <action name="actionLicense">
    <property name="text">
     <string>License</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>Options</string>
    </property>
   </action>
  </widget>
