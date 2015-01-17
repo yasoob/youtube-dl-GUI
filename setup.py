@@ -14,19 +14,17 @@ DATA=[('imageformats',[
 
 for files in os.listdir(os.path.join(os.getcwd(),'UI')):
     f1 = os.path.join(os.getcwd(),'UI', files)
-    print f1
     if os.path.isfile(f1): # skip directories
         f2 = 'UI', [f1]
         DATA.append(f2)
 
 setup(
-    options={'py2exe': {'compressed': True,"includes":["sip"]}},
-    windows=[{
+    options = {'py2exe': {'compressed': True,"includes":["sip"]}},
+    windows = [{
                    'script': "main.py",
-                   "icon_resources": [
-                       (0, os.path.join(os.getcwd(),"UI","icon.png"))
-                   ]
-    }],
-    zipfile=None,
-    data_files=DATA,
+                   "icon_resources": [(0, os.path.join(os.getcwd(),"resources","converted_icon.ico"))],
+                   "dest_base":"youtube-gl",
+               }],
+    zipfile = None,
+    data_files = DATA,
 )

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'gui_qt-designer-beta.ui'
 #
-# Created: Fri Jan 16 04:28:11 2015
+# Created: Sat Jan 17 23:23:26 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(622, 402)
+        MainWindow.setStyleSheet(_fromUtf8(""))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.centralwidget)
@@ -46,6 +47,39 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
+        self.tabWidget.setStyleSheet(_fromUtf8("QTabWidget::pane { /* The tab widget frame */\n"
+"     border-top: 1px solid #C2C7CB;\n"
+"     position: absolute;\n"
+"     top: -0.5em;\n"
+"     background: white;\n"
+" }\n"
+"\n"
+" QTabWidget::tab-bar {\n"
+"     alignment: center;\n"
+" }\n"
+"\n"
+" /* Style the tab using the tab sub-control. Note that\n"
+"     it reads QTabBar _not_ QTabWidget */\n"
+" QTabBar::tab {\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\n"
+"     border: 1px solid #C4C4C3;\n"
+"     border-bottom-color: #C2C7CB; /* same as the pane color */\n"
+"     min-width: 8ex;\n"
+"     padding: 3px 15px;\n"
+" }\n"
+"\n"
+" QTabBar::tab:selected, QTabBar::tab:hover {\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,\n"
+"                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);\n"
+" }\n"
+"\n"
+" QTabBar::tab:selected {\n"
+"     border-color:#C4C4C3;\n"
+"\n"
+" }"))
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         self.DownloadTab = QtGui.QWidget()
         self.DownloadTab.setObjectName(_fromUtf8("DownloadTab"))
@@ -266,7 +300,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "youtube-dl v0.3.5", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "youtube-dl v0.3.3", None))
         self.groupBox.setTitle(_translate("MainWindow", "Enter url and download location", None))
         self.label_2.setText(_translate("MainWindow", "Video URL:", None))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "http://www.dailymotion.com/video/x2asrvp_salman-khan-teasing-katrina-kaif-at-his-sister-arpita-s-wedding_shortfilms", None))
