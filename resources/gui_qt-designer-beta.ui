@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
-    <height>402</height>
+    <width>561</width>
+    <height>423</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>youtube-dl v0.3.3</string>
+   <string>youtube-dl v0.3.5</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -97,14 +97,39 @@
 
  }</string>
         </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::North</enum>
+        </property>
         <property name="currentIndex">
          <number>0</number>
+        </property>
+        <property name="documentMode">
+         <bool>false</bool>
+        </property>
+        <property name="tabsClosable">
+         <bool>false</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
         </property>
         <widget class="QWidget" name="DownloadTab">
          <attribute name="title">
           <string>Download</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
@@ -114,104 +139,76 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_8">
                <item>
-                <layout class="QVBoxLayout" name="verticalLayout_7">
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_3">
-                   <item>
-                    <widget class="QLabel" name="label_2">
-                     <property name="text">
-                      <string>Video URL:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_4">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Fixed</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>24</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="lineEdit">
-                     <property name="frame">
-                      <bool>true</bool>
-                     </property>
-                     <property name="echoMode">
-                      <enum>QLineEdit::Normal</enum>
-                     </property>
-                     <property name="cursorPosition">
-                      <number>0</number>
-                     </property>
-                     <property name="placeholderText">
-                      <string>http://www.dailymotion.com/video/x2asrvp_salman-khan-teasing-katrina-kaif-at-his-sister-arpita-s-wedding_shortfilms</string>
-                     </property>
-                     <property name="cursorMoveStyle">
-                      <enum>Qt::VisualMoveStyle</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="BatchAdd">
-                     <property name="text">
-                      <string>Batch Add</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                <layout class="QGridLayout" name="gridLayout_2">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Video URL:</string>
+                   </property>
+                  </widget>
                  </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_2">
-                   <item>
-                    <widget class="QLabel" name="label_3">
-                     <property name="text">
-                      <string>Save To:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_3">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Fixed</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>33</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="lineEdit_2"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browse_btn">
-                     <property name="text">
-                      <string>Browse</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>Save To:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QLineEdit" name="videoUrlLineEdit">
+                   <property name="frame">
+                    <bool>true</bool>
+                   </property>
+                   <property name="echoMode">
+                    <enum>QLineEdit::Normal</enum>
+                   </property>
+                   <property name="cursorPosition">
+                    <number>0</number>
+                   </property>
+                   <property name="placeholderText">
+                    <string>http://www.dailymotion.com/video/x2asrvp_salman-khan-teasing-katrina-kaif-at-his-sister-arpita-s-wedding_shortfilms</string>
+                   </property>
+                   <property name="cursorMoveStyle">
+                    <enum>Qt::VisualMoveStyle</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QPushButton" name="BatchAdd">
+                   <property name="text">
+                    <string>Batch Add</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QLineEdit" name="saveToLineEdit"/>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QPushButton" name="browse_btn">
+                   <property name="text">
+                    <string>Browse</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
               </layout>
-              <zorder></zorder>
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_2">
@@ -296,10 +293,23 @@
            </widget>
           </item>
           <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QPushButton" name="download_btn">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>82</width>
               <height>28</height>
              </size>
             </property>
@@ -324,6 +334,22 @@
           <string>Convert</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item>
            <layout class="QGridLayout" name="gridLayout">
             <property name="verticalSpacing">
@@ -509,26 +535,35 @@
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QTableWidget" name="tableWidget">
+              <property name="focusPolicy">
+               <enum>Qt::WheelFocus</enum>
+              </property>
               <property name="contextMenuPolicy">
                <enum>Qt::ActionsContextMenu</enum>
               </property>
+              <property name="statusTip">
+               <string notr="true"/>
+              </property>
               <property name="autoFillBackground">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">QTableWidget
-{
-    outline: 0;
-}</string>
+               <string notr="true"/>
               </property>
               <property name="frameShape">
                <enum>QFrame::VLine</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Sunken</enum>
               </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>false</bool>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectRows</enum>
@@ -599,7 +634,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>622</width>
+     <width>561</width>
      <height>21</height>
     </rect>
    </property>
@@ -614,6 +649,7 @@
      <string>Help</string>
     </property>
     <addaction name="actionLicense"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
@@ -639,13 +675,18 @@
     <string>Options</string>
    </property>
   </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="resource.qrc"/>
  </resources>
  <connections>
   <connection>
-   <sender>lineEdit</sender>
+   <sender>videoUrlLineEdit</sender>
    <signal>returnPressed()</signal>
    <receiver>download_btn</receiver>
    <slot>click()</slot>

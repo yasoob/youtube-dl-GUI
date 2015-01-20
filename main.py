@@ -1,55 +1,33 @@
-from UI.gui import Ui_MainWindow
-from UI.batch_add_ui import Ui_BatchAdd
-from UI.licenseDialog import Ui_Dialog
-from PyQt4 import QtGui
-from PyQt4 import QtCore
 import sys
 import os
-from download_thread import Download
-from post_processor_thread import PostProcessor
 
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+
+from UI.gui import Ui_MainWindow
+from GUI.BatchAddUrls import BatchAddDialogue
+from GUI.LicenseDialog import LicenseDialogue
+from GUI.AboutDialog import AboutDialog
+from Threads.Download import Download
+from Threads.PostProcessor import PostProcessor
+
+
+# For getting the icon to work
 import ctypes
-myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+ctypes.\
+    windll.\
+    shell32.\
+    SetCurrentProcessExplicitAppUserModelID(
+        'my_company.my_product.sub_product.version'
+)
 
+# Setting custom variables
+desktop_path = os.path.join(os.path.expanduser('~'), "Desktop")
 try:
-    approot = os.path.dirname(os.path.abspath(__file__))
+    app_root = os.path.dirname(os.path.abspath(__file__))
 except NameError:  # We are the main py2exe script, not a module
     import sys
-    approot = os.path.dirname(os.path.abspath(sys.argv[0]))
-
-class LicenseDialogue(QtGui.QDialog):
-    def __init__(self, parent=None):
-        super(LicenseDialogue, self).__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self)
-        self.ui.ExitButton.clicked.connect(self.close)
-
-class BatchAddDialogue(QtGui.QDialog):
-    def __init__(self, parent=None):
-        super(BatchAddDialogue, self).__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
-        self.ui = Ui_BatchAdd()
-        self.ui.setupUi(self)
-        self.download = False
-        self.ui.Browse.clicked.connect(self.browse_clicked)
-        self.ui.Close.clicked.connect(self.close)
-        self.ui.Add.clicked.connect(self.add_clicked)
-
-    def browse_clicked(self):
-        file_name = str(QtGui.QFileDialog.getOpenFileName(self, "Select txt file",filter=QtCore.QString('*.txt')))
-        if file_name is '':
-            return
-        with open(file_name, 'rb') as file_data:
-            for line in file_data.readlines():
-                self.ui.UrlList.append(line.strip())
-
-    def add_clicked(self):
-        if str(self.ui.UrlList.toPlainText()).strip() is '':
-            QtGui.QMessageBox.information(self, "Error!","No urls given!")
-            return
-        else:
-            self.download = True
-            self.close()
+    app_root = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -57,10 +35,10 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        path = os.path.join(approot, 'UI', 'icon.png')
+        path = os.path.join(app_root, 'UI', 'images', 'icon.png')
         self.setWindowIcon(QtGui.QIcon(path))
-        self.batch_dialogue = BatchAddDialogue(self)
-        self.ui.lineEdit_2.setText(os.getcwd())
+        self.batch_dialog = BatchAddDialogue(self)
+        self.ui.saveToLineEdit.setText(desktop_path)
         self.ui.BrowseConvertToLineEdit.setText(os.getcwd())
         self.ui.BrowseConvertLineEdit.files = []
         self.ui.statusbar.showMessage('Ready.')
@@ -85,9 +63,9 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.BrowseConvertToButton.clicked.connect(self.browse_convert_destination)
 
     def batch_file(self):
-        self.batch_dialogue.exec_()
-        if self.batch_dialogue.download is True:
-            urls = list(self.batch_dialogue.ui.UrlList.toPlainText().split('\n'))
+        self.batch_dialog.exec_()
+        if self.batch_dialog.download is True:
+            urls = list(self.batch_dialog.ui.UrlList.toPlainText().split('\n'))
             for url in urls:
                 self.download_url(str(url))
         else:
@@ -96,7 +74,7 @@ class MainWindow(QtGui.QMainWindow):
     def set_destination(self):
         file_name = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
         if file_name is not '':
-            self.ui.lineEdit_2.setText(file_name)
+            self.ui.saveToLineEdit.setText(file_name)
 
     def browse_convert_destination(self):
         file_name = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
@@ -112,20 +90,22 @@ class MainWindow(QtGui.QMainWindow):
             return
 
         for file_path in self.ui.BrowseConvertLineEdit.files:
-            self.convert_file(file_path, out_path, preferred_format,delete_temp)
+            self.convert_file(file_path, out_path, preferred_format, delete_temp)
 
     def convert_file_browse(self):
-        file_names = [str(file_n) for file_n in list(QtGui.QFileDialog.getOpenFileNames(self, "Select files",
-            filter=QtCore.QString('Videos (*.mp4 *.ogg *.webm *.flv *.mkv)')
-        ))]
+        file_names = [str(file_n) for file_n in list(
+            QtGui.QFileDialog.getOpenFileNames(self, "Select files",
+                filter=QtCore.QString('Videos (*.mp4 *.ogg *.webm *.flv *.mkv)')
+            ))
+        ]
         if len(file_names) > 1:
             self.ui.BrowseConvertLineEdit.setText('{} Files selected'.format(len(file_names)))
-            self.ui.BrowseConvertLineEdit.files = file_names
+            self.ui.BrowseConvertLineEdit.files=file_names
         elif len(file_names) == 1:
             self.ui.BrowseConvertLineEdit.setText(file_names[0])
-            self.ui.BrowseConvertLineEdit.files = file_names
+            self.ui.BrowseConvertLineEdit.files=file_names
         else:
-            self.ui.BrowseConvertLineEdit.files = file_names
+            self.ui.BrowseConvertLineEdit.files=file_names
 
     def convert_file(self,file_path, out_path, preferred_format, delete_tmp=False):
         if file_path.split('.')[-1] == preferred_format:
@@ -146,8 +126,9 @@ class MainWindow(QtGui.QMainWindow):
             self.thread_pool['thread{}'.format(self.rowcount)].list_Signal.connect(self.add_to_table)
             self.thread_pool['thread{}'.format(self.rowcount)].row_Signal.connect(self.decrease_rowcount)
             self.thread_pool['thread{}'.format(self.rowcount)].start()
-            self.convert_list.append(file_path)
             self.ui.tabWidget.setCurrentIndex(2)
+
+            self.convert_list.append(file_path)
             self.add_to_table([
                 self.rowcount,
                 os.path.split(file_path)[-1].split('.')[0],
@@ -167,7 +148,7 @@ class MainWindow(QtGui.QMainWindow):
         elif row is None:
             row = self.rowcount
 
-        directory = str(self.ui.lineEdit_2.text())
+        directory = str(self.ui.saveToLineEdit.text())
         quality = False
         if self.ui.ConvertCheckBox.isChecked():
             quality = str(self.ui.ConvertComboBox.currentText())
@@ -185,10 +166,10 @@ class MainWindow(QtGui.QMainWindow):
             options['keep_file'] = True
 
         self.thread_pool['thread{}'.format(row)] = Download(options)
-        self.thread_pool['thread{}'.format(row)].statusSignal.connect(self.ui.statusbar.showMessage)
-        self.thread_pool['thread{}'.format(row)].remove_url_Signal.connect(self.remove_url)
-        self.thread_pool['thread{}'.format(row)].list_Signal.connect(self.add_to_table)
-        self.thread_pool['thread{}'.format(row)].row_Signal.connect(self.decrease_rowcount)
+        self.thread_pool['thread{}'.format(row)].status_bar_signal.connect(self.ui.statusbar.showMessage)
+        self.thread_pool['thread{}'.format(row)].remove_url_signal.connect(self.remove_url)
+        self.thread_pool['thread{}'.format(row)].add_update_list_signal.connect(self.add_to_table)
+        self.thread_pool['thread{}'.format(row)].remove_row_signal.connect(self.decrease_rowcount)
         self.thread_pool['thread{}'.format(row)].start()
 
         self.ui.tabWidget.setCurrentIndex(2)
@@ -208,7 +189,7 @@ class MainWindow(QtGui.QMainWindow):
             self.ui.statusbar.showMessage("done")
 
     def handleButton(self):
-        url = str(self.ui.lineEdit.text())
+        url = str(self.ui.videoUrlLineEdit.text())
         if url is '':
             QtGui.QMessageBox.information(self, "Error!","No url given!")
             return
@@ -247,13 +228,13 @@ class MainWindow(QtGui.QMainWindow):
             return
 
     def add_to_table(self, values):
+        self.ui.tableWidget.setRowCount(self.rowcount)
         row = values[0]
         m = 0
         for key in values[1:]:
             new_item = QtGui.QTableWidgetItem(key)
             self.ui.tableWidget.setItem(row, m, new_item)
             m += 1
-        self.ui.tableWidget.setRowCount(self.rowcount)
 
     def decrease_rowcount(self):
         self.rowcount -= 1 
@@ -261,10 +242,15 @@ class MainWindow(QtGui.QMainWindow):
     def connect_menu_action(self):
         self.ui.actionExit.triggered.connect(self.close)
         self.ui.actionLicense.triggered.connect(self.showLicense)
+        self.ui.actionAbout.triggered.connect(self.showAbout)
 
     def showLicense(self):
         license = LicenseDialogue(self)
         license.show()
+
+    def showAbout(self):
+        about = AboutDialog(self)
+        about.show()
 
     def closeEvent(self, event):
         if len(self.url_list) is not 0:

@@ -1,26 +1,27 @@
 import math
+import os
 from PyQt4 import QtCore
 import youtube_dl
-import time
+
 
 class Download(QtCore.QThread):
-    statusSignal = QtCore.pyqtSignal(QtCore.QString)
-    remove_url_Signal = QtCore.pyqtSignal(str)
-    list_Signal = QtCore.pyqtSignal([list])
-    row_Signal = QtCore.pyqtSignal()
+    status_bar_signal = QtCore.pyqtSignal(QtCore.QString)
+    remove_url_signal = QtCore.pyqtSignal(str)
+    add_update_list_signal = QtCore.pyqtSignal([list])
+    remove_row_signal = QtCore.pyqtSignal()
     error_occurred = False
     done = False
 
-    def __init__(self,opts):
-        super(Download,self).__init__(opts.get('parent'))
+    def __init__(self, opts):
+        super(Download, self).__init__(opts.get('parent'))
         self.url = opts.get('url')
         self.directory = opts.get('directory')
+        if self.directory is not '':
+            self.directory = os.path.join(opts.get('directory'), '')
         self.local_rowcount = opts.get('rowcount')
         self.convert_format = opts.get('convert_format')
         self.proxy = opts.get('proxy')
         self.keep_file = opts.get('keep_file')
-        if self.directory is not '':
-            self.directory = opts.get('directory') + '/'
 
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
@@ -30,10 +31,10 @@ class Download(QtCore.QThread):
                 self.bytes = 'unknown'
                 if li.get('total_bytes') is not None:
                     self.bytes = self.format_bytes(li.get('total_bytes'))
-
-                self.list_Signal.emit([
+                filename = os.path.split(li.get('filename'))[-1].split('.')[0]
+                self.add_update_list_signal.emit([
                     self.local_rowcount,
-                    li.get('filename').split('/')[-1],
+                    filename,
                     self.bytes,
                     self.eta,
                     self.speed,
@@ -41,21 +42,32 @@ class Download(QtCore.QThread):
                 ])
 
             elif li.get('status') == "finished":
-                self.file_name = li.get('filename').split('/')[-1]
-                self.list_Signal.emit([self.local_rowcount, li.get('filename').split('/')[-1],self.bytes,self.eta,self.speed,'Converting'])
+                self.file_name = os.path.split(li.get('filename'))[-1].split('.')[0]
+                self.add_update_list_signal.emit([
+                    self.local_rowcount,
+                    self.file_name,
+                    self.bytes,
+                    self.eta,
+                    self.speed,
+                    'Converting'
+                ])
         else:
             self.bytes = self.format_bytes(li.get('total_bytes'))
             self.file_name = li.get('filename').split('/')[-1]
             self.speed = '-- KiB/s'
 
-            self.list_Signal.emit([self.local_rowcount, self.file_name, self.bytes, '00:00', self.speed,'Finished'])
-            self.statusSignal.emit('Already Downloaded')
-            self.row_Signal.emit()
+            self.add_update_list_signal.emit([
+                self.local_rowcount,
+                self.file_name,
+                self.bytes,
+                '00:00',
+                self.speed,
+                'Finished'
+            ])
+            self.status_bar_signal.emit('Already Downloaded')
+            self.remove_row_signal.emit()
 
-        if li.get('eta') is not None:
-            filename = li.get('filename').split('/')[-1][:25]+'..'
-
-    def download(self):
+    def _prepare_ytd_options(self):
         ydl_options = {
             'outtmpl': '{0}%(title)s-%(id)s.%(ext)s'.format(self.directory),
             'continuedl': True,
@@ -70,21 +82,28 @@ class Download(QtCore.QThread):
 
         if self.keep_file:
             ydl_options['keepvideo'] = True
+        return ydl_options
 
+    def download(self):
+        ydl_options = self._prepare_ytd_options()
         with youtube_dl.YoutubeDL(ydl_options) as ydl:
             ydl.add_default_info_extractors()
             ydl.add_progress_hook(self.hook)
             try:
-                ydl.download([self.url])        
-            except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError,youtube_dl.utils.UnavailableVideoError) as e:
-                self.row_Signal.emit()
-                self.remove_url_Signal.emit(self.url)
+                ydl.download([self.url])
+            except (
+                    youtube_dl.utils.DownloadError,
+                    youtube_dl.utils.ContentTooShortError,
+                    youtube_dl.utils.ExtractorError,
+                    youtube_dl.utils.UnavailableVideoError
+            ) as e:
                 self.error_occurred = True
-                self.statusSignal.emit(str(e))
-        #self.p_barSignal.emit(0)
+                self.remove_row_signal.emit()
+                self.remove_url_signal.emit(self.url)
+                self.status_bar_signal.emit(str(e))
 
     def run(self):
-        self.list_Signal.emit([
+        self.add_update_list_signal.emit([
             self.local_rowcount,
             self.url,
             '',
@@ -95,22 +114,32 @@ class Download(QtCore.QThread):
 
         self.download()
         if self.error_occurred is not True:
-            self.list_Signal.emit([self.local_rowcount, self.file_name, self.bytes, '00:00', self.speed, 'Finished'])
-            self.statusSignal.emit('Done!')
-        self.remove_url_Signal.emit(self.url)
+            self.add_update_list_signal.emit([
+                self.local_rowcount,
+                self.file_name,
+                self.bytes,
+                '00:00',
+                self.speed,
+                'Finished'
+            ])
+
+            self.status_bar_signal.emit('Done!')
+        self.remove_url_signal.emit(self.url)
         self.done = True
 
-    def format_seconds(self,seconds):
-        (mins, secs) = divmod(seconds, 60)
-        (hours, mins) = divmod(mins, 60)
+    @staticmethod
+    def format_seconds(seconds):
+        (minutes, secs) = divmod(seconds, 60)
+        (hours, minutes) = divmod(minutes, 60)
         if hours > 99:
             return '--:--:--'
         if hours == 0:
-            return '%02d:%02d' % (mins, secs)
+            return '%02d:%02d' % (minutes, secs)
         else:
-            return '%02d:%02d:%02d' % (hours, mins, secs)
+            return '%02d:%02d:%02d' % (hours, minutes, secs)
 
-    def format_bytes(self,bytes):
+    @staticmethod
+    def format_bytes(bytes):
         if bytes is None:
             return u'N/A'
         if type(bytes) is str:

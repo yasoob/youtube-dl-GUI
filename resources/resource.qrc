@@ -1,5 +1,9 @@
 <RCC>
   <qresource>
+    <file>stop-icon.png</file>
+    <file>pause-icon.svg</file>
+    <file>resume-icon.svg</file>
+    <file>icon.ico</file>
     <file>logo.png</file>
   </qresource>
 </RCC>

@@ -71,7 +71,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setEchoMode(QtGui.QLineEdit.Normal)
         self.lineEdit.setCursorPosition(0)
         self.lineEdit.setCursorMoveStyle(QtCore.Qt.VisualMoveStyle)
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.lineEdit.setObjectName(_fromUtf8("videoUrlLineEdit"))
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.BatchAdd = QtGui.QPushButton(self.groupBox)
         self.BatchAdd.setObjectName(_fromUtf8("BatchAdd"))
