@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f59715e1-e9c8-4227-a5ca-6b847c467480" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GUI/AboutDialog.py" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\UI\icon.ico" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\UI\icon.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\UI\logo.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\download_thread.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\post_processor_thread.py" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\yasoob\Documents\GitHub\youtube-dl-GUI\UI\batch_add_ui.py" afterPath="$PROJECT_DIR$/UI/BatchAddUrls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/gui_qt-designer-beta.ui" afterPath="$PROJECT_DIR$/resources/gui_qt-designer-beta.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/gui_qt-designer.ui" afterPath="$PROJECT_DIR$/resources/gui_qt-designer.ui" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/gui.py" afterPath="$PROJECT_DIR$/UI/gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/UI/gui.py" afterPath="$PROJECT_DIR$/dist/UI/gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/resource.qrc" afterPath="$PROJECT_DIR$/resources/resource.qrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="youtube-dl-GUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,8 +41,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4637224" vertical-offset="454" max-vertical-offset="1088">
-              <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.51735014" vertical-offset="454" max-vertical-offset="1088">
+              <caret line="46" column="3" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -742,8 +728,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4637224" vertical-offset="454" max-vertical-offset="1088">
-          <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.51735014" vertical-offset="454" max-vertical-offset="1088">
+          <caret line="46" column="3" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
           <folding />
         </state>
       </provider>

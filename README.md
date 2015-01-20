@@ -43,8 +43,8 @@ This program is still in beta so if you encounter any bugs feel free to report t
 TODO:
 -------
 - Allow pause/resume functionality
-- ~integrate post processing options~
-- ~integrate batch add feature~
+- ~~integrate post processing options~~
+- ~~integrate batch add feature~~
 - integrate save state
 - integrate Queue to make it stable
 
