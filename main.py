@@ -1,9 +1,8 @@
 import sys
 import os
-
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-
+import subprocess
 from UI.gui import Ui_MainWindow
 from GUI.BatchAddUrls import BatchAddDialogue
 from GUI.LicenseDialog import LicenseDialogue
@@ -14,6 +13,7 @@ from Threads.PostProcessor import PostProcessor
 
 # For getting the icon to work
 import ctypes
+
 ctypes.\
     windll.\
     shell32.\
@@ -61,6 +61,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.BrowseConvertButton.clicked.connect(self.convert_file_browse)
         self.ui.ConvertMultipleButton.clicked.connect(self.convert_button)
         self.ui.BrowseConvertToButton.clicked.connect(self.browse_convert_destination)
+        self.ui.tableWidget.itemDoubleClicked.connect(self.open_file)
 
     def batch_file(self):
         self.batch_dialog.exec_()
@@ -129,13 +130,15 @@ class MainWindow(QtGui.QMainWindow):
             self.ui.tabWidget.setCurrentIndex(2)
 
             self.convert_list.append(file_path)
+
             self.add_to_table([
                 self.rowcount,
                 os.path.split(file_path)[-1].split('.')[0],
                 '',
                 '00:00',
                 '-- KiB/s',
-                'Converting'
+                'Converting',
+                file_path
             ])
             self.rowcount += 1
 
@@ -275,6 +278,17 @@ class MainWindow(QtGui.QMainWindow):
             else:
                 continue
         self.close()
+
+    def open_file(self):
+        row = self.ui.tableWidget.currentRow()
+        file_name = str(self.ui.tableWidget.item(row,5).text().toUtf8())
+        if sys.platform.startswith('darwin'):
+            subprocess.call(('open', file_name))
+        elif os.name == 'nt':
+            os.startfile(file_name)
+        elif os.name == 'posix':
+            subprocess.call(('xdg-open', file_name))
+
 
 
 if __name__ == "__main__":

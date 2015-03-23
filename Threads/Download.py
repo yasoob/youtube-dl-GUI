@@ -38,7 +38,8 @@ class Download(QtCore.QThread):
                     self.bytes,
                     self.eta,
                     self.speed,
-                    li.get('status')
+                    li.get('status'),
+                    li.get('filename')
                 ])
 
             elif li.get('status') == "finished":
