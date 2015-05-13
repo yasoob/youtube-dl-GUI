@@ -14,12 +14,15 @@ from Threads.PostProcessor import PostProcessor
 
 # For getting the icon to work
 import ctypes
-ctypes.\
-    windll.\
-    shell32.\
-    SetCurrentProcessExplicitAppUserModelID(
-        'my_company.my_product.sub_product.version'
-)
+try:
+    ctypes.\
+        windll.\
+        shell32.\
+        SetCurrentProcessExplicitAppUserModelID(
+            'my_company.my_product.sub_product.version'
+    )
+except AttributeError:
+    pass
 
 # Setting custom variables
 desktop_path = os.path.join(os.path.expanduser('~'), "Desktop")
@@ -43,7 +46,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.BrowseConvertLineEdit.files = []
         self.ui.statusbar.showMessage('Ready.')
         self.set_connections()
-        
+
         self.url_list = []
         self.complete_url_list = {}
         self.convert_list = []
@@ -237,7 +240,7 @@ class MainWindow(QtGui.QMainWindow):
             m += 1
 
     def decrease_rowcount(self):
-        self.rowcount -= 1 
+        self.rowcount -= 1
 
     def connect_menu_action(self):
         self.ui.actionExit.triggered.connect(self.close)
