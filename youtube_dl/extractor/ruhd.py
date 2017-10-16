@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from __future__ import unicode_literals
 
 from .common import InfoExtractor
 
 
 class RUHDIE(InfoExtractor):
-    _VALID_URL = r'http://(?:www\.)?ruhd\.ru/play\.php\?vid=(?P<id>\d+)'
+    _VALID_URL = r'https?://(?:www\.)?ruhd\.ru/play\.php\?vid=(?P<id>\d+)'
     _TEST = {
         'url': 'http://www.ruhd.ru/play.php?vid=207',
         'md5': 'd1a9ec4edf8598e3fbd92bb16072ba83',
@@ -14,7 +14,7 @@ class RUHDIE(InfoExtractor):
             'ext': 'divx',
             'title': 'КОТ бааааам',
             'description': 'классный кот)',
-            'thumbnail': 're:^http://.*\.jpg$',
+            'thumbnail': r're:^http://.*\.jpg$',
         }
     }
 
@@ -25,7 +25,7 @@ class RUHDIE(InfoExtractor):
         video_url = self._html_search_regex(
             r'<param name="src" value="([^"]+)"', webpage, 'video url')
         title = self._html_search_regex(
-            r'<title>([^<]+)&nbsp;&nbsp; RUHD.ru - Видео Высокого качества №1 в России!</title>',
+            r'<title>([^<]+)&nbsp;&nbsp; RUHD\.ru - Видео Высокого качества №1 в России!</title>',
             webpage, 'title')
         description = self._html_search_regex(
             r'(?s)<div id="longdesc">(.+?)<span id="showlink">',
