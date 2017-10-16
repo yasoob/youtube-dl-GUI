@@ -8,13 +8,13 @@ from .common import InfoExtractor
 
 class FreespeechIE(InfoExtractor):
     IE_NAME = 'freespeech.org'
-    _VALID_URL = r'https://www\.freespeech\.org/video/(?P<title>.+)'
+    _VALID_URL = r'https?://(?:www\.)?freespeech\.org/video/(?P<title>.+)'
     _TEST = {
         'add_ie': ['Youtube'],
         'url': 'https://www.freespeech.org/video/obama-romney-campaign-colorado-ahead-debate-0',
         'info_dict': {
             'id': 'poKsVCZ64uU',
-            'ext': 'mp4',
+            'ext': 'webm',
             'title': 'Obama, Romney Campaign in Colorado Ahead of Debate',
             'description': 'Obama, Romney Campaign in Colorado Ahead of Debate',
             'uploader': 'freespeechtv',
@@ -27,7 +27,7 @@ class FreespeechIE(InfoExtractor):
         mobj = re.match(self._VALID_URL, url)
         title = mobj.group('title')
         webpage = self._download_webpage(url, title)
-        info_json = self._search_regex(r'jQuery.extend\(Drupal.settings, ({.*?})\);', webpage, 'info')
+        info_json = self._search_regex(r'jQuery\.extend\(Drupal\.settings, ({.*?})\);', webpage, 'info')
         info = json.loads(info_json)
 
         return {
