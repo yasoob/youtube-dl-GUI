@@ -10,6 +10,7 @@ ScreenShot:
 Requirements:
 ------------
 - PyQt4
+- youtube_dl
 - Python >= v2.6
 - py2exe - _see Windows_
 
