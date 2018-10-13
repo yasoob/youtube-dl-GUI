@@ -1,6 +1,8 @@
 youtube-dl-GUI
 ==============
 
+**Note:** I haven't updated the code in years so if you want to become a maintainer for this project and carry it forward please let me know. I would love to have someone else take care of it with me because I simply don't have enough time right now.
+
 This repository contains code for a youtube-dl GUI written in PyQt. It is based on [youtube-dl](https://github.com/rg3/youtube-dl) which is a Video downloading script maintained by various contributers and released in Public Domain. This GUI code is currently written for Python v2.x and not v3.x However I will make it compatible with Python v3.x after refining it a little. Please note that this GUI code is released under the MIT License and not Public Domain.
 
 ScreenShot:
