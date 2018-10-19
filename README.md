@@ -12,7 +12,7 @@ ScreenShot:
 Requirements:
 ------------
 - PyQt4
-- youtube_dl
+- [youtube_dl](https://github.com/rg3/youtube-dl)
 - Python >= v2.6
 - py2exe - _see Windows_
 
