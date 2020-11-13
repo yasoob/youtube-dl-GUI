@@ -1,7 +1,7 @@
 youtube-dl-GUI
 ==============
 
-This repository contains code for a youtube-dl GUI written in PyQt. It is based on [youtube-dl](https://gitlab.com/dstftw/youtube-dl) which is a Video downloading script maintained by various contributers and released in Public Domain. This GUI code is currently written for v3.x. Please note that this GUI code is released under the MIT License and not Public Domain.
+This repository contains code for a youtube-dl GUI written in PyQt. It is based on [youtube-dl](https://gitlab.com/dstftw/youtube-dl) which is a Video downloading script maintained by various contributers and released in Public Domain. This GUI code is currently written for Python v3.x. Please note that this GUI code is released under the MIT License and not Public Domain.
 
 ScreenShot:
 -------------
@@ -37,8 +37,8 @@ This program is still in beta so if you encounter any bugs feel free to report t
 
 TODO:
 -------
-Change for PyInstaller
-- py2exe - _see Windows_
+
+- Change for PyInstaller: py2exe - _see Windows_
 
 - Allow pause/resume functionality
 - ~~integrate post processing options~~
