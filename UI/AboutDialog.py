@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'resources\about-dialog.ui'
+# Form implementation generated from reading ui file '.\resources\about-dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -52,7 +52,7 @@ class Ui_Dialog(object):
         self.label_3.setWordWrap(True)
         self.label_3.setObjectName("label_3")
         self.verticalLayout.addWidget(self.label_3)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem4 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem4)
         self.label_5 = QtWidgets.QLabel(Dialog)
         self.label_5.setTextFormat(QtCore.Qt.AutoText)
@@ -61,7 +61,7 @@ class Ui_Dialog(object):
         self.label_5.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
         self.label_5.setObjectName("label_5")
         self.verticalLayout.addWidget(self.label_5)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem5 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem5)
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setObjectName("label_4")

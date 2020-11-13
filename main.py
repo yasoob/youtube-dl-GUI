@@ -1,15 +1,12 @@
 import sys
 import os
 
-try:
-    app_root = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
-except NameError:  # We are the main py2exe script, not a module
-    import sys
-    app_root = os.path.dirname(os.path.realpath(os.path.abspath(sys.argv[0])))
-
 if not hasattr(sys, 'frozen'):
     # for import youtube_dl
+    app_root = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
     sys.path.insert(0, app_root)
+else:
+    app_root = os.path.dirname(os.path.realpath(os.path.abspath(sys.argv[0])))
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -102,8 +99,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def convert_file_browse(self):
         file_names, _ = QtWidgets.QFileDialog.getOpenFileNames(self,
-                                                                          "Select files",
-                                                                          filter='Videos (*.mp4 *.ogg *.webm *.flv *.mkv)')
+                                                               "Select files",
+                                                               filter='Videos (*.mp4 *.ogg *.webm *.flv *.mkv)')
         if len(file_names) > 1:
             self.ui.BrowseConvertLineEdit.setText('{} Files selected'.format(len(file_names)))
             self.ui.BrowseConvertLineEdit.files=file_names
@@ -119,7 +116,6 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         
         # TODO: Check file_path (file_name to final preferred_format)
-
         if file_path not in self.convert_list:
             options= {
                 'file_path': file_path,
