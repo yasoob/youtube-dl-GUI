@@ -9,8 +9,8 @@ from ..utils import (
 
 
 class TVAIE(InfoExtractor):
-    _VALID_URL = r'https?://videos\.tva\.ca/details/_(?P<id>\d+)'
-    _TEST = {
+    _VALID_URL = r'https?://videos?\.tva\.ca/details/_(?P<id>\d+)'
+    _TESTS = [{
         'url': 'https://videos.tva.ca/details/_5596811470001',
         'info_dict': {
             'id': '5596811470001',
@@ -24,7 +24,10 @@ class TVAIE(InfoExtractor):
             # m3u8 download
             'skip_download': True,
         }
-    }
+    }, {
+        'url': 'https://video.tva.ca/details/_5596811470001',
+        'only_matching': True,
+    }]
     BRIGHTCOVE_URL_TEMPLATE = 'http://players.brightcove.net/5481942443001/default_default/index.html?videoId=%s'
 
     def _real_extract(self, url):
@@ -32,6 +35,8 @@ class TVAIE(InfoExtractor):
         video_data = self._download_json(
             'https://videos.tva.ca/proxy/item/_' + video_id, video_id, headers={
                 'Accept': 'application/json',
+            }, query={
+                'appId': '5955fc5f23eec60006c951f1',
             })
 
         def get_attribute(key):

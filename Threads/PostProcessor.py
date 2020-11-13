@@ -1,8 +1,8 @@
-__author__ = 'Yasoob'
-from youtube_dl.postprocessor.ffmpeg import FFmpegPostProcessor
-from PyQt4 import QtCore
 import os
 import math
+
+from youtube_dl.postprocessor.ffmpeg import FFmpegPostProcessor
+from PyQt5 import QtCore
 
 
 class FFmpegVideoConvertorPP(FFmpegPostProcessor):
@@ -18,11 +18,11 @@ class FFmpegVideoConvertorPP(FFmpegPostProcessor):
             return True, information
         prefix, sep, ext = path.rpartition('.')
 
-        print path
-        print self.outpath
-        print self._preferedformat
-        print prefix + sep + self._preferedformat
-        print "\n"
+        print(path)
+        print(self.outpath)
+        print(self._preferedformat)
+        print(prefix + sep + self._preferedformat)
+        print("\n")
 
         self.run_ffmpeg(path, self.outpath, [])
         information['filepath'] = self.outpath
@@ -44,7 +44,7 @@ class PostProcessor(QtCore.QThread):
     ext
     format
     """
-    statusSignal = QtCore.pyqtSignal(QtCore.QString)
+    statusSignal = QtCore.pyqtSignal(str)
     list_Signal = QtCore.pyqtSignal([list])
     row_Signal = QtCore.pyqtSignal()
     error_occurred = False
@@ -67,7 +67,7 @@ class PostProcessor(QtCore.QThread):
         #try:
         result = self.convertor.run({
             "ext": self.ext,
-            "filepath": unicode(self.file_path),
+            "filepath": str(self.file_path),
         })
         return result
 
@@ -92,13 +92,13 @@ class PostProcessor(QtCore.QThread):
 
     def format_bytes(self,bytes):
         if bytes is None:
-            return u'N/A'
+            return 'N/A'
         if type(bytes) is str:
             bytes = float(bytes)
         if bytes == 0.0:
             exponent = 0
         else:
             exponent = int(math.log(bytes, 1024.0))
-        suffix = [u'B', u'KiB', u'MiB', u'GiB', u'TiB', u'PiB', u'EiB', u'ZiB', u'YiB'][exponent]
+        suffix = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'][exponent]
         converted = float(bytes) / float(1024 ** exponent)
-        return u'%.2f%s' % (converted, suffix)
+        return '%.2f%s' % (converted, suffix)

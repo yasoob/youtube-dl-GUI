@@ -14,12 +14,27 @@ class RtlNlIE(InfoExtractor):
     _VALID_URL = r'''(?x)
         https?://(?:(?:www|static)\.)?
         (?:
-            rtlxl\.nl/[^\#]*\#!/[^/]+/|
-            rtl\.nl/(?:(?:system/videoplayer/(?:[^/]+/)+(?:video_)?embed\.html|embed)\b.+?\buuid=|video/)
+            rtlxl\.nl/(?:[^\#]*\#!|programma)/[^/]+/|
+            rtl\.nl/(?:(?:system/videoplayer/(?:[^/]+/)+(?:video_)?embed\.html|embed)\b.+?\buuid=|video/)|
+            embed\.rtl\.nl/\#uuid=
         )
         (?P<id>[0-9a-f-]+)'''
 
     _TESTS = [{
+        # new URL schema
+        'url': 'https://www.rtlxl.nl/programma/rtl-nieuws/0bd1384d-d970-3086-98bb-5c104e10c26f',
+        'md5': '490428f1187b60d714f34e1f2e3af0b6',
+        'info_dict': {
+            'id': '0bd1384d-d970-3086-98bb-5c104e10c26f',
+            'ext': 'mp4',
+            'title': 'RTL Nieuws',
+            'description': 'md5:d41d8cd98f00b204e9800998ecf8427e',
+            'timestamp': 1593293400,
+            'upload_date': '20200627',
+            'duration': 661.08,
+        },
+    }, {
+        # old URL schema
         'url': 'http://www.rtlxl.nl/#!/rtl-nieuws-132237/82b1aad1-4a14-3d7b-b554-b0aed1b2c416',
         'md5': '473d1946c1fdd050b2c0161a4b13c373',
         'info_dict': {
@@ -31,8 +46,9 @@ class RtlNlIE(InfoExtractor):
             'upload_date': '20160429',
             'duration': 1167.96,
         },
+        'skip': '404',
     }, {
-        # best format avaialble a3t
+        # best format available a3t
         'url': 'http://www.rtl.nl/system/videoplayer/derden/rtlnieuws/video_embed.html#uuid=84ae5571-ac25-4225-ae0c-ef8d9efb2aed/autoplay=false',
         'md5': 'dea7474214af1271d91ef332fb8be7ea',
         'info_dict': {
@@ -45,7 +61,7 @@ class RtlNlIE(InfoExtractor):
             'description': 'Er zijn nieuwe beelden vrijgegeven die vlak na de aanslag in Kopenhagen zijn gemaakt. Op de video is goed te zien hoe omstanders zich bekommeren om één van de slachtoffers, terwijl de eerste agenten ter plaatse komen.',
         }
     }, {
-        # empty synopsis and missing episodes (see https://github.com/rg3/youtube-dl/issues/6275)
+        # empty synopsis and missing episodes (see https://github.com/ytdl-org/youtube-dl/issues/6275)
         # best format available nettv
         'url': 'http://www.rtl.nl/system/videoplayer/derden/rtlnieuws/video_embed.html#uuid=f536aac0-1dc3-4314-920e-3bd1c5b3811a/autoplay=false',
         'info_dict': {
@@ -76,6 +92,10 @@ class RtlNlIE(InfoExtractor):
     }, {
         'url': 'https://static.rtl.nl/embed/?uuid=1a2970fc-5c0b-43ff-9fdc-927e39e6d1bc&autoplay=false&publicatiepunt=rtlnieuwsnl',
         'only_matching': True,
+    }, {
+        # new embed URL schema
+        'url': 'https://embed.rtl.nl/#uuid=84ae5571-ac25-4225-ae0c-ef8d9efb2aed/autoplay=false',
+        'only_matching': True,
     }]
 
     def _real_extract(self, url):
@@ -93,58 +113,11 @@ class RtlNlIE(InfoExtractor):
 
         meta = info.get('meta', {})
 
-        # m3u8 streams are encrypted and may not be handled properly by older ffmpeg/avconv.
-        # To workaround this previously adaptive -> flash trick was used to obtain
-        # unencrypted m3u8 streams (see https://github.com/rg3/youtube-dl/issues/4118)
-        # and bypass georestrictions as well.
-        # Currently, unencrypted m3u8 playlists are (intentionally?) invalid and therefore
-        # unusable albeit can be fixed by simple string replacement (see
-        # https://github.com/rg3/youtube-dl/pull/6337)
-        # Since recent ffmpeg and avconv handle encrypted streams just fine encrypted
-        # streams are used now.
         videopath = material['videopath']
         m3u8_url = meta.get('videohost', 'http://manifest.us.rtl.nl') + videopath
 
         formats = self._extract_m3u8_formats(
             m3u8_url, uuid, 'mp4', m3u8_id='hls', fatal=False)
-
-        video_urlpart = videopath.split('/adaptive/')[1][:-5]
-        PG_URL_TEMPLATE = 'http://pg.us.rtl.nl/rtlxl/network/%s/progressive/%s.mp4'
-
-        PG_FORMATS = (
-            ('a2t', 512, 288),
-            ('a3t', 704, 400),
-            ('nettv', 1280, 720),
-        )
-
-        def pg_format(format_id, width, height):
-            return {
-                'url': PG_URL_TEMPLATE % (format_id, video_urlpart),
-                'format_id': 'pg-%s' % format_id,
-                'protocol': 'http',
-                'width': width,
-                'height': height,
-            }
-
-        if not formats:
-            formats = [pg_format(*pg_tuple) for pg_tuple in PG_FORMATS]
-        else:
-            pg_formats = []
-            for format_id, width, height in PG_FORMATS:
-                try:
-                    # Find hls format with the same width and height corresponding
-                    # to progressive format and copy metadata from it.
-                    f = next(f for f in formats if f.get('height') == height)
-                    # hls formats may have invalid width
-                    f['width'] = width
-                    f_copy = f.copy()
-                    f_copy.update(pg_format(format_id, width, height))
-                    pg_formats.append(f_copy)
-                except StopIteration:
-                    # Missing hls format does mean that no progressive format with
-                    # such width and height exists either.
-                    pass
-            formats.extend(pg_formats)
         self._sort_formats(formats)
 
         thumbnails = []

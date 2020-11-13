@@ -1,11 +1,12 @@
 import math
 import os
-from PyQt4 import QtCore
-import youtube_dl
+import sys
 
+import youtube_dl
+from PyQt5 import QtCore
 
 class Download(QtCore.QThread):
-    status_bar_signal = QtCore.pyqtSignal(QtCore.QString)
+    status_bar_signal = QtCore.pyqtSignal(str)
     remove_url_signal = QtCore.pyqtSignal(str)
     add_update_list_signal = QtCore.pyqtSignal([list])
     remove_row_signal = QtCore.pyqtSignal()
@@ -14,9 +15,10 @@ class Download(QtCore.QThread):
 
     def __init__(self, opts):
         super(Download, self).__init__(opts.get('parent'))
+        self.file_name = self.bytes = self.eta = self.speed = None
         self.url = opts.get('url')
         self.directory = opts.get('directory')
-        if self.directory is not '':
+        if self.directory != '':
             self.directory = os.path.join(opts.get('directory'), '')
         self.local_rowcount = opts.get('rowcount')
         self.convert_format = opts.get('convert_format')

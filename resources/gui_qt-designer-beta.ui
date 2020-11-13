@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>youtube-dl v0.3.5</string>
+   <string>youtube-dl v0.4.0</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -635,7 +635,7 @@
      <x>0</x>
      <y>0</y>
      <width>561</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

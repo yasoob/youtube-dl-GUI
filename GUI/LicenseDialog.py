@@ -1,8 +1,8 @@
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtCore, QtWidgets
 from UI.licenseDialog import Ui_Dialog
 
 
-class LicenseDialogue(QtGui.QDialog):
+class LicenseDialogue(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(LicenseDialogue, self).__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
         self.ui = Ui_Dialog()
