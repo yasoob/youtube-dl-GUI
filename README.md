@@ -38,13 +38,13 @@ This program is still in beta so if you encounter any bugs feel free to report t
 TODO:
 -------
 
-- Change for PyInstaller: py2exe - _see Windows_
-
+- Change for PyInstaller: setup.py - _see Windows_
+- Fix Convert (main:MainWindow.convert_file)
+- integrate save state
 - Allow pause/resume functionality
 - ~~integrate post processing options~~
 - ~~integrate batch add feature~~
-- integrate save state
-- integrate Queue to make it stable
+- ~~integrate Queue to make it stable~~
 
 Windows:
 -----------
@@ -57,9 +57,3 @@ This will result in a dist and build directory. Simply go to the dist directory 
 License:
 ----------
 This project is released under the MIT license. See the included license file.
-
-Note:
------
-
-I am doing a huge change in the code base and UI so it is very unstable right now. You may use it at your own risk.
-Some UI components are not wired up so they are useless right now.
