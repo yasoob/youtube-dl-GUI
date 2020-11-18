@@ -1,7 +1,7 @@
 youtube-dl-GUI
 ==============
 
-This repository contains code for a youtube-dl GUI written in PyQt. It is based on [youtube-dl](https://gitlab.com/dstftw/youtube-dl) which is a Video downloading script maintained by various contributers and released in Public Domain. This GUI code is currently written for Python v3.x. Please note that this GUI code is released under the MIT License and not Public Domain.
+This repository contains code for a youtube-dl GUI written in PyQt. It is based on [youtube-dl](https://github.com/ytdl-org/youtube-dl) which is a Video downloading script maintained by various contributers and released in Public Domain. This GUI code is currently written for Python v3.x. Please note that this GUI code is released under the MIT License and not Public Domain.
 
 ScreenShot:
 -------------
@@ -10,7 +10,7 @@ ScreenShot:
 Requirements:
 ------------
 - PyQt5
-- [youtube_dl](https://gitlab.com/dstftw/youtube-dl)
+- [youtube_dl](https://github.com/ytdl-org/youtube-dl)
 - Python >= v3.x
 
 
