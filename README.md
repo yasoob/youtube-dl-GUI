@@ -33,7 +33,7 @@ If you want to become a contributor then just contribute some code and I will ad
 
 Bugs:
 ----------
-This program is still in beta so if you encounter any bugs feel free to report them on https://github.com/oleksis/youtube-dl-pyqt/issues.
+This program is still in beta so if you encounter any bugs feel free to report them on https://github.com/yasoob/youtube-dl-GUI/issues.
 
 TODO:
 -------
