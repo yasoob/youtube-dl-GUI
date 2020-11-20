@@ -2,8 +2,8 @@
 *.mp3
 *.mp4
 *.flv
+build
 old/
 *.part
-*.txt
-/.idea
-/.idea/*
+.idea
+.DS_Store

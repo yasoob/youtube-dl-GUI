@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>405</width>
-    <height>309</height>
+    <height>350</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>405</width>
-    <height>309</height>
+    <height>350</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>405</width>
-    <height>309</height>
+    <height>350</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -96,7 +96,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Version: 0.3.5</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Version: 0.4.0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -118,7 +118,7 @@
    <item>
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Youtube-dl is a front-end to youtube-dl - a CLI application. Youtube-dl provides some additional features. Youtube-dl is not released as a part of youtube-dl. Youtube-dl is a separate project and is developed by Muhammad Yasoob Ullah Khalid.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Youtube-dl is a front-end to youtube-dl - a CLI application. Youtube-dl provides some additional features. Youtube-dl is not released as a part of youtube-dl. Youtube-dl is a separate project and is developed by Muhammad Yasoob Ullah Khalid.This Youtube-dl project version is mainteined by Oleksis Fraga &amp;lt;oleksis.fraga@gmail.com&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -138,8 +138,8 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>20</width>
-       <height>20</height>
+       <width>10</width>
+       <height>10</height>
       </size>
      </property>
     </spacer>
@@ -147,7 +147,7 @@
    <item>
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Youtube-dl uses youtube-dl which is released into Public Domain. It can be downloaded from https://github.com/rg3/youtube-dl</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Youtube-dl uses youtube-dl which is released into Public Domain. It can be downloaded from &lt;a href=&quot;https://github.com/ytdl-org/youtube-dl&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;youtube-dl repository&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -168,10 +168,13 @@
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>20</width>
-       <height>40</height>
+       <width>10</width>
+       <height>10</height>
       </size>
      </property>
     </spacer>
@@ -179,7 +182,7 @@
    <item>
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Copyright © 2013-2015</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Copyright © 2013-2020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>

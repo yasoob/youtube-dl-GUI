@@ -1,27 +1,43 @@
 import math
 import os
-from PyQt4 import QtCore
+import sys
+
 import youtube_dl
+from PyQt5 import QtCore
 
 
-class Download(QtCore.QThread):
-    status_bar_signal = QtCore.pyqtSignal(QtCore.QString)
+class DownloadSignals(QtCore.QObject):
+    "Define the signals available from a running download thread"
+    
+    status_bar_signal = QtCore.pyqtSignal(str)
     remove_url_signal = QtCore.pyqtSignal(str)
     add_update_list_signal = QtCore.pyqtSignal([list])
     remove_row_signal = QtCore.pyqtSignal()
-    error_occurred = False
-    done = False
+    finished = QtCore.pyqtSignal()
+
+
+class Download(QtCore.QRunnable):
+    "Download Thread"
 
     def __init__(self, opts):
-        super(Download, self).__init__(opts.get('parent'))
+        super(Download, self).__init__()
+        self.parent = opts.get('parent')
+        self.error_occurred = False
+        self.done = False
+        self.file_name = ""
+        self.speed = '-- KiB/s'
+        self.eta = "00:00"
+        self.bytes = self.format_bytes(None)
         self.url = opts.get('url')
         self.directory = opts.get('directory')
-        if self.directory is not '':
+        if self.directory != '':
             self.directory = os.path.join(opts.get('directory'), '')
         self.local_rowcount = opts.get('rowcount')
         self.convert_format = opts.get('convert_format')
         self.proxy = opts.get('proxy')
         self.keep_file = opts.get('keep_file')
+        # Signals
+        self.signals = DownloadSignals()
 
     def hook(self, li):
         if li.get('downloaded_bytes') is not None:
@@ -32,7 +48,7 @@ class Download(QtCore.QThread):
                 if li.get('total_bytes') is not None:
                     self.bytes = self.format_bytes(li.get('total_bytes'))
                 filename = os.path.split(li.get('filename'))[-1].split('.')[0]
-                self.add_update_list_signal.emit([
+                self.signals.add_update_list_signal.emit([
                     self.local_rowcount,
                     filename,
                     self.bytes,
@@ -43,7 +59,7 @@ class Download(QtCore.QThread):
 
             elif li.get('status') == "finished":
                 self.file_name = os.path.split(li.get('filename'))[-1].split('.')[0]
-                self.add_update_list_signal.emit([
+                self.signals.add_update_list_signal.emit([
                     self.local_rowcount,
                     self.file_name,
                     self.bytes,
@@ -56,7 +72,7 @@ class Download(QtCore.QThread):
             self.file_name = li.get('filename').split('/')[-1]
             self.speed = '-- KiB/s'
 
-            self.add_update_list_signal.emit([
+            self.signals.add_update_list_signal.emit([
                 self.local_rowcount,
                 self.file_name,
                 self.bytes,
@@ -64,8 +80,8 @@ class Download(QtCore.QThread):
                 self.speed,
                 'Finished'
             ])
-            self.status_bar_signal.emit('Already Downloaded')
-            self.remove_row_signal.emit()
+            self.signals.status_bar_signal.emit('Already Downloaded')
+            self.signals.remove_row_signal.emit()
 
     def _prepare_ytd_options(self):
         ydl_options = {
@@ -98,12 +114,13 @@ class Download(QtCore.QThread):
                     youtube_dl.utils.UnavailableVideoError
             ) as e:
                 self.error_occurred = True
-                self.remove_row_signal.emit()
-                self.remove_url_signal.emit(self.url)
-                self.status_bar_signal.emit(str(e))
+                self.signals.remove_row_signal.emit()
+                self.signals.remove_url_signal.emit(self.url)
+                self.signals.status_bar_signal.emit(str(e))
 
+    @QtCore.pyqtSlot()
     def run(self):
-        self.add_update_list_signal.emit([
+        self.signals.add_update_list_signal.emit([
             self.local_rowcount,
             self.url,
             '',
@@ -114,7 +131,7 @@ class Download(QtCore.QThread):
 
         self.download()
         if self.error_occurred is not True:
-            self.add_update_list_signal.emit([
+            self.signals.add_update_list_signal.emit([
                 self.local_rowcount,
                 self.file_name,
                 self.bytes,
@@ -123,12 +140,12 @@ class Download(QtCore.QThread):
                 'Finished'
             ])
 
-            self.status_bar_signal.emit('Done!')
-        self.remove_url_signal.emit(self.url)
+            self.signals.status_bar_signal.emit('Done!')
+        self.signals.remove_url_signal.emit(self.url)
         self.done = True
+        self.signals.finished.emit()  # Done
 
-    @staticmethod
-    def format_seconds(seconds):
+    def format_seconds(self, seconds):
         (minutes, secs) = divmod(seconds, 60)
         (hours, minutes) = divmod(minutes, 60)
         if hours > 99:
@@ -138,21 +155,20 @@ class Download(QtCore.QThread):
         else:
             return '%02d:%02d:%02d' % (hours, minutes, secs)
 
-    @staticmethod
-    def format_bytes(bytes):
+    def format_bytes(self, bytes):
         if bytes is None:
-            return u'N/A'
+            return 'N/A'
         if type(bytes) is str:
             bytes = float(bytes)
         if bytes == 0.0:
             exponent = 0
         else:
             exponent = int(math.log(bytes, 1024.0))
-        suffix = [u'B', u'KiB', u'MiB', u'GiB', u'TiB', u'PiB', u'EiB', u'ZiB', u'YiB'][exponent]
+        suffix = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'][exponent]
         converted = float(bytes) / float(1024 ** exponent)
-        return u'%.2f%s' % (converted, suffix)
+        return '%.2f%s' % (converted, suffix)
 
-    def format_speed(self,speed):
+    def format_speed(self, speed):
         if speed is None:
             return '%10s' % '---b/s'
         return '%10s' % ('%s/s' % self.format_bytes(speed))

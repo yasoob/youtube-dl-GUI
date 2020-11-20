@@ -1,43 +1,49 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+import re
+
 from .common import InfoExtractor
 from .nexx import NexxIE
-from ..utils import extract_attributes
+from ..utils import (
+    int_or_none,
+    str_or_none,
+)
 
 
 class FunkIE(InfoExtractor):
-    _VALID_URL = r'https?://(?:www\.)?funk\.net/(?:mix|channel)/(?:[^/]+/)*(?P<id>[^?/#]+)'
+    _VALID_URL = r'https?://(?:www\.)?funk\.net/(?:channel|playlist)/[^/]+/(?P<display_id>[0-9a-z-]+)-(?P<id>\d+)'
     _TESTS = [{
-        'url': 'https://www.funk.net/mix/59d65d935f8b160001828b5b/0/59d517e741dca10001252574/',
-        'md5': '4d40974481fa3475f8bccfd20c5361f8',
+        'url': 'https://www.funk.net/channel/ba-793/die-lustigsten-instrumente-aus-dem-internet-teil-2-1155821',
+        'md5': '8dd9d9ab59b4aa4173b3197f2ea48e81',
         'info_dict': {
-            'id': '716599',
+            'id': '1155821',
             'ext': 'mp4',
-            'title': 'Neue Rechte Welle',
-            'description': 'md5:a30a53f740ffb6bfd535314c2cc5fb69',
-            'timestamp': 1501337639,
-            'upload_date': '20170729',
+            'title': 'Die LUSTIGSTEN INSTRUMENTE aus dem Internet - Teil 2',
+            'description': 'md5:a691d0413ef4835588c5b03ded670c1f',
+            'timestamp': 1514507395,
+            'upload_date': '20171229',
         },
-        'params': {
-            'format': 'bestvideo',
-            'skip_download': True,
-        },
+
     }, {
-        'url': 'https://www.funk.net/channel/59d5149841dca100012511e3/0/59d52049999264000182e79d/',
+        'url': 'https://www.funk.net/playlist/neuesteVideos/kameras-auf-dem-fusion-festival-1618699',
         'only_matching': True,
     }]
 
     def _real_extract(self, url):
-        video_id = self._match_id(url)
-
-        webpage = self._download_webpage(url, video_id)
-
-        domain_id = NexxIE._extract_domain_id(webpage) or '741'
-        nexx_id = extract_attributes(self._search_regex(
-            r'(<div[^>]id=["\']mediaplayer-funk[^>]+>)',
-            webpage, 'media player'))['data-id']
-
-        return self.url_result(
-            'nexx:%s:%s' % (domain_id, nexx_id), ie=NexxIE.ie_key(),
-            video_id=nexx_id)
+        display_id, nexx_id = re.match(self._VALID_URL, url).groups()
+        video = self._download_json(
+            'https://www.funk.net/api/v4.0/videos/' + nexx_id, nexx_id)
+        return {
+            '_type': 'url_transparent',
+            'url': 'nexx:741:' + nexx_id,
+            'ie_key': NexxIE.ie_key(),
+            'id': nexx_id,
+            'title': video.get('title'),
+            'description': video.get('description'),
+            'duration': int_or_none(video.get('duration')),
+            'channel_id': str_or_none(video.get('channelId')),
+            'display_id': display_id,
+            'tags': video.get('tags'),
+            'thumbnail': video.get('imageUrlLandscape'),
+        }

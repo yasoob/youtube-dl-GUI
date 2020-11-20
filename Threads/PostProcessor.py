@@ -1,8 +1,8 @@
-__author__ = 'Yasoob'
-from youtube_dl.postprocessor.ffmpeg import FFmpegPostProcessor
-from PyQt4 import QtCore
 import os
 import math
+
+from youtube_dl.postprocessor.ffmpeg import FFmpegPostProcessor
+from PyQt5 import QtCore
 
 
 class FFmpegVideoConvertorPP(FFmpegPostProcessor):
@@ -16,13 +16,14 @@ class FFmpegVideoConvertorPP(FFmpegPostProcessor):
         self.outpath = os.path.join(self.outpath, os.path.split(path)[-1])
         if information['ext'] == self._preferedformat:
             return True, information
+        
         prefix, sep, ext = path.rpartition('.')
 
-        print path
-        print self.outpath
-        print self._preferedformat
-        print prefix + sep + self._preferedformat
-        print "\n"
+        # print(path)
+        # print(self.outpath)
+        # print(self._preferedformat)
+        # print(prefix + sep + self._preferedformat)
+        # print("\n")
 
         self.run_ffmpeg(path, self.outpath, [])
         information['filepath'] = self.outpath
@@ -37,23 +38,25 @@ class DummyDownloader(object):
         pass
 
 
-class PostProcessor(QtCore.QThread):
-    """
-    preferred_format
-    filepath
-    ext
-    format
-    """
-    statusSignal = QtCore.pyqtSignal(QtCore.QString)
+class PostProcessorSignals(QtCore.QObject):
+    "Define the signals available from a running postprocessor thread"
+
+    statusSignal = QtCore.pyqtSignal(str)
     list_Signal = QtCore.pyqtSignal([list])
     row_Signal = QtCore.pyqtSignal()
-    error_occurred = False
-    done = False
+    finished = QtCore.pyqtSignal()
+
+class PostProcessor(QtCore.QRunnable):
+    "PostProcessor Thread"
 
     def __init__(self, opts):
-        super(PostProcessor, self).__init__(opts.get('parent'))
+        super(PostProcessor, self).__init__()
+        self.parent = opts.get('parent')
+        self.error_occurred = False
+        self.done = False
         self.preferred_format = opts.get('preferred_format')
-        self.convertor = FFmpegVideoConvertorPP(opts.get('out_path'), preferedformat=self.preferred_format)
+        self.convertor = FFmpegVideoConvertorPP(opts.get('out_path'),
+                                                preferedformat=self.preferred_format)
         self.convertor._deletetempfiles = opts.get('delete_tmp')
         self.convertor._downloader = DummyDownloader()
         self.file_path = opts.get('file_path')
@@ -62,17 +65,18 @@ class PostProcessor(QtCore.QThread):
         self.bytes = self.format_bytes(os.path.getsize(self.file_path))
         self.eta = "00:00"
         self.ext = self.file_path.split('.')[-1]
+        # Signals
+        self.signals = PostProcessorSignals()
 
     def convert(self):
-        #try:
         result = self.convertor.run({
             "ext": self.ext,
-            "filepath": unicode(self.file_path),
+            "filepath": str(self.file_path),
         })
         return result
 
     def run(self):
-        self.list_Signal.emit([
+        self.signals.list_Signal.emit([
             self.local_rowcount,
             os.path.split(self.file_path)[-1].split('.')[0],
             self.bytes,
@@ -81,7 +85,7 @@ class PostProcessor(QtCore.QThread):
             'Converting'
         ])
         self.convert()
-        self.list_Signal.emit([
+        self.signals.list_Signal.emit([
             self.local_rowcount,
             os.path.split(self.file_path)[-1].split('.')[0],
             self.bytes,
@@ -90,15 +94,15 @@ class PostProcessor(QtCore.QThread):
             'Finished'
         ])
 
-    def format_bytes(self,bytes):
+    def format_bytes(self, bytes):
         if bytes is None:
-            return u'N/A'
+            return 'N/A'
         if type(bytes) is str:
             bytes = float(bytes)
         if bytes == 0.0:
             exponent = 0
         else:
             exponent = int(math.log(bytes, 1024.0))
-        suffix = [u'B', u'KiB', u'MiB', u'GiB', u'TiB', u'PiB', u'EiB', u'ZiB', u'YiB'][exponent]
+        suffix = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'][exponent]
         converted = float(bytes) / float(1024 ** exponent)
-        return u'%.2f%s' % (converted, suffix)
+        return '%.2f%s' % (converted, suffix)

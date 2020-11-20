@@ -64,7 +64,7 @@ class HlsFD(FragmentFD):
         s = urlh.read().decode('utf-8', 'ignore')
 
         if not self.can_download(s, info_dict):
-            if info_dict.get('extra_param_to_segment_url'):
+            if info_dict.get('extra_param_to_segment_url') or info_dict.get('_decryption_key_url'):
                 self.report_error('pycrypto not found. Please install it.')
                 return False
             self.report_warning(
@@ -75,8 +75,13 @@ class HlsFD(FragmentFD):
                 fd.add_progress_hook(ph)
             return fd.real_download(filename, info_dict)
 
-        def anvato_ad(s):
-            return s.startswith('#ANVATO-SEGMENT-INFO') and 'type=ad' in s
+        def is_ad_fragment_start(s):
+            return (s.startswith('#ANVATO-SEGMENT-INFO') and 'type=ad' in s
+                    or s.startswith('#UPLYNK-SEGMENT') and s.endswith(',ad'))
+
+        def is_ad_fragment_end(s):
+            return (s.startswith('#ANVATO-SEGMENT-INFO') and 'type=master' in s
+                    or s.startswith('#UPLYNK-SEGMENT') and s.endswith(',segment'))
 
         media_frags = 0
         ad_frags = 0
@@ -86,12 +91,13 @@ class HlsFD(FragmentFD):
             if not line:
                 continue
             if line.startswith('#'):
-                if anvato_ad(line):
-                    ad_frags += 1
+                if is_ad_fragment_start(line):
                     ad_frag_next = True
+                elif is_ad_fragment_end(line):
+                    ad_frag_next = False
                 continue
             if ad_frag_next:
-                ad_frag_next = False
+                ad_frags += 1
                 continue
             media_frags += 1
 
@@ -122,7 +128,6 @@ class HlsFD(FragmentFD):
             if line:
                 if not line.startswith('#'):
                     if ad_frag_next:
-                        ad_frag_next = False
                         continue
                     frag_index += 1
                     if frag_index <= ctx['fragment_index']:
@@ -136,7 +141,7 @@ class HlsFD(FragmentFD):
                     count = 0
                     headers = info_dict.get('http_headers', {})
                     if byte_range:
-                        headers['Range'] = 'bytes=%d-%d' % (byte_range['start'], byte_range['end'])
+                        headers['Range'] = 'bytes=%d-%d' % (byte_range['start'], byte_range['end'] - 1)
                     while count <= fragment_retries:
                         try:
                             success, frag_content = self._download_fragment(
@@ -147,8 +152,8 @@ class HlsFD(FragmentFD):
                         except compat_urllib_error.HTTPError as err:
                             # Unavailable (possibly temporary) fragments may be served.
                             # First we try to retry then either skip or abort.
-                            # See https://github.com/rg3/youtube-dl/issues/10165,
-                            # https://github.com/rg3/youtube-dl/issues/10448).
+                            # See https://github.com/ytdl-org/youtube-dl/issues/10165,
+                            # https://github.com/ytdl-org/youtube-dl/issues/10448).
                             count += 1
                             if count <= fragment_retries:
                                 self.report_retry_fragment(err, frag_index, count, fragment_retries)
@@ -163,7 +168,8 @@ class HlsFD(FragmentFD):
                         return False
                     if decrypt_info['METHOD'] == 'AES-128':
                         iv = decrypt_info.get('IV') or compat_struct_pack('>8xq', media_sequence)
-                        decrypt_info['KEY'] = decrypt_info.get('KEY') or self.ydl.urlopen(decrypt_info['URI']).read()
+                        decrypt_info['KEY'] = decrypt_info.get('KEY') or self.ydl.urlopen(
+                            self._prepare_url(info_dict, info_dict.get('_decryption_key_url') or decrypt_info['URI'])).read()
                         frag_content = AES.new(
                             decrypt_info['KEY'], AES.MODE_CBC, iv).decrypt(frag_content)
                     self._append_fragment(ctx, frag_content)
@@ -194,8 +200,10 @@ class HlsFD(FragmentFD):
                         'start': sub_range_start,
                         'end': sub_range_start + int(splitted_byte_range[0]),
                     }
-                elif anvato_ad(line):
+                elif is_ad_fragment_start(line):
                     ad_frag_next = True
+                elif is_ad_fragment_end(line):
+                    ad_frag_next = False
 
         self._finish_frag_download(ctx)
 
