@@ -58,7 +58,7 @@ from .ard import (
     ARDMediathekIE,
 )
 from .arte import (
-    ArteTVPlus7IE,
+    ArteTVIE,
     ArteTVEmbedIE,
     ArteTVPlaylistIE,
 )
@@ -529,6 +529,7 @@ from .laola1tv import (
     EHFTVIE,
     ITTFIE,
 )
+from .lbry import LBRYIE
 from .lci import LCIIE
 from .lcp import (
     LcpPlayIE,
@@ -1058,8 +1059,7 @@ from .spankbang import (
     SpankBangPlaylistIE,
 )
 from .spankwire import SpankwireIE
-from .spiegel import SpiegelIE, SpiegelArticleIE
-from .spiegeltv import SpiegeltvIE
+from .spiegel import SpiegelIE
 from .spike import (
     BellatorIE,
     ParamountNetworkIE,
@@ -1362,7 +1362,6 @@ from .vk import (
 from .vlive import (
     VLiveIE,
     VLiveChannelIE,
-    VLivePlaylistIE
 )
 from .vodlocker import VodlockerIE
 from .vodpl import VODPlIE
@@ -1479,21 +1478,18 @@ from .yourporn import YourPornIE
 from .yourupload import YourUploadIE
 from .youtube import (
     YoutubeIE,
-    YoutubeChannelIE,
-    YoutubeFavouritesIE,
     YoutubeHistoryIE,
     YoutubeLiveIE,
+    YoutubeTabIE,
     YoutubePlaylistIE,
-    YoutubePlaylistsIE,
     YoutubeRecommendedIE,
     YoutubeSearchDateIE,
     YoutubeSearchIE,
-    YoutubeSearchURLIE,
-    YoutubeShowIE,
+    #YoutubeSearchURLIE,
     YoutubeSubscriptionsIE,
     YoutubeTruncatedIDIE,
     YoutubeTruncatedURLIE,
-    YoutubeUserIE,
+    YoutubeYtUserIE,
     YoutubeWatchLaterIE,
 )
 from .zapiks import ZapiksIE
