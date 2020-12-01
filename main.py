@@ -1,12 +1,14 @@
 import sys
 import os
 
+
+app_root = None
+
 if not hasattr(sys, 'frozen'):
     # for import youtube_dl
     app_root = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
     sys.path.insert(0, app_root)
-else:
-    app_root = os.path.dirname(os.path.realpath(os.path.abspath(sys.argv[0])))
+    
 
 import youtube_dl
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -19,18 +21,6 @@ from Threads.Download import Download
 from Threads.PostProcessor import PostProcessor
 
 
-# For getting the icon to work
-import ctypes
-try:
-    ctypes.\
-        windll.\
-        shell32.\
-        SetCurrentProcessExplicitAppUserModelID(
-            'my_company.my_product.sub_product.version'
-    )
-except AttributeError:
-    pass
-
 # Setting custom variables
 desktop_path = os.path.join(os.path.expanduser('~'), "Desktop")
 
@@ -40,8 +30,21 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(parent, *args, **kwargs)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        path = os.path.join(app_root, 'UI', 'images', 'icon.png')
-        self.setWindowIcon(QtGui.QIcon(path))
+        # For getting the icon to work
+        try:
+            from PyQt5.QtWinExtras import QtWin
+            myappid = 'my_company.my_product.sub_product.version'
+            QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
+        except ImportError:
+            pass
+        
+        global app_root
+        if app_root:
+            ico_path = os.path.join(app_root, 'UI', 'images', 'icon.ico')
+        else:
+            app_root = "."
+            ico_path = ':/icon.ico'
+        self.setWindowIcon(QtGui.QIcon(ico_path))
         self.batch_dialog = BatchAddDialogue(self)
         self.ui.saveToLineEdit.setText(desktop_path)
         self.ui.BrowseConvertToLineEdit.setText(os.getcwd())

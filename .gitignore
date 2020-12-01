@@ -3,6 +3,9 @@
 *.mp4
 *.flv
 build
+dist
+*.spec
+*.egg-info
 old/
 *.part
 .idea
