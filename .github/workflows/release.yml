@@ -56,12 +56,12 @@ jobs:
       id: sha2_file_exe
       env:
         SHA2: ${{ hashFiles('dist/youtube-dl-gui.exe') }}
-      run: echo "::set-output name=sha2_windows::${SHA2}"
+      run: echo "::set-output name=sha2_windows::${env:SHA2}"
     - name: Make SHA2-256SUMS file
       env:
         SHA2_WINDOWS: ${{ steps.sha2_file_exe.outputs.sha2_windows }}
       run: |
-        echo "${SHA2_WINDOWS} youtube-dl-gui.exe" > SHA2-256SUMS
+        echo "${env:SHA2_WINDOWS} youtube-dl-gui.exe" > SHA2-256SUMS
     - name: Upload SHA2-256SUMS to Release
       id: upload-release-sha2 
       uses: actions/upload-release-asset@v1
