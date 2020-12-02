@@ -7,7 +7,7 @@ $ conda create --name youtube-dl-pyqt python=3.8.3 pyqt pyinstaller
 
 ## Export Conda Environment
 ```bash
-$ conda env export > my_environment.yml
+$ conda env export > environment.yml
 ```
 
 ## Export Requirements from Conda
@@ -15,6 +15,46 @@ $ conda env export > my_environment.yml
 $ conda list -e > requirements.txt
 ```
 
+## Install PyQt5 in MSYS2 (MINGW64)
+```bash
+$ pacman -Sy base-devel git mingw-w64-x86_64-toolchain mingw-w64-x86_64-qt5-static mingw-w64-x86_64-python-pyqt5
+```
+
+### Install PIP in MSYS2
+```bash
+$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py 
+
+$ python get-pip.py
+```
+
+### Build .EXE
+```bash
+$ python setup.py pyinstaller
+
+OR
+
+$ pyinstaller.exe -w --icon=UI/images/icon.ico --add-data="UI/images;UI/images" --name=youtube-dl-gui main.py
+```
+
+### Run .EXE
+```bash
+$ ./dist/youtube-dl-gui/youtube-dl-gui.exe
+```
+
+### Python Packages
+```bash
+$ pip freeze
+altgraph==0.17
+future==0.18.2
+pefile==2019.4.18
+pyinstaller==4.1
+pyinstaller-hooks-contrib==2020.10
+PyOpenGL==3.1.5
+PyOpenGL-accelerate==3.1.5
+PyQt5==5.15.0
+PyQt5-sip==12.8.0
+pywin32-ctypes==0.2.0
+```
 
 ## Install Qt in GNU/Linux Debian Stretch
 ```bash

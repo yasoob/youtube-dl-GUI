@@ -1,0 +1,74 @@
+name: Build-Release
+
+on: 
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_windows_exe:
+    # https://github.com/actions/virtual-environments/blob/master/images/win/Windows2019-Readme.md
+    runs-on: windows-2019
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      sha2_windows: ${{ steps.sha2_file_exe.outputs.sha2_windows }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8.3
+    - name: Install dependencies
+      run: |
+        C:\Miniconda\condabin\conda.bat env update --file environment.yml --name base
+        C:\Miniconda\condabin\conda.bat init powershell
+    - name: Get Tag version
+      id: get_version
+      shell: bash
+      run: echo "::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}"
+    - name: Build x64 release GUI
+      id: build_x64_release
+      run: |
+        C:\Miniconda\condabin\conda.bat activate base
+        python setup.py pyinstaller
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: youtube-dl-gui 
+        body: "Youtube Downloader GUI ${{ steps.get_version.outputs.VERSION }}"
+        draft: false
+        prerelease: false
+    - name: Upload Executable youtube-dl-gui.exe
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/youtube-dl-gui.exe
+        asset_name: youtube-dl-gui.exe
+        asset_content_type: application/octet-stream
+    - name: Get SHA2-256SUMS for youtube-dl-gui.exe
+      id: sha2_file_exe
+      env:
+        SHA2: ${{ hashFiles('dist/youtube-dl-gui.exe') }}
+      run: echo "::set-output name=sha2_windows::${SHA2}"
+    - name: Make SHA2-256SUMS file
+      env:
+        SHA2_WINDOWS: ${{ steps.sha2_file_exe.outputs.sha2_windows }}
+      run: |
+        echo "${SHA2_WINDOWS} youtube-dl-gui.exe" > SHA2-256SUMS
+    - name: Upload SHA2-256SUMS to Release
+      id: upload-release-sha2 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SHA2-256SUMS
+        asset_name: SHA2-256SUMS
+        asset_content_type: text/plain

@@ -1,0 +1,30 @@
+name: youtube-dl-pyqt
+channels:
+  - defaults
+dependencies:
+  - altgraph=0.17=py_0
+  - ca-certificates=2020.10.14=0
+  - certifi=2020.6.20=pyhd3eb1b0_3
+  - future=0.18.2=py38_1
+  - icu=58.2=ha925a31_3
+  - jpeg=9b=hb83a4c4_2
+  - libpng=1.6.37=h2a8f88b_0
+  - macholib=1.14=py_1
+  - openssl=1.1.1h=he774522_0
+  - pefile=2019.4.18=py_0
+  - pip=20.2.4=py38haa95532_0
+  - pycryptodome=3.9.8=py38he774522_0
+  - pyinstaller=3.6=py38h62dcd97_5
+  - pyqt=5.9.2=py38ha925a31_4
+  - python=3.8.3=he1778fa_2
+  - pywin32=227=py38he774522_1
+  - pywin32-ctypes=0.2.0=py38_1000
+  - qt=5.9.7=vc14h73c81de_0
+  - setuptools=50.3.1=py38haa95532_1
+  - sip=4.19.13=py38ha925a31_0
+  - sqlite=3.33.0=h2a8f88b_0
+  - vc=14.1=h0510ff6_4
+  - vs2015_runtime=14.16.27012=hf0eaf9b_3
+  - wheel=0.35.1=py_0
+  - wincertstore=0.2=py38_0
+  - zlib=1.2.11=h62dcd97_4
