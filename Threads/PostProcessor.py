@@ -13,17 +13,14 @@ class FFmpegVideoConvertorPP(FFmpegPostProcessor):
 
     def run(self, information):
         path = information['filepath']
-        self.outpath = os.path.join(self.outpath, os.path.split(path)[-1])
+        file_name = os.path.split(path)[-1]
+        self.outpath = os.path.join(self.outpath, file_name)
+
         if information['ext'] == self._preferedformat:
             return True, information
         
-        prefix, sep, ext = path.rpartition('.')
-
-        # print(path)
-        # print(self.outpath)
-        # print(self._preferedformat)
-        # print(prefix + sep + self._preferedformat)
-        # print("\n")
+        prefix, sep, ext = self.outpath.rpartition('.')
+        self.outpath = prefix + sep + self._preferedformat
 
         self.run_ffmpeg(path, self.outpath, [])
         information['filepath'] = self.outpath
@@ -41,7 +38,7 @@ class DummyDownloader(object):
 class PostProcessorSignals(QtCore.QObject):
     "Define the signals available from a running postprocessor thread"
 
-    statusSignal = QtCore.pyqtSignal(str)
+    statusBar_Signal = QtCore.pyqtSignal(str)
     list_Signal = QtCore.pyqtSignal([list])
     row_Signal = QtCore.pyqtSignal()
     finished = QtCore.pyqtSignal()
@@ -82,8 +79,9 @@ class PostProcessor(QtCore.QRunnable):
             self.bytes,
             self.eta,
             self.speed,
-            'Converting'
+            'Converting...'
         ])
+        self.signals.statusBar_Signal.emit('Converting...')
         self.convert()
         self.signals.list_Signal.emit([
             self.local_rowcount,
@@ -93,6 +91,7 @@ class PostProcessor(QtCore.QRunnable):
             self.speed,
             'Finished'
         ])
+        self.signals.statusBar_Signal.emit('Done!')
 
     def format_bytes(self, bytes):
         if bytes is None:
