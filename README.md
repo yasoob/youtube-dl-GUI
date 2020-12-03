@@ -8,9 +8,14 @@ This repository contains code for a youtube-dl GUI written in PyQt. It is based 
 
 ## Requirements:
 
+- Python >= v3.x
 - PyQt5
 - [youtube_dl](https://github.com/ytdl-org/youtube-dl)
-- Python >= v3.x
+- [FFmpeg](https://ffmpeg.org/download.html) (optional, to postprocess video files)
+
+### Requirement for build Binaries/Executables
+
+- [PyInstaller](https://www.pyinstaller.org/)
 
 ## Features:
 
@@ -34,13 +39,13 @@ This program is still in beta so if you encounter any bugs feel free to report t
 
 ## TODO:
 
-- Fix Convert (main:MainWindow.convert_file)
-- integrate save state
 - Allow pause/resume functionality
+- integrate save state
 - ~~integrate post processing options~~
 - ~~integrate batch add feature~~
 - ~~integrate Queue to make it stable~~
 - ~~Change for PyInstaller: setup.py - _see Windows_~~
+- ~~Fix Convert (main:MainWindow.convert_file)~~
 
 ## Windows:
 
@@ -51,6 +56,9 @@ python setup.py pyinstaller
 ```
 
 This will result in a **dist** and **build** directory. Simply go to the **dist** directory and you will get a ```youtube-dl-gui.exe``` file and some other files. That ```youtube-dl-gui.exe``` file is a standalone executable which can be run simply by double clicking it. You can distribute that file to your friend.
+
+### Download
+Can dowload the latest version from [Releases](https://github.com/yasoob/youtube-dl-GUI/releases/latest)
 
 ## License:
 

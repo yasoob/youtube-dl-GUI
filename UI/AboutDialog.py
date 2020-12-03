@@ -82,7 +82,7 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "About"))
-        self.label_2.setText(_translate("Dialog", "<html><head/><body><p>Version: 0.4.0</p></body></html>"))
+        self.label_2.setText(_translate("Dialog", "<html><head/><body><p>Version: 0.4.1</p></body></html>"))
         self.label_3.setText(_translate("Dialog", "<html><head/><body><p>Youtube-dl is a front-end to youtube-dl - a CLI application. Youtube-dl provides some additional features. Youtube-dl is not released as a part of youtube-dl. Youtube-dl is a separate project and is developed by Muhammad Yasoob Ullah Khalid.This Youtube-dl project version is mainteined by Oleksis Fraga &lt;oleksis.fraga@gmail.com&gt;</p></body></html>"))
         self.label_5.setText(_translate("Dialog", "<html><head/><body><p>Youtube-dl uses youtube-dl which is released into Public Domain. It can be downloaded from <a href=\"https://github.com/ytdl-org/youtube-dl\"><span style=\" text-decoration: underline; color:#0000ff;\">youtube-dl repository</span></a></p></body></html>"))
         self.label_4.setText(_translate("Dialog", "<html><head/><body><p>Copyright © 2013-2020</p></body></html>"))

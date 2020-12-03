@@ -118,13 +118,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.ui.BrowseConvertLineEdit.files=file_names
 
-    # TODO: Fix it
     def convert_file(self,file_path, out_path, preferred_format, delete_tmp=False):
         if file_path.split('.')[-1] == preferred_format:
             self.ui.statusbar.showMessage('The source and destination formats are same')
             return
         
-        # TODO: Check file_path (file_name to final preferred_format)
         if file_path not in self.convert_list:
             options= {
                 'file_path': file_path,
@@ -136,7 +134,7 @@ class MainWindow(QtWidgets.QMainWindow):
             }
             # Using ThreadPool
             pprocessorThread = PostProcessor(options)
-            pprocessorThread.signals.statusSignal.connect(self.ui.statusbar.showMessage)
+            pprocessorThread.signals.statusBar_Signal.connect(self.ui.statusbar.showMessage)
             pprocessorThread.signals.list_Signal.connect(self.add_to_table)
             pprocessorThread.signals.row_Signal.connect(self.decrease_rowcount)
             self.threadpool.start(pprocessorThread)
@@ -277,7 +275,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.kill_all_threads()
 
     def kill_all_threads(self):
-        self.threadpool.waitForDone(1)
+        self.threadpool.waitForDone()
         self.close()
 
 

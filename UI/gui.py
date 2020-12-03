@@ -292,7 +292,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "youtube-dl v0.4.0"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "youtube-dl v0.4.1"))
         self.groupBox.setTitle(_translate("MainWindow", "Enter url and download location"))
         self.label_2.setText(_translate("MainWindow", "Video URL:"))
         self.label_3.setText(_translate("MainWindow", "Save To:"))

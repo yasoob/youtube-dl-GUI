@@ -2,6 +2,7 @@
 *.mp3
 *.mp4
 *.flv
+.vscode
 build
 dist
 *.spec
