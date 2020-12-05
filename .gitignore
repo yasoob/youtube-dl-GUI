@@ -3,6 +3,7 @@
 *.mp4
 *.flv
 .vscode
+env
 build
 dist
 *.spec
