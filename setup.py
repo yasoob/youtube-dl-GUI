@@ -186,6 +186,8 @@ setup(
     py_modules=["main"],
     packages=["GUI", "Threads", "UI", "youtube_dl", "youtube_dl.downloader", "youtube_dl.extractor", "youtube_dl.postprocessor"],
     include_package_data=True,
+    python_requires=">=3.6.0",
+    install_requires=["PyQt5>=5.15.2"],
     classifiers=[
         "Topic :: Multimedia :: Video :: User Interfaces",
         "Development Status :: 5 - Production/Stable",
