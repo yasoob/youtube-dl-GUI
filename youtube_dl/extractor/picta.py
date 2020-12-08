@@ -316,13 +316,13 @@ class PictaPlaylistIE(InfoExtractor):
         return header
 
     def _extract_playlist(self, playlist, playlist_id=None, require_title=True):
-        if len(playlist["results"]) == 0:
+        if len(playlist.get("results", [])) == 0:
             raise ExtractorError("Cannot find playlist!")
 
         title = (
             playlist["results"][0]["nombre"]
             if require_title
-            else playlist.get("results")[0].get("nombre")
+            else playlist["results"][0].get("nombre")
         )
         thumbnail = try_get(playlist, lambda x: x["results"][0].get("url_imagen"))
         entries = try_get(playlist, lambda x: x["results"][0]["publicaciones"])
