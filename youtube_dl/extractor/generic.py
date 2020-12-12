@@ -52,7 +52,6 @@ from .ooyala import OoyalaIE
 from .rutv import RUTVIE
 from .tvc import TVCIE
 from .sportbox import SportBoxIE
-from .smotri import SmotriIE
 from .myvi import MyviIE
 from .condenast import CondeNastIE
 from .udn import UDNEmbedIE
@@ -2117,23 +2116,23 @@ class GenericIE(InfoExtractor):
                 'skip_download': True,
             },
         },
-        {
-            # Zype embed
-            'url': 'https://www.cookscountry.com/episode/554-smoky-barbecue-favorites',
-            'info_dict': {
-                'id': '5b400b834b32992a310622b9',
-                'ext': 'mp4',
-                'title': 'Smoky Barbecue Favorites',
-                'thumbnail': r're:^https?://.*\.jpe?g',
-                'description': 'md5:5ff01e76316bd8d46508af26dc86023b',
-                'upload_date': '20170909',
-                'timestamp': 1504915200,
-            },
-            'add_ie': [ZypeIE.ie_key()],
-            'params': {
-                'skip_download': True,
-            },
-        },
+        # {
+        #     # Zype embed
+        #     'url': 'https://www.cookscountry.com/episode/554-smoky-barbecue-favorites',
+        #     'info_dict': {
+        #         'id': '5b400b834b32992a310622b9',
+        #         'ext': 'mp4',
+        #         'title': 'Smoky Barbecue Favorites',
+        #         'thumbnail': r're:^https?://.*\.jpe?g',
+        #         'description': 'md5:5ff01e76316bd8d46508af26dc86023b',
+        #         'upload_date': '20170909',
+        #         'timestamp': 1504915200,
+        #     },
+        #     'add_ie': [ZypeIE.ie_key()],
+        #     'params': {
+        #         'skip_download': True,
+        #     },
+        # },
         {
             # videojs embed
             'url': 'https://video.sibnet.ru/shell.php?videoid=3422904',
@@ -2814,11 +2813,6 @@ class GenericIE(InfoExtractor):
             webpage)
         if mobj is not None:
             return self.url_result(mobj.group('url'))
-
-        # Look for embedded smotri.com player
-        smotri_url = SmotriIE._extract_url(webpage)
-        if smotri_url:
-            return self.url_result(smotri_url, 'Smotri')
 
         # Look for embedded Myvi.ru player
         myvi_url = MyviIE._extract_url(webpage)
