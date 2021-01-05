@@ -56,6 +56,7 @@ from .appletrailers import (
     AppleTrailersSectionIE,
 )
 from .archiveorg import ArchiveOrgIE
+from .arcpublishing import ArcPublishingIE
 from .arkena import ArkenaIE
 from .ard import (
     ARDBetaMediathekIE,
@@ -789,6 +790,7 @@ from .nrk import (
     NRKSkoleIE,
     NRKTVIE,
     NRKTVDirekteIE,
+    NRKRadioPodkastIE,
     NRKTVEpisodeIE,
     NRKTVEpisodesIE,
     NRKTVSeasonIE,
@@ -1057,6 +1059,7 @@ from .skynewsarabia import (
 from .sky import (
     SkyNewsIE,
     SkySportsIE,
+    SkySportsNewsIE,
 )
 from .slideshare import SlideshareIE
 from .slideslive import SlidesLiveIE

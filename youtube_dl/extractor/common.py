@@ -2135,7 +2135,7 @@ class InfoExtractor(object):
             def extract_Initialization(source):
                 initialization = source.find(_add_ns('Initialization'))
                 if initialization is not None:
-                    ms_info['initialization_url'] = initialization.get('sourceURL')
+                    ms_info['initialization_url'] = initialization.attrib['sourceURL']
 
             segment_list = element.find(_add_ns('SegmentList'))
             if segment_list is not None:
@@ -2143,9 +2143,7 @@ class InfoExtractor(object):
                 extract_Initialization(segment_list)
                 segment_urls_e = segment_list.findall(_add_ns('SegmentURL'))
                 if segment_urls_e:
-                    segment_urls = [segment.get('media') for segment in segment_urls_e if segment.get('media') is not None]
-                    if len(segment_urls) > 0:
-                        ms_info['segment_urls'] = segment_urls
+                    ms_info['segment_urls'] = [segment.attrib['media'] for segment in segment_urls_e]
             else:
                 segment_template = element.find(_add_ns('SegmentTemplate'))
                 if segment_template is not None:
