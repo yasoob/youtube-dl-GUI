@@ -25,6 +25,12 @@ from Threads.PostProcessor import PostProcessor
 desktop_path = os.path.join(os.path.expanduser('~'), "Desktop")
 
 
+class CloseSignals(QtCore.QObject):
+    "Define the signals available for close"
+    
+    closed = QtCore.pyqtSignal()
+
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None, *args, **kwargs):
         super(MainWindow, self).__init__(parent, *args, **kwargs)
@@ -63,6 +69,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.about = AboutDialog(self)
         self.license = LicenseDialogue(self)
+        self.closing = CloseSignals()
         self.show()
 
     def set_connections(self):
@@ -184,6 +191,7 @@ class MainWindow(QtWidgets.QMainWindow):
         downloadThread.signals.remove_url_signal.connect(self.remove_url)
         downloadThread.signals.add_update_list_signal.connect(self.add_to_table)
         downloadThread.signals.remove_row_signal.connect(self.decrease_rowcount)
+        self.closing.closed.connect(downloadThread.stop)
         self.threadpool.start(downloadThread)
 
         self.ui.tabWidget.setCurrentIndex(2)
@@ -275,6 +283,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.kill_all_threads()
 
     def kill_all_threads(self):
+        self.closing.closed.emit()
         self.threadpool.waitForDone()
         self.close()
 

@@ -1,9 +1,12 @@
 import math
 import os
-import sys
 
 import youtube_dl
 from PyQt5 import QtCore
+
+
+class StopError(Exception):
+    pass
 
 
 class DownloadSignals(QtCore.QObject):
@@ -40,6 +43,9 @@ class Download(QtCore.QRunnable):
         self.signals = DownloadSignals()
 
     def hook(self, li):
+        if self.done:
+            raise StopError()
+
         if li.get('downloaded_bytes') is not None:
             if li.get('speed') is not None:
                 self.speed = self.format_speed(li.get('speed'))
@@ -117,6 +123,11 @@ class Download(QtCore.QRunnable):
                 self.signals.remove_row_signal.emit()
                 self.signals.remove_url_signal.emit(self.url)
                 self.signals.status_bar_signal.emit(str(e))
+            except StopError:
+                # import threading
+                # print("Exiting thread:", threading.currentThread().getName())
+                self.done = True
+                self.signals.finished.emit()  # Done
 
     @QtCore.pyqtSlot()
     def run(self):
@@ -144,6 +155,9 @@ class Download(QtCore.QRunnable):
         self.signals.remove_url_signal.emit(self.url)
         self.done = True
         self.signals.finished.emit()  # Done
+    
+    def stop(self):
+        self.done = True
 
     def format_seconds(self, seconds):
         (minutes, secs) = divmod(seconds, 60)
