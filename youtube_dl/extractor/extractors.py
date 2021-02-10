@@ -470,8 +470,8 @@ from .hungama import (
 from .hypem import HypemIE
 from .ign import (
     IGNIE,
-    OneUPIE,
-    PCMagIE,
+    IGNVideoIE,
+    IGNArticleIE,
 )
 from .iheart import (
     IHeartRadioIE,
@@ -1265,6 +1265,7 @@ from .tv2 import (
     TV2IE,
     TV2ArticleIE,
     KatsomoIE,
+    MTVUutisetArticleIE,
 )
 from .tv2dk import (
     TV2DKIE,
@@ -1403,7 +1404,6 @@ from .vidme import (
     VidmeUserIE,
     VidmeUserLikesIE,
 )
-from .vidzi import VidziIE
 from .vier import VierIE, VierVideosIE
 from .viewlift import (
     ViewLiftIE,
@@ -1463,6 +1463,7 @@ from .vrv import (
     VRVSeriesIE,
 )
 from .vshare import VShareIE
+from .vtm import VTMIE
 from .medialaan import MedialaanIE
 from .vube import VubeIE
 from .vuclip import VuClipIE
