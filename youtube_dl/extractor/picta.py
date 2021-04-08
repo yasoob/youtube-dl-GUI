@@ -22,7 +22,7 @@ from ..utils import (
 from .common import InfoExtractor
 
 ROOT_BASE_URL = "https://www.picta.cu/"
-API_BASE_URL = "https://api.picta.cu/api/v2/"
+API_BASE_URL = "https://api.picta.cu/v2/"
 
 
 # noinspection PyAbstractClass
