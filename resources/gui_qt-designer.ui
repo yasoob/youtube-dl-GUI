@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>youtube-dl v0.3.5</string>
+   <string>youtube-dl v0.4.3</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -67,7 +67,6 @@
      border-top: 1px solid #C2C7CB;
      position: absolute;
      top: -0.5em;
-	 background: white;
  }
 
  QTabWidget::tab-bar {
@@ -94,14 +93,13 @@
 
  QTabBar::tab:selected {
      border-color:#C4C4C3;
-
  }</string>
         </property>
         <property name="tabPosition">
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="documentMode">
          <bool>false</bool>
@@ -155,7 +153,7 @@
                   </widget>
                  </item>
                  <item row="0" column="2">
-                  <widget class="QLineEdit" name="lineEdit">
+                  <widget class="QLineEdit" name="videoUrlLineEdit">
                    <property name="frame">
                     <bool>true</bool>
                    </property>
@@ -181,7 +179,7 @@
                   </widget>
                  </item>
                  <item row="1" column="2">
-                  <widget class="QLineEdit" name="lineEdit_2"/>
+                  <widget class="QLineEdit" name="saveToLineEdit"/>
                  </item>
                  <item row="1" column="3">
                   <widget class="QPushButton" name="browse_btn">
@@ -532,56 +530,6 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QToolButton" name="toolButton">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resource.qrc">
-                <normaloff>:/resume-icon.svg</normaloff>:/resume-icon.svg</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="toolButton_2">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resource.qrc">
-                <normaloff>:/pause-icon.svg</normaloff>:/pause-icon.svg</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="toolButton_3">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resource.qrc">
-                <normaloff>:/stop-icon.png</normaloff>:/stop-icon.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QTableWidget" name="tableWidget">
@@ -595,10 +543,10 @@
                <string notr="true"/>
               </property>
               <property name="autoFillBackground">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true"> QTableWidget::item:focus { background-color:transparent; color:blue;  border: 0px }</string>
+               <string notr="true"/>
               </property>
               <property name="frameShape">
                <enum>QFrame::VLine</enum>
@@ -608,6 +556,9 @@
               </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>false</bool>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -630,11 +581,11 @@
               <attribute name="verticalHeaderVisible">
                <bool>false</bool>
               </attribute>
-              <attribute name="verticalHeaderDefaultSectionSize">
-               <number>30</number>
-              </attribute>
               <attribute name="verticalHeaderMinimumSectionSize">
                <number>20</number>
+              </attribute>
+              <attribute name="verticalHeaderDefaultSectionSize">
+               <number>30</number>
               </attribute>
               <attribute name="verticalHeaderShowSortIndicator" stdset="0">
                <bool>false</bool>
@@ -733,7 +684,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>lineEdit</sender>
+   <sender>videoUrlLineEdit</sender>
    <signal>returnPressed()</signal>
    <receiver>download_btn</receiver>
    <slot>click()</slot>

@@ -1,4 +1,4 @@
-__version__ = '0.4.2'
+__version__ = '0.4.3'
 __author__ = 'yasoob'
 __maintainer__ = 'Oleksis Fraga'
 __maintainer_contact__ = 'oleksis.fraga@gmail.com'

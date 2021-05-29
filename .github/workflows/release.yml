@@ -30,6 +30,7 @@ jobs:
       id: build_x64_release
       run: |
         C:\Miniconda\condabin\conda.bat activate base
+        python -m pip install --upgrade pip setuptools wheel
         python setup.py pyinstaller
     - name: Create Release
       id: create_release
