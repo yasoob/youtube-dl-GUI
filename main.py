@@ -1,12 +1,14 @@
-import sys
 import os
+import sys
+from pathlib import Path
 
 
 app_root = None
 
-if not hasattr(sys, 'frozen'):
-    # for import youtube_dl
-    app_root = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
+if not hasattr(sys, "frozen"):
+    # direct call of __main__.py
+    PATH = Path(__file__).resolve().parent
+    app_root = str(PATH)
     sys.path.insert(0, app_root)
     
 
@@ -22,7 +24,7 @@ from Threads.PostProcessor import PostProcessor
 
 
 # Setting custom variables
-desktop_path = os.path.join(os.path.expanduser('~'), "Desktop")
+desktop_path = str(Path().home() / Path("Desktop"))
 
 
 class CloseSignals(QtCore.QObject):
@@ -38,7 +40,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # For getting the icon to work
         try:
-            from PyQt5.QtWinExtras import QtWin
+            from PyQt5.QtWinExtras import QtWin  # type: ignore
             myappid = 'my_company.my_product.sub_product.version'
             QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
         except ImportError:
