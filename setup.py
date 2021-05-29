@@ -38,8 +38,14 @@ try:
     if pyi_compat.is_win:
         # noinspection PyUnresolvedReferences
         from PyInstaller.utils.win32.versioninfo import (
-            VarStruct, VarFileInfo, StringStruct, StringTable,
-            StringFileInfo, FixedFileInfo, VSVersionInfo, SetVersion,
+            VarStruct,
+            VarFileInfo,
+            StringStruct,
+            StringTable,
+            StringFileInfo,
+            FixedFileInfo,
+            VSVersionInfo,
+            SetVersion,
         )
 except ImportError:
     pyi_compat = None
@@ -129,18 +135,19 @@ class BuildPyinstallerBin(Command):
             path_sep = ";"
         else:
             path_sep = ":"
-        
+
         spawn(
             [
                 "pyinstaller",
                 "-w",
                 "-F",
                 "--icon=UI/images/icon.ico",
-                "--add-data=UI/images"+path_sep+"UI/images",
+                "--add-data=UI/images" + path_sep + "UI/images",
                 "--name=youtube-dl-gui",
                 "main.py",
             ],
-            dry_run=self.dry_run)
+            dry_run=self.dry_run,
+        )
 
         if version:
             time.sleep(3)
@@ -150,15 +157,13 @@ class BuildPyinstallerBin(Command):
 def setup_data():
     """Setup params for Windows/Linux"""
     # Add pixmaps icons (*.ico,*.png)
-    package_data = {"UI": [
-        "images/*.ico",
-        "images/*.png"
-    ]}
+    package_data = {"UI": ["images/*.ico", "images/*.png"]}
     setup_params = {
-       "package_data": package_data,
+        "package_data": package_data,
     }
 
     return setup_params
+
 
 cmdclass = dict()
 params = dict()
@@ -167,9 +172,7 @@ if PYINSTALLER:
     cmdclass.update({"pyinstaller": BuildPyinstallerBin})
 else:
     params = setup_data()
-    params["entry_points"] = {
-        "console_scripts": ["youtube-dl-gui = main:main"]
-    }
+    params["entry_points"] = {"console_scripts": ["youtube-dl-gui = main:main"]}
 
 
 setup(
@@ -184,7 +187,15 @@ setup(
     maintainer_email=__maintainer_contact__,
     license=__license__,
     py_modules=["main"],
-    packages=["GUI", "Threads", "UI", "youtube_dl", "youtube_dl.downloader", "youtube_dl.extractor", "youtube_dl.postprocessor"],
+    packages=[
+        "GUI",
+        "Threads",
+        "UI",
+        "youtube_dl",
+        "youtube_dl.downloader",
+        "youtube_dl.extractor",
+        "youtube_dl.postprocessor",
+    ],
     include_package_data=True,
     python_requires=">=3.6.0",
     install_requires=["PyQt5>=5.15.2"],
@@ -197,7 +208,7 @@ setup(
         "License :: Public Domain",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",        
+        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation",
         "Programming Language :: Python :: Implementation :: CPython",
