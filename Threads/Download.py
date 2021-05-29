@@ -63,7 +63,7 @@ class Download(QtCore.QRunnable):
                         self.speed,
                         li.get("status"),
                     ]
-                )  # type: ignore
+                )  
 
             elif li.get("status") == "finished":
                 self.file_name = str(Path(_file_name).stem)
@@ -76,7 +76,7 @@ class Download(QtCore.QRunnable):
                         self.speed,
                         "Converting",
                     ]
-                )  # type: ignore
+                )  
         else:
             self.bytes = self.format_bytes(li.get("total_bytes"))
             self.file_name = Path(_file_name).name
@@ -91,9 +91,9 @@ class Download(QtCore.QRunnable):
                     self.speed,
                     "Finished",
                 ]
-            )  # type: ignore
-            self.signals.status_bar_signal.emit("Already Downloaded")  # type: ignore
-            self.signals.remove_row_signal.emit()  # type: ignore
+            )  
+            self.signals.status_bar_signal.emit("Already Downloaded")  
+            self.signals.remove_row_signal.emit()  
 
     def _prepare_ytd_options(self):
         ydl_options = {
@@ -128,20 +128,20 @@ class Download(QtCore.QRunnable):
                 youtube_dl.utils.UnavailableVideoError,
             ) as e:
                 self.error_occurred = True
-                self.signals.remove_row_signal.emit()  # type: ignore
-                self.signals.remove_url_signal.emit(self.url)  # type: ignore
-                self.signals.status_bar_signal.emit(str(e))  # type: ignore
+                self.signals.remove_row_signal.emit()  
+                self.signals.remove_url_signal.emit(self.url)  
+                self.signals.status_bar_signal.emit(str(e))  
             except StopError:
                 # import threading
                 # print("Exiting thread:", threading.currentThread().getName())
                 self.done = True
-                self.signals.finished.emit()  # type: ignore
+                self.signals.finished.emit()  
 
     @QtCore.pyqtSlot()
     def run(self):
         self.signals.add_update_list_signal.emit(
             [self.local_rowcount, self.url, "", "", "", "Starting"]
-        )  # type: ignore
+        )  
 
         self.download()
 
@@ -155,12 +155,12 @@ class Download(QtCore.QRunnable):
                     self.speed,
                     "Finished",
                 ]
-            )  # type: ignore
+            )  
 
-            self.signals.status_bar_signal.emit("Done!")  # type: ignore
-        self.signals.remove_url_signal.emit(self.url)  # type: ignore
+            self.signals.status_bar_signal.emit("Done!")  
+        self.signals.remove_url_signal.emit(self.url)  
         self.done = True
-        self.signals.finished.emit()  # type: ignore
+        self.signals.finished.emit()  
 
     def stop(self):
         self.done = True

@@ -42,10 +42,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # For getting the icon to work
         try:
-            from PyQt5.QtWinExtras import QtWin  # type: ignore
+            from PyQt5.QtWinExtras import QtWin
 
             myappid = "my_company.my_product.sub_product.version"
-            QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
+            QtWin.setCurrentProcessExplicitAppUserModelID(myappid)  # type: ignore
         except ImportError:
             pass
 
@@ -59,7 +59,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.batch_dialog = BatchAddDialogue(self)
         self.ui.saveToLineEdit.setText(desktop_path)
         self.ui.BrowseConvertToLineEdit.setText(str(Path().cwd()))
-        self.ui.BrowseConvertLineEdit.files = []  # type: ignore
+        self.ui.BrowseConvertLineEdit.files = []
         self.ui.statusbar.showMessage("Ready.")
         self.set_connections()
 
@@ -130,7 +130,7 @@ class MainWindow(QtWidgets.QMainWindow):
             file_name = str(Path(file_names[0]).resolve())
             self.ui.BrowseConvertLineEdit.setText(file_name)
 
-        self.ui.BrowseConvertLineEdit.files = file_names  # type: ignore
+        self.ui.BrowseConvertLineEdit.files = file_names
 
     def convert_file(self, file_path, out_path, preferred_format, delete_tmp=False):
         if Path(file_path).suffix == preferred_format:
@@ -148,9 +148,9 @@ class MainWindow(QtWidgets.QMainWindow):
             }
             # Using ThreadPool
             pprocessorThread = PostProcessor(options)
-            pprocessorThread.signals.statusBar_Signal.connect(self.ui.statusbar.showMessage)  # type: ignore
-            pprocessorThread.signals.list_Signal.connect(self.add_to_table)  # type: ignore
-            pprocessorThread.signals.row_Signal.connect(self.decrease_rowcount)  # type: ignore
+            pprocessorThread.signals.statusBar_Signal.connect(self.ui.statusbar.showMessage)
+            pprocessorThread.signals.list_Signal.connect(self.add_to_table)
+            pprocessorThread.signals.row_Signal.connect(self.decrease_rowcount)
             self.threadpool.start(pprocessorThread)
 
             self.ui.tabWidget.setCurrentIndex(2)
@@ -193,11 +193,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Using ThreadPool
         downloadThread = Download(options)
-        downloadThread.signals.status_bar_signal.connect(self.ui.statusbar.showMessage)  # type: ignore
-        downloadThread.signals.remove_url_signal.connect(self.remove_url)  # type: ignore
-        downloadThread.signals.add_update_list_signal.connect(self.add_to_table)  # type: ignore
-        downloadThread.signals.remove_row_signal.connect(self.decrease_rowcount)  # type: ignore
-        self.closing.closed.connect(downloadThread.stop)  # type: ignore
+        downloadThread.signals.status_bar_signal.connect(self.ui.statusbar.showMessage)
+        downloadThread.signals.remove_url_signal.connect(self.remove_url)
+        downloadThread.signals.add_update_list_signal.connect(self.add_to_table)
+        downloadThread.signals.remove_row_signal.connect(self.decrease_rowcount)
+        self.closing.closed.connect(downloadThread.stop)
         self.threadpool.start(downloadThread)
 
         self.ui.tabWidget.setCurrentIndex(2)
@@ -286,7 +286,7 @@ class MainWindow(QtWidgets.QMainWindow):
             msgBox.setWindowTitle("Exit")
             msgBox.setText("Some files are currently being downloaded.")
             msgBox.setInformativeText("Do you really want to close?")
-            msgBox.setStandardButtons(QtWidgets.QMessageBox.Close | QtWidgets.QMessageBox.Cancel)  # type: ignore
+            msgBox.setStandardButtons(QtWidgets.QMessageBox.Close | QtWidgets.QMessageBox.Cancel)
             msgBox.setDefaultButton(QtWidgets.QMessageBox.Cancel)
             ret = msgBox.exec_()
             if ret == QtWidgets.QMessageBox.Cancel:
@@ -297,7 +297,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.kill_all_threads()
 
     def kill_all_threads(self):
-        self.closing.closed.emit()  # type: ignore
+        self.closing.closed.emit()
         self.threadpool.waitForDone()
         self.close()
 

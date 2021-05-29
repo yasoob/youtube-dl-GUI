@@ -89,8 +89,8 @@ class PostProcessor(QtCore.QRunnable):
                 self.speed,
                 "Converting...",
             ]
-        )  # type: ignore
-        self.signals.statusBar_Signal.emit("Converting...")  # type: ignore
+        )  
+        self.signals.statusBar_Signal.emit("Converting...")  
         self.convert()
         self.signals.list_Signal.emit(
             [
@@ -101,8 +101,8 @@ class PostProcessor(QtCore.QRunnable):
                 self.speed,
                 "Finished",
             ]
-        )  # type: ignore
-        self.signals.statusBar_Signal.emit("Done!")  # type: ignore
+        )  
+        self.signals.statusBar_Signal.emit("Done!")  
 
     # TODO: Move to utils
     def format_bytes(self, _bytes=None):
